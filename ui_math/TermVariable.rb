@@ -3,6 +3,7 @@ class TermVariable
 	attr_accessor :variable, :exponent,:value,:negative
 	def initialize(variableString)
 		@variable = Variable.new(variableString)
+		@exponent =1
 	end
 	def setExponent(exponent)
 		@exponent = exponent
@@ -21,7 +22,13 @@ class TermVariable
 		exponentString ="^{"+@exponent.to_s+"}" if exponentFlag()
 		negativeString = ""
 		negativeString = "-" if negativeFlag()
-		return negativeString+@variable.toLatexString()+exponentString;
+		return negativeString+@variable.toLatexString()+exponentString
+	end
+	def simplifyExponent()
+		
+	end
+	def simplifyNegative()
+		
 	end
 	def calcValue(value)
 		@value = value

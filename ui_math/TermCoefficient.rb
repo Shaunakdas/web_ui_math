@@ -6,6 +6,7 @@ class TermCoefficient
 			@baseNegative  = (base<0)? true:false
 		end
 		@base = base.abs
+		@exponent=1
 	end
 	def setExponent(exponent)
 		@exponent = exponent
@@ -34,16 +35,18 @@ class TermCoefficient
 				baseString="("+baseString+")"
 			end
 		end
-		return negativeString+baseString+exponentString;
+		return negativeString+baseString+exponentString
 	end
 	def simplifyExponent()
 		if baseNegativeFlag()
-			@baseNegative = (@exponent%2!=0)? true:false;
+			@baseNegative = (@exponent%2!=0)? true:false
 		end
-		@base = @base**@exponent
-		@exponent =1
+		if exponentFlag()
+			@base = @base**@exponent
+			@exponent =1
+		end
 	end
-	def simplifyBracket()
+	def simplifyNegative()
 		if baseNegativeFlag() && negativeFlag()
 			@baseNegative = !@baseNegative
 			@negative = !@negative

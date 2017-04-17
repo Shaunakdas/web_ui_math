@@ -4,6 +4,7 @@ class Term
 	attr_accessor :termItemList, :exponent, :negative
 	def initialize()
 		self.termItemList = []
+		@exponent=1
 	end
 	def setExponent(exponent)
 		@exponent = exponent
@@ -45,12 +46,85 @@ class Term
 		negativeString = "-" if negativeFlag()
 		return negativeString+latexString+exponentString;
 	end
-	def setValue=(value)
+	def simplifyItemExponent()
+		#Calculating individual item exponent values
+		self.termItemList.each{ |termItem| termItem.simplifyExponent()}
+	end
+	def simplifyItemNegative()
+		#Calculating individual item Negative Sign
+		self.termItemList.each{ |termItem| termItem.simplifyNegative()}
+	end
+	def simplifyExponent()
+		#Calculating value based on Term Exponent, bringin term exponnent on each item
+		if exponentFlag()
+			self.termItemList.each do |termItem|
+				termItem.negative = (@exponent%2!=0)? true:false if termItem.negativeFlag()
+				termItem.exponent = termItem.exponent*@exponent if termItem.exponentFlag()
+			end
+			@exponent=1
+		end
+	end
+	def simplifyNegative()
+		#Calculating Negative Sign based on negative sign of all items
+		negativeCount = 0
+		negativeCount+=1 if @negative
+		self.termItemList.each do |termItem|
+			negativeCount+=(termItem.negativeFlag()? 1:0)
+			termItem.negative = false
+		end
+		@negative= ((negativeCount%2==0)? false:true)
+	end
+	def simplifyCoefficient()
+		#Calculating Final TermCoefficient
+		self.termItemList =[]
+		groupedTermItemList = self.termItemList.group_by {|x| x.class.name}
+		if groupedTermItemList["TermCoefficient"]
+			finalTermCoeffItem=1
+			termCoeffList = groupedTermItemList["TermCoefficient"] 
+			termCoeffList.each{ |termCoeff| finalTermCoeffItem = finalTermCoeffItem*termCoeff}
+			if(finalTermCoeffItem !=1)
+				self.termItemList.addTermItem(TermCoefficient.new(finalTermCoeffItem))
+				self.termItemList += groupedTermItemList["TermVariable"] if   groupedTermItemList["TermVariable"]
+			end
+		end
+	end
+	def simplifyVariable()
+		#Calculating Final Variable List
+		self.termItemList =[]
+		self.termItemList += groupedTermItemList["TermCoefficient"] if groupedTermItemList["TermCoefficient"]
+		groupedTermItemList = self.termItemList.group_by {|x| x.class.name}
+		if groupedTermItemList["TermVariable"]
+			termVarList = groupedTermItemList["TermVariable"] 
+			termVarList.each do |termVar,index|
+				((index+1)..(termVarList.length)) do |i|
+					#Iterating throught the whole list after index to check for duplicates
+					if(termVarList[index].variable.equals(termVarList[i].variable))
+						#If variable is same at both the indexes
+						#adding exponents of both termVariables
+						termVarList[index].exponent += termVarList[i].exponent
+						#deleting element at ith index
+						termVarList.delete_at(i)
+					end
+				end
+			end
+			self.termItemList += termVarList
+		end
+	end
+
+	def simplify()
+
+	end
+	def setValueList=(variableList)
 		self.termItemList.each do |termItem|
 			if termItem.class.name = "TermVariable"
-				termCoeff = TermCoefficient.new(1)
-				termCoeff.convertTermVariable(termItem,value)
-				termItem = termCoeff
+				variableList.each do |variable|
+					if termItem.variable.equals(variable)
+						termCoeff = TermCoefficient.new(1)
+						termCoeff.convertTermVariable(termItem,variable.substituteValue)
+						termItem = termCoeff
+					end
+				end
+				
 			end
 		end
 	end
