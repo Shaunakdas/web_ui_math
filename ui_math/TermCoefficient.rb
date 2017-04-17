@@ -2,7 +2,9 @@ require_relative 'TermVariable'
 class TermCoefficient
 	attr_accessor :base,:baseNegative, :exponent, :negative
 	def initialize(base)
-		@baseNegative  = (base<0)? true:false
+		if base<0
+			@baseNegative  = (base<0)? true:false
+		end
 		@base = base.abs
 	end
 	def setExponent(exponent)

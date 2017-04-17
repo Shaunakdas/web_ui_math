@@ -20,14 +20,3 @@ class Variable
 		end
 	end
 end
-
-describe Variable do
-	context "When testing the Variable class" do
-
-		it "should say 'Hello World' when we call the say_hello method " do
-			var = Variable.new("x")
-			latexString = var.toLatexString()
-			expect(latexString).to eq "x"
-		end
-	end
-end
