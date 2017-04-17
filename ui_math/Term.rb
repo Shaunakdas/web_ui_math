@@ -18,8 +18,35 @@ class Term
 	def negativeFlag()
 		return !(defined?(@negative)).nil? && @negative ==true
 	end
+
 	def addTermItem(termItem)
 		self.termItemList << termItem
+	end
+	def addTermVariable(symbol,exponent,negative)
+		termVar = TermVariable.new(symbol)
+		termVar.setNegative(negative)
+		termVar.setExponent(exponent)
+		addTermItem(termVar)
+	end
+	def addTermCoefficient(base,exponent,negative)
+		termCoeff = TermCoefficient.new(base)
+		termCoeff.setNegative(negative)
+		termCoeff.setExponent(exponent)
+		addTermItem(termCoeff)
+	end
+	def consistsVariable()
+		variableFlag = false
+		self.termItemList.each do |termItem|
+			return true if(termItem.class.name=="TermVariable")
+		end
+		return variableFlag
+	end
+	def consistsCoefficient()
+		coeffFlag = false
+		self.termItemList.each do |termItem|
+			return true if(termItem.class.name=="TermCoefficient")
+		end
+		return coeffFlag
 	end
 	def sortTermItem()
 		groupedTermItemList = self.termItemList.group_by {|x| x.class.name}
@@ -112,7 +139,12 @@ class Term
 	end
 
 	def simplify()
-
+		simplifyItemExponent()
+		simplifyItemNegative()
+		simplifyExponent()
+		simplifyNegative()
+		simplifyCoefficient()
+		simplifyVariable()
 	end
 	def setValueList=(variableList)
 		self.termItemList.each do |termItem|
@@ -128,6 +160,31 @@ class Term
 			end
 		end
 	end
+	def negateTerm()
+		negativeTerm = Term.new(1)
+		negativeTerm.termItemList = self.termItemList
+		negativeTerm.exponent = @exponent if @exponent
+		negativeTerm.negative = true
+		negativeTerm.negative = !@negative if @negative
+		return negativeTerm
+	end
+	def addCoefficientTerm(otherTerm)
+		if (!consistsVariable() && !(otherTerm.consistsVariable()))
+			#Contains only coefficient
+			simplify()
+			otherTerm.simplify()
+			self.termItemList[0].base = -self.termItemList[0].base if self.termItemList[0].negative
+			otherTerm.termItemList[0].base = -otherTerm.termItemList[0].base if otherTerm.termItemList[0].negative
+			self.termItemList[0].base += otherTerm.termItemList[0].base
+		end
+	end
+	def subtractCoefficientTerm(otherTerm)
+		addCoefficientTerm(otherTerm.negateTerm())
+	end
+	def multiplyCoefficientTerm(otherTerm)
+		term.termItemList << otherTerm.termItemList
+	end
+	
 	def equals(other)
 	end
 	def getVariableList()

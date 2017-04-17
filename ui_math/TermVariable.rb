@@ -1,9 +1,13 @@
 require_relative 'Variable'
 class TermVariable
+	include Comparable
 	attr_accessor :variable, :exponent,:value,:negative
 	def initialize(variableString)
 		@variable = Variable.new(variableString)
 		@exponent =1
+	end
+	def <=>(another)
+	    @variable.symbol <=> another.variable.symbol
 	end
 	def setExponent(exponent)
 		@exponent = exponent

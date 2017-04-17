@@ -1,5 +1,6 @@
 require_relative 'TermVariable'
 class TermCoefficient
+	include Comparable
 	attr_accessor :base,:baseNegative, :exponent, :negative
 	def initialize(base)
 		if base<0
@@ -7,6 +8,9 @@ class TermCoefficient
 		end
 		@base = base.abs
 		@exponent=1
+	end
+	def <=>(another)
+	    finalValue() <=> another.finalValue()
 	end
 	def setExponent(exponent)
 		@exponent = exponent
@@ -57,6 +61,12 @@ class TermCoefficient
 		@exponent = termVar.exponent if termVar.exponentFlag()
 		@negative = termVar.negative if termVar.negativeFlag()
 
+	end
+	def finalValue()
+		simplifyExponent()
+		simplifyNegative()
+		return @base if negative
+		return -@base if !negative
 	end
 	def equals(other)
 		if ((defined?(@exponent)).nil? && (defined?(other.exponent)).nil?)
