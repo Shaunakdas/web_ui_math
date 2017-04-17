@@ -1,0 +1,8 @@
+load 'Variable.rb'
+load 'TermVariable.rb'
+load 'TermCoefficient.rb'
+load 'Term.rb'
+load 'Operator.rb'
+load 'Expression.rb'
+load 'Fraction.rb'
+load 'Equation.rb'

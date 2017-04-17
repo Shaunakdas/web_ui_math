@@ -1,26 +1,29 @@
 class Fraction
 	attr_accessor :numerator,:denominator
-	def initialize(value)
-		@numerator = new Expression(value)
-		@denominator = new Expression(1)
-	end
 	def initialize(num,den)
 		if(num.class.name == "Expression")
 			@numerator = num
 		else
-			@numerator = new Expression(num)
+			@numerator =Expression.new()
+			term = Term.new()
+			term.addTermItem(TermCoefficient.new(num))
+			@numerator.addExpressionItem(term)
 		end
 		if(den.class.name == "Expression")
 			@denominator = num
 		else
-			@denominator = new Expression(den)
+			@denominator =Expression.new()
+			term = Term.new()
+			term.addTermItem(TermCoefficient.new(num))
+			@denominator.addExpressionItem(term)
+			@denominator.addTermItem(term)
 		end
 	end
 	def addTermItem(termItem)
 		self.expressionItemList << termItem
 	end
 	def toLatexString
-		return "\\frac{"+@numerator.toLatexString()+"}{"+@denominator.toLatexString()
+		return "\\frac{"+@numerator.toLatexString()+"}{"+@denominator.toLatexString()+"}"
 	end
 	def setValue=(value)
 	end

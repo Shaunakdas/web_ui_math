@@ -1,28 +1,33 @@
 class Variable
-	attr_accessor :symbol
-	attr_accessor :substituteValue
-	attr_accessor :substituteFlag
+	attr_accessor :symbol,:substituteValue,:substituteNegative
 	
 	def initialize(symbol)
 		@symbol = symbol
-		@substituteFlag = false
-	end
-	def initialize(symbol,substituteValue)
-		@symbol = symbol
-		@substituteValue = substituteValue
-		@substituteFlag= false
 	end
 	def toLatexString
-		@symbol
+		@symbol.to_s
 	end
-	def setValue=(value)
+	def setValue(value)
 		@substituteValue = value
+		@substituteNegative = false
+		@substituteNegative = true if value < 0
 	end
 	def equals(other)
-		if ((@substituteFlag == false) || (other.@substituteFlag == false))
-			return (@symbol == other.@symbol);
+		if (defined?(@substituteValue)).nil?
+			return (@substituteValue == other.substituteValue);
 		else
-			return (@substituteValue == other.@substituteValue);
+			return (@symbol == other.symbol);
+		end
+	end
+end
+
+describe Variable do
+	context "When testing the Variable class" do
+
+		it "should say 'Hello World' when we call the say_hello method " do
+			var = Variable.new("x")
+			latexString = var.toLatexString()
+			expect(latexString).to eq "x"
 		end
 	end
 end

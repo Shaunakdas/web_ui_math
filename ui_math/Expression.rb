@@ -1,13 +1,10 @@
 class Expression
 	attr_accessor :expressionItemList
-	def initialize(baseValue)
+	def initialize()
 		self.expressionItemList = []
 	end
-	def initialize(termItem)
-		self.expressionItemList = [termItem]
-	end
-	def addTermItem(termItem)
-		self.expressionItemList << termItem
+	def addExpressionItem(termItem)
+		self.expressionItemList << expressionItem
 	end
 	def toLatexString
 		latexString =""
