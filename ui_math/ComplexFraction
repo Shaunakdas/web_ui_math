@@ -1,0 +1,111 @@
+require_relative 'Expression'
+class ComplexFraction
+	include Comparable
+	attr_accessor :baseNumerator,:baseDenominator,:baseNumNegative,:baseDenNegative, :exponent, :negative
+	def initialize(baseNumerator,baseDenominator)
+		if @baseNumerator.is_a? Integer
+			@baseNumNegative  = (baseNumerator<0)? true:false
+			@baseNumerator = baseNumerator.abs
+		elsif @baseNumerator.class.name == "Expression"
+			@baseNumNegative  = baseNumerator.negative
+			@baseNumerator = baseNumerator.expressionItemList
+		end
+		if @baseDenominator.is_a? Integer
+			@baseDenNegative  = (baseDenominator<0)? true:false
+			@baseDenominator = baseDenominator.abs
+		elsif @baseDenominator.class.name == "Expression"
+			@baseDenNegative  = baseDenominator.negative
+			@baseDenominator = baseDenominator.expressionItemList
+		end
+		@exponent=1
+		@negative= false
+	end
+	def <=>(another)
+	    finalValue() <=> another.finalValue()
+	end
+	def setExponent(exponent)
+		@exponent = exponent
+	end
+	def setNegative(negative)
+		@negative = negative
+	end
+	def exponentFlag()
+		return !(defined?(@exponent)).nil? && @exponent !=1
+	end
+	def negativeFlag()
+		return !(defined?(@negative)).nil? && @negative ==true
+	end
+	def toLatexString
+		exponentString =""
+		exponentString ="^{"+@exponent.to_s+"}" if exponentFlag()
+		negativeString = ""
+		negativeString = "-" if negativeFlag()
+		baseNumeratorString = @baseNumerator.to_s 
+		baseDenominatorString = @baseDenominator.to_s 
+		baseString = "\\frac{"+baseNumeratorString+"}{"+baseDenominatorString+"}"
+		baseString="("+baseString+")" if exponentFlag()
+		return negativeString+baseString+exponentString
+	end
+	def to_s
+		toLatexString()
+	end
+	def simplifyExponent()
+		@baseNumNegative = ((@exponent%2!=0)? true:false)  if baseNumNegative == true
+		@baseDenNegative = ((@exponent%2!=0)? true:false)  if baseDenNegative == true
+		if exponentFlag()
+			if @baseNumerator.is_a? Integer
+				@baseNumerator = @baseNumerator**@exponent
+			elsif @baseNumerator.class.name == "Expression"
+				@baseNumerator.exponent = @baseNumerator.exponent*@exponent
+			end
+			if	@baseNumerator.is_a? Integer
+				@baseDenominator = @baseDenominator**@exponent
+			elsif @baseDenominator.class.name == "Expression"
+				@baseDenominator.exponent = @baseDenominator.exponent*@exponent
+			end
+			@exponent =1
+		end
+	end
+	def simplifyNegative()
+		@baseNumNegative = !(@negative^@baseNumNegative)
+		@baseDenNegative = !(@negative^@baseDenNegative)
+		@negative = false
+	end
+	def convertTermVariable(termVar,substituteNum,substituteDen)
+		initialize(substituteNum,substituteDen)
+		@exponent = termVar.exponent if termVar.exponentFlag()
+		@negative = termVar.negative if termVar.negativeFlag()
+	
+	def gcd(a, b)
+	 	b == 0 ? a : gcd(b, a.modulo(b))
+	end
+	def reduce()
+		if(@baseNumerator.is_a?Integer && @baseDenominator.is_a?Integer)
+			baseGcd = gcd(@baseNumerator,@baseDenominator)
+			@baseNumerator = @baseNumerator/baseGcd
+			@baseDenominator = @baseDenominator/baseGcd
+		end
+	end
+	def simpleFraction()
+		simplifyExponent()
+		simplifyNegative()
+		reduce()
+	end
+	def finalValue()
+		if(@baseNumerator.is_a?Integer && @baseDenominator.is_a?Integer)
+			simpleFraction()
+			@baseDenominator =1 if @baseDenominator==0
+			return @baseNumerator/@baseDenominator
+		end
+	end
+	def ==(other)
+		if @exponent ==1
+			return (@baseNumerator == other.baseNumerator) && (@baseDenominator == other.baseDenominator)
+		else
+			return ((@baseNumerator == other.baseNumerator) && (@baseDenominator == other.baseDenominator) && (@exponent==other.exponent))
+		end
+	end
+	def getVariableList()
+		return []
+	end
+end

@@ -28,6 +28,12 @@ class Term
 		termVar.setExponent(exponent)
 		addTermItem(termVar)
 	end
+	def addSimpleFraction(num,den,exponent,negative)
+		simpleFrac  = SimpleFraction.new(num,den)
+		simpleFrac.setNegative(negative)
+		simpleFrac.setExponent(exponent)
+		addTermItem(simpleFrac)
+	end
 	def addTermCoefficient(base,exponent,negative)
 		termCoeff = TermCoefficient.new(base)
 		termCoeff.setNegative(negative)
@@ -35,19 +41,24 @@ class Term
 		addTermItem(termCoeff)
 	end
 	def consistsVariable()
-		variableFlag = false
 		self.termItemList.each do |termItem|
 			return true if(termItem.class.name=="TermVariable")
 		end
-		return variableFlag
+		return false
 	end
 	def consistsCoefficient()
-		coeffFlag = false
 		self.termItemList.each do |termItem|
 			return true if(termItem.class.name=="TermCoefficient")
 		end
-		return coeffFlag
+		return false
 	end
+	def consistsSimpleFraction()
+		self.termItemList.each do |termItem|
+			return true if(termItem.class.name=="SimpleFraction")
+		end
+		return false
+	end
+
 	def sortTermItem()
 		groupedTermItemList = self.termItemList.group_by {|x| x.class.name}
 		self.termItemList =[]
@@ -58,7 +69,7 @@ class Term
 		self.sortTermItem()
 		latexString =""
 		self.termItemList.each do |termItem|
-			if termItem.negativeFlag()
+			if termItem.negativeFlag() || termItem.baseNegativeFlag()
 				latexString += "("+termItem.toLatexString()+")"
 			else
 				latexString += termItem.toLatexString()
@@ -73,6 +84,9 @@ class Term
 		negativeString = "-" if negativeFlag()
 		return negativeString+latexString+exponentString;
 	end
+	def to_s
+		toLatexString()
+	end
 	def simplifyItemExponent()
 		#Calculating individual item exponent values
 		self.termItemList.each{ |termItem| termItem.simplifyExponent()}
@@ -82,11 +96,11 @@ class Term
 		self.termItemList.each{ |termItem| termItem.simplifyNegative()}
 	end
 	def simplifyExponent()
-		#Calculating value based on Term Exponent, bringin term exponnent on each item
+		#Calculating value based on Term Exponent, bringing term exponnent on each item
 		if exponentFlag()
 			self.termItemList.each do |termItem|
 				termItem.negative = (@exponent%2!=0)? true:false if termItem.negativeFlag()
-				termItem.exponent = termItem.exponent*@exponent if termItem.exponentFlag()
+				termItem.exponent = termItem.exponent*@exponent 
 			end
 			@exponent=1
 		end
@@ -103,32 +117,36 @@ class Term
 	end
 	def simplifyCoefficient()
 		#Calculating Final TermCoefficient
-		self.termItemList =[]
 		groupedTermItemList = self.termItemList.group_by {|x| x.class.name}
+		self.termItemList =[]
 		if groupedTermItemList["TermCoefficient"]
 			finalTermCoeffItem=1
 			termCoeffList = groupedTermItemList["TermCoefficient"] 
-			termCoeffList.each{ |termCoeff| finalTermCoeffItem = finalTermCoeffItem*termCoeff}
-			if(finalTermCoeffItem !=1)
-				self.termItemList.addTermItem(TermCoefficient.new(finalTermCoeffItem))
+			
+			termCoeffList.each{ |termCoeff| finalTermCoeffItem = finalTermCoeffItem*termCoeff.calcFinalValue()}
+			
+			if(groupedTermItemList["TermVariable"])
+				self.addTermItem(TermCoefficient.new(finalTermCoeffItem)) if finalTermCoeffItem !=1
 				self.termItemList += groupedTermItemList["TermVariable"] if   groupedTermItemList["TermVariable"]
+			else
+				self.addTermItem(TermCoefficient.new(finalTermCoeffItem))
 			end
 		end
 	end
 	def simplifyVariable()
 		#Calculating Final Variable List
+		groupedTermItemList = self.termItemList.group_by {|x| x.class.name}
 		self.termItemList =[]
 		self.termItemList += groupedTermItemList["TermCoefficient"] if groupedTermItemList["TermCoefficient"]
-		groupedTermItemList = self.termItemList.group_by {|x| x.class.name}
 		if groupedTermItemList["TermVariable"]
 			termVarList = groupedTermItemList["TermVariable"] 
-			termVarList.each do |termVar,index|
-				((index+1)..(termVarList.length)) do |i|
+			termVarList.each_with_index do |termVar,indexer|
+				((indexer+1)..(termVarList.length-1)).each do |i|
 					#Iterating throught the whole list after index to check for duplicates
-					if(termVarList[index].variable.equals(termVarList[i].variable))
+					if(termVarList[indexer].variable == (termVarList[i].variable))
 						#If variable is same at both the indexes
 						#adding exponents of both termVariables
-						termVarList[index].exponent += termVarList[i].exponent
+						termVarList[indexer].exponent += termVarList[i].exponent
 						#deleting element at ith index
 						termVarList.delete_at(i)
 					end
@@ -146,14 +164,15 @@ class Term
 		simplifyCoefficient()
 		simplifyVariable()
 	end
-	def setValueList=(variableList)
-		self.termItemList.each do |termItem|
-			if termItem.class.name = "TermVariable"
+	def setValueList(variableList)
+		self.termItemList.each_with_index do |termItem,index|
+			if termItem.class.name == "TermVariable"
 				variableList.each do |variable|
-					if termItem.variable.equals(variable)
+					if termItem.variable == (variable)
 						termCoeff = TermCoefficient.new(1)
 						termCoeff.convertTermVariable(termItem,variable.substituteValue)
-						termItem = termCoeff
+						self.termItemList.delete_at(index)
+						self.termItemList.insert(index,termCoeff)
 					end
 				end
 				
@@ -161,31 +180,50 @@ class Term
 		end
 	end
 	def negateTerm()
-		negativeTerm = Term.new(1)
-		negativeTerm.termItemList = self.termItemList
-		negativeTerm.exponent = @exponent if @exponent
-		negativeTerm.negative = true
+		puts "Negative"+@negative.to_s
+		negativeTerm = Marshal.load(Marshal.dump(self))
+		negativeTerm.negative= true
 		negativeTerm.negative = !@negative if @negative
 		return negativeTerm
 	end
 	def addCoefficientTerm(otherTerm)
 		if (!consistsVariable() && !(otherTerm.consistsVariable()))
 			#Contains only coefficient
-			simplify()
-			otherTerm.simplify()
-			self.termItemList[0].base = -self.termItemList[0].base if self.termItemList[0].negative
-			otherTerm.termItemList[0].base = -otherTerm.termItemList[0].base if otherTerm.termItemList[0].negative
-			self.termItemList[0].base += otherTerm.termItemList[0].base
+			selfRef = Marshal.load(Marshal.dump(self))
+			selfRef.simplify()
+			otherTermRef = Marshal.load(Marshal.dump(otherTerm))
+			otherTermRef.simplify()
+			selfRef.bringNegativeInside()
+			otherTermRef.bringNegativeInside()
+			selfRef.termItemList[0] = selfRef.termItemList[0].add(otherTermRef.termItemList[0])
+			selfRef.simplify()
+			return selfRef
+		end
+	end
+	def bringNegativeInside()
+		if self.negativeFlag()
+			self.termItemList.each_with_index do |termItem,index|
+				self.termItemList[index] = termItem.negateTermItem()
+			end
+			self.negative = false
 		end
 	end
 	def subtractCoefficientTerm(otherTerm)
-		addCoefficientTerm(otherTerm.negateTerm())
+		return addCoefficientTerm(otherTerm.negateTerm())
 	end
 	def multiplyCoefficientTerm(otherTerm)
-		term.termItemList << otherTerm.termItemList
+		selfRef = Marshal.load(Marshal.dump(self))
+		selfRef.simplify()
+		selfRef.bringNegativeInside()
+		otherTermRef = Marshal.load(Marshal.dump(otherTerm))
+		otherTermRef.simplify()
+		otherTermRef.bringNegativeInside()
+		selfRef.termItemList = selfRef.termItemList + otherTermRef.termItemList
+		selfRef.simplifyCoefficient()
+		return selfRef
 	end
 	
-	def equals(other)
+	def ==(other)
 	end
 	def getVariableList()
 		variableList =[]

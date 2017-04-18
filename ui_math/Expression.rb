@@ -61,6 +61,9 @@ class Expression
 		negativeString = "-" if negativeFlag()
 		return negativeString+latexString+exponentString;
 	end
+	def to_s
+		toLatexString()
+	end
 	def negateExpression()
 		negativeExpression = Expression.new(1)
 		negativeExpression.expressionItemList = @base.expressionItemList
@@ -70,7 +73,7 @@ class Expression
 		return negativeExpression
 	end
 	
-	def equals(other)
+	def ==(other)
 	end
 	def getVariableList()
 		variableList =[]

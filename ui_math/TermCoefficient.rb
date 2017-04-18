@@ -1,16 +1,17 @@
 require_relative 'TermVariable'
 class TermCoefficient
 	include Comparable
-	attr_accessor :base,:baseNegative, :exponent, :negative
+	attr_accessor :base,:baseNegative, :exponent, :negative,:final
 	def initialize(base)
 		if base<0
 			@baseNegative  = (base<0)? true:false
 		end
 		@base = base.abs
 		@exponent=1
+		@negative=false
 	end
 	def <=>(another)
-	    finalValue() <=> another.finalValue()
+		self.calcFinalValue() <=> another.calcFinalValue()
 	end
 	def setExponent(exponent)
 		@exponent = exponent
@@ -41,6 +42,9 @@ class TermCoefficient
 		end
 		return negativeString+baseString+exponentString
 	end
+	def to_s
+		toLatexString()
+	end
 	def simplifyExponent()
 		if baseNegativeFlag()
 			@baseNegative = (@exponent%2!=0)? true:false
@@ -51,10 +55,24 @@ class TermCoefficient
 		end
 	end
 	def simplifyNegative()
-		if baseNegativeFlag() && negativeFlag()
-			@baseNegative = !@baseNegative
-			@negative = !@negative
-		end
+		@negative = @baseNegative^@negative
+		@baseNegative=false
+	end
+	def simplify()
+		simplifyExponent()
+		simplifyNegative()
+	end
+	def add(otherTermCoeff)
+		selfRef = Marshal.load(Marshal.dump(self))
+		selfRef.simplify()
+		otherTermCoeffRef = Marshal.load(Marshal.dump(otherTermCoeff))
+		otherTermCoeffRef.simplify()
+		selfRef.base = -selfRef.base if selfRef.negative
+		otherTermCoeffRef.base = -otherTermCoeffRef.base if otherTermCoeffRef.negative
+		selfRef.base += otherTermCoeffRef.base
+		selfRef.negative = (selfRef.base<0)? true:false
+		selfRef.base = selfRef.base.abs
+		return selfRef
 	end
 	def convertTermVariable(termVar,substituteValue)
 		initialize(substituteValue)
@@ -65,15 +83,30 @@ class TermCoefficient
 	def finalValue()
 		simplifyExponent()
 		simplifyNegative()
-		return @base if negative
-		return -@base if !negative
+		final = @negative? -@base:@base
+		return final
 	end
-	def equals(other)
-		if ((defined?(@exponent)).nil? && (defined?(other.exponent)).nil?)
-			return (@base == other.base)
-		else
-			return ((@base == other.base) && (@exponent==other.exponent))
+	def calcFinalValue()
+		baseNegative =@baseNegative
+		base =@base
+		negative =@negative
+		if baseNegativeFlag()
+			baseNegative = (@exponent%2!=0)? true:false
 		end
+		if exponentFlag()
+			base = @base**@exponent
+			exponent =1
+		end
+		negative = baseNegative^@negative
+		return -base if negative
+		return base
+	end
+	def negateTermItem()
+		puts "Negative"+@negative.to_s
+		negativeTermCoeff = Marshal.load(Marshal.dump(self))
+		negativeTermCoeff.negative= true
+		negativeTermCoeff.negative = !@negative if @negative
+		return negativeTermCoeff
 	end
 	def getVariableList()
 		return []

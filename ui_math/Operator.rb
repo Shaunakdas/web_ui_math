@@ -6,7 +6,10 @@ class Operator
 	def toLatexString
 		@symbol
 	end
-	def equals(other)
+	def to_s
+		toLatexString()
+	end
+	def ==(other)
 		return @symbol == other.symbol
 	end
 	def getVariableList()

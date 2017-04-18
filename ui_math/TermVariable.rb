@@ -21,12 +21,24 @@ class TermVariable
 	def negativeFlag()
 		return !(defined?(@negative)).nil? && @negative ==true
 	end
+	def baseNegativeFlag()
+		return false
+	end
 	def toLatexString
 		exponentString =""
 		exponentString ="^{"+@exponent.to_s+"}" if exponentFlag()
 		negativeString = ""
 		negativeString = "-" if negativeFlag()
 		return negativeString+@variable.toLatexString()+exponentString
+	end
+	def negateTermItem()
+		negativeTermVar = Marshal.load(Marshal.dump(self))
+		negativeTermVar.negative= true
+		negativeTermVar.negative = !@negative if @negative
+		return negativeTermVar
+	end
+	def to_s
+		toLatexString()
 	end
 	def simplifyExponent()
 		
@@ -38,11 +50,11 @@ class TermVariable
 		@value = value
 		@value = value**@exponent if @exponent
 	end
-	def equals(other)
+	def ==(other)
 		if (defined?(@exponent)).nil?
-			return @variable.equals(other.variable)
+			return @variable == (other.variable)
 		else
-			return (@variable.equals(other) && (@exponent==other.exponent))
+			return (@variable == (other) && (@exponent==other.exponent))
 		end
 	end
 	def getVariableList()
