@@ -3,9 +3,7 @@ class TermCoefficient
 	include Comparable
 	attr_accessor :base,:baseNegative, :exponent, :negative,:final
 	def initialize(base)
-		if base<0
-			@baseNegative  = (base<0)? true:false
-		end
+		@baseNegative  = (base<0)? true:false
 		@base = base.abs
 		@exponent=1
 		@negative=false
@@ -29,6 +27,7 @@ class TermCoefficient
 		return !(defined?(@baseNegative)).nil? && @baseNegative ==true
 	end
 	def toLatexString
+		#Display precaution
 		exponentString =""
 		exponentString ="^{"+@exponent.to_s+"}" if exponentFlag()
 		negativeString = ""
@@ -54,6 +53,7 @@ class TermCoefficient
 			@exponent =1
 		end
 	end
+
 	def simplifyNegative()
 		@negative = @baseNegative^@negative
 		@baseNegative=false
@@ -70,7 +70,38 @@ class TermCoefficient
 		selfRef.base = -selfRef.base if selfRef.negative
 		otherTermCoeffRef.base = -otherTermCoeffRef.base if otherTermCoeffRef.negative
 		selfRef.base += otherTermCoeffRef.base
+		#Display precaution
 		selfRef.negative = (selfRef.base<0)? true:false
+		selfRef.base = selfRef.base.abs
+		return selfRef
+	end
+	def multiply(otherTermCoeff)
+		selfRef = Marshal.load(Marshal.dump(self))
+		selfRef.simplify()
+		otherTermCoeffRef = Marshal.load(Marshal.dump(otherTermCoeff))
+		otherTermCoeffRef.simplify()
+		selfRef.base = -selfRef.base if selfRef.negative
+		otherTermCoeffRef.base = -otherTermCoeffRef.base if otherTermCoeffRef.negative
+		selfRef.base = selfRef.base.to_f*otherTermCoeffRef.base
+		selfRef.base = selfRef.base.to_i if selfRef.base%1==0
+		#Display precaution
+		selfRef.negative = (selfRef.base<0)? true:false
+		selfRef.base = selfRef.base.abs
+		return selfRef
+	end
+	def divide(otherTermCoeff)
+		selfRef = Marshal.load(Marshal.dump(self))
+		selfRef.simplify()
+		otherTermCoeffRef = Marshal.load(Marshal.dump(otherTermCoeff))
+		otherTermCoeffRef.simplify()
+		selfRef.base = -selfRef.base if selfRef.negative
+		otherTermCoeffRef.base = -otherTermCoeffRef.base if otherTermCoeffRef.negative
+
+		selfRef.base = selfRef.base.to_f/otherTermCoeffRef.base
+		selfRef.base = selfRef.base.to_i if selfRef.base%1==0
+		#Display precaution
+		selfRef.negative = (selfRef.base<0)? true:false
+		puts "TermCoefficient.abs="+selfRef.base.to_s+"and"+selfRef.base.abs.to_s
 		selfRef.base = selfRef.base.abs
 		return selfRef
 	end
@@ -87,19 +118,10 @@ class TermCoefficient
 		return final
 	end
 	def calcFinalValue()
-		baseNegative =@baseNegative
-		base =@base
-		negative =@negative
-		if baseNegativeFlag()
-			baseNegative = (@exponent%2!=0)? true:false
-		end
-		if exponentFlag()
-			base = @base**@exponent
-			exponent =1
-		end
-		negative = baseNegative^@negative
-		return -base if negative
-		return base
+		selfRef = selfRef = Marshal.load(Marshal.dump(self))
+		selfRef.simplify()
+		return -selfRef.base if selfRef.negative
+		return selfRef.base
 	end
 	def negateTermItem()
 		puts "Negative"+@negative.to_s

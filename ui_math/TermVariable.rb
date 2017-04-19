@@ -5,6 +5,7 @@ class TermVariable
 	def initialize(variableString)
 		@variable = Variable.new(variableString)
 		@exponent =1
+		@negative=false
 	end
 	def <=>(another)
 	    @variable.symbol <=> another.variable.symbol
