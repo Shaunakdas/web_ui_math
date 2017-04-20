@@ -5,6 +5,7 @@ class Expression
 	def initialize()
 		self.expressionItemList = []
 		@exponent=1
+		@negative=false
 	end
 	def setExponent(exponent)
 		@exponent = exponent
@@ -25,7 +26,7 @@ class Expression
 	def consistsVariable()
 		variableFlag = false
 		self.expressionItemList.each do |expressionItem|
-			return true if expressionItem.consistsVariable()
+			return true if expressionItem.getVariableList().length>0
 		end
 		return variableFlag
 	end
@@ -36,20 +37,16 @@ class Expression
 		end
 		return coeffFlag
 	end
-	def sortExpressionItem()
-		groupedExpressionItemList = self.expressionItemList.group_by {|x| x.consistsVariable().to_s}
-		self.expressionItemList =[]
-		self.expressionItemList += groupedExpressionItemList["true"] if   groupedExpressionItemList["true"]
-		self.expressionItemList += groupedExpressionItemList["false"] if groupedExpressionItemList["false"]
-		end
 	def toLatexString
 		self.sortExpressionItem()
 		latexString =""
 		self.expressionItemList.each do |expressionItem|
-			if expressionItem.negativeFlag()
-				latexString += "("+expressionItem.toLatexString()+")"
-			else
-				latexString += expressionItem.toLatexString()
+			if expressionItem.class.name != "Operator"
+				if expressionItem.negativeFlag()
+					latexString += "("+expressionItem.toLatexString()+")"
+				else
+					latexString += expressionItem.toLatexString()
+				end
 			end
 		end
 		if exponentFlag()
@@ -65,16 +62,12 @@ class Expression
 		toLatexString()
 	end
 	def negateExpression()
-		negativeExpression = Expression.new(1)
-		negativeExpression.expressionItemList = @base.expressionItemList
-		negativeExpression.exponent = @exponent if @exponent
+		negativeExpression = Marshal.load(Marshal.dump(self))
 		negativeExpression.negative = true
 		negativeExpression.negative = !@negative if @negative
 		return negativeExpression
 	end
 	
-	def ==(other)
-	end
 	def getVariableList()
 		variableList =[]
 		self.expressionItemList.each do |expressionItem|

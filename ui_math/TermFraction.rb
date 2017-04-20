@@ -23,19 +23,26 @@ class TermFraction
 		@exponent=1
 		@negative= false
 	end
+	def numerator()
+		return @baseNumerator.cloneForOperation()
+	end
+	def denominator()
+		return @baseDenominator.cloneForOperation()
+	end
 	def <=>(otherTermFrac)
-		selfRef = Marshal.load(Marshal.dump(self))
-		selfRef.simplify()
-		otherTermFracRef = Marshal.load(Marshal.dump(otherTermFrac))
-		otherTermFracRef.simplify()
-		selfRef.baseNumerator.negative = !selfRef.baseNumerator.negative if selfRef.negative
-		otherTermFracRef.baseNumerator.negative = !otherTermFracRef.baseNumerator.negative if otherTermFracRef.negative
+
+		selfRef = self.cloneForOperation()
+		otherTermFracRef = otherTermFrac.cloneForOperation()
 		finalDenominator = selfRef.lcmDenominator(otherTermFracRef)
 		selfRef.baseNumerator = selfRef.baseNumerator.multiply(finalDenominator.divide(selfRef.baseDenominator))
 		otherTermFracRef.baseNumerator = otherTermFracRef.baseNumerator.multiply(finalDenominator.divide(otherTermFracRef.baseDenominator))
-		puts "selfRef.baseNumerator"+selfRef.baseNumerator.to_s
-		puts "otherTermFracRef.baseNumerator"+otherTermFracRef.baseNumerator.to_s
 		selfRef.baseNumerator <=> otherTermFracRef.baseNumerator
+	end
+	def cloneForOperation()
+		selfRef = Marshal.load(Marshal.dump(self))
+		selfRef.simplify()
+		selfRef.baseNumerator.negative = !selfRef.baseNumerator.negative if selfRef.negative
+		return selfRef
 	end
 	def setExponent(exponent)
 		@exponent = exponent
@@ -96,13 +103,8 @@ class TermFraction
 		simplifyNegative()
 	end
 	def add(otherTermFrac)
-		selfRef = Marshal.load(Marshal.dump(self))
-		selfRef.simplify()
-		otherTermFracRef = Marshal.load(Marshal.dump(otherTermFrac))
-		otherTermFracRef.simplify()
-		#Bringing negative inside
-		selfRef.baseNumerator.negative = !selfRef.baseNumerator.negative if selfRef.negative
-		otherTermFracRef.baseNumerator.negative = !otherTermFracRef.baseNumerator.negative if otherTermFracRef.negative
+		selfRef = self.cloneForOperation()
+		otherTermFracRef = otherTermFrac.cloneForOperation()
 		
 		finalDenominator = selfRef.lcmDenominator(otherTermFracRef)
 		selfRef.baseNumerator = selfRef.baseNumerator.multiply(finalDenominator.divide(selfRef.baseDenominator))
@@ -158,6 +160,12 @@ class TermFraction
 		negativeTermFrac.negative= true
 		negativeTermFrac.negative = !@negative if @negative
 		return negativeTermFrac
+	end
+	def reciprocal()
+		reciprocal = Marshal.load(Marshal.dump(self))
+		reciprocal.baseNumerator = reciprocal.baseDenominator
+		reciprocal.baseDenominator = Marshal.load(Marshal.dump(self.baseNumerator))
+		return reciprocal
 	end
 	def getVariableList()
 		return []

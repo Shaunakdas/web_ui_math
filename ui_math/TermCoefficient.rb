@@ -62,13 +62,15 @@ class TermCoefficient
 		simplifyExponent()
 		simplifyNegative()
 	end
-	def add(otherTermCoeff)
+	def cloneForOperation()
 		selfRef = Marshal.load(Marshal.dump(self))
 		selfRef.simplify()
-		otherTermCoeffRef = Marshal.load(Marshal.dump(otherTermCoeff))
-		otherTermCoeffRef.simplify()
 		selfRef.base = -selfRef.base if selfRef.negative
-		otherTermCoeffRef.base = -otherTermCoeffRef.base if otherTermCoeffRef.negative
+		return selfRef
+	end
+	def add(otherTermCoeff)
+		selfRef = self.cloneForOperation()
+		otherTermCoeffRef = otherTermCoeff.cloneForOperation()
 		selfRef.base += otherTermCoeffRef.base
 		#Display precaution
 		selfRef.negative = (selfRef.base<0)? true:false
@@ -76,12 +78,8 @@ class TermCoefficient
 		return selfRef
 	end
 	def multiply(otherTermCoeff)
-		selfRef = Marshal.load(Marshal.dump(self))
-		selfRef.simplify()
-		otherTermCoeffRef = Marshal.load(Marshal.dump(otherTermCoeff))
-		otherTermCoeffRef.simplify()
-		selfRef.base = -selfRef.base if selfRef.negative
-		otherTermCoeffRef.base = -otherTermCoeffRef.base if otherTermCoeffRef.negative
+		selfRef = self.cloneForOperation()
+		otherTermCoeffRef = otherTermCoeff.cloneForOperation()
 		selfRef.base = selfRef.base.to_f*otherTermCoeffRef.base
 		selfRef.base = selfRef.base.to_i if selfRef.base%1==0
 		#Display precaution
@@ -90,12 +88,8 @@ class TermCoefficient
 		return selfRef
 	end
 	def divide(otherTermCoeff)
-		selfRef = Marshal.load(Marshal.dump(self))
-		selfRef.simplify()
-		otherTermCoeffRef = Marshal.load(Marshal.dump(otherTermCoeff))
-		otherTermCoeffRef.simplify()
-		selfRef.base = -selfRef.base if selfRef.negative
-		otherTermCoeffRef.base = -otherTermCoeffRef.base if otherTermCoeffRef.negative
+		selfRef = self.cloneForOperation()
+		otherTermCoeffRef = otherTermCoeff.cloneForOperation()
 
 		selfRef.base = selfRef.base.to_f/otherTermCoeffRef.base
 		selfRef.base = selfRef.base.to_i if selfRef.base%1==0
