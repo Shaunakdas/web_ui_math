@@ -170,4 +170,16 @@ class TermFraction
 	def getVariableList()
 		return []
 	end
+	def ratioFrom()
+		exponentString =""
+		exponentString ="^{"+@exponent.to_s+"}" if exponentFlag()
+		negativeString = ""
+		negativeString = "-" if negativeFlag()
+		baseString = ""+@baseNumerator.toLatexString()+":"+@baseDenominator.toLatexString()
+		baseString="{("+baseString+")}" if exponentFlag()
+		return negativeString+baseString+exponentString
+	end
+	def percentage()
+		return 100*self.calcFinalValue()
+	end
 end

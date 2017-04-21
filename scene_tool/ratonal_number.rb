@@ -171,7 +171,7 @@ class RationalNumber
 		exp2 = [frac.baseDenominator,Operator.new("\\div"),termItemgcd]
 		frac1 = Fraction.new(exp1,exp2)
 		frac2 = Fraction.new(frac.baseNumerator.divide(termItemgcd),frac.baseDenominator.divide(termItemgcd))
-		latexStringList << "We know that"+ frac.toLatexString()+frac1.toLatexString()+frac2.toLatexString()
+		latexStringList <<  frac.toLatexString()+frac1.toLatexString()+frac2.toLatexString()
 	end
 	def gcd(a, b)
 	 	b == 0 ? a : gcd(b, a.modulo(b))
