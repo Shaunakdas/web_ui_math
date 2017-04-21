@@ -205,4 +205,44 @@ class RatioProportion
 		latexStringList << "Discount Percentage =  \\frac{Discount}{Marked Price}"
 		latexStringList << "Discount Percentage =  "+exp.toLatexString()
 	end
+	def calcSalesTax(cost,rate)
+		increase = (rate.to_f*cost)/100
+		exp = Expression.new()
+		exp.expressionItemList = [TermFraction.new(rate,100),@times,TermCoefficient.new(cost),@eq,TermCoefficient.new(increase)]
+		latexStringList << "On "+cost.to_s ", sales tax paid would be = "+ exp.toLatexString()
+		latexStringList << "Bill amount = Cost of item + Sales tax = "+price.to_s+" + "+increase.to_s+" = "+(price+increase).to_s
+	end
+	def calcVAT(cost,rate)
+		increasedRate = rate+100
+		increase = (cost.to_f*100)/increasedRate
+		latexStringList << "The price includes the VAT, i.e., the value added tax. Thus, a "+rate.to_s+"\\% VAT means if the price without VAT is 100 then price including VAT is "+(increasedRate).to_s+". "
+		latexStringList << "Now, when price including VAT is "+(100+rate).to_s+", original price is  100."
+		exp = Expression.new()
+		exp.expressionItemList = [TermFraction.new(rate,increasedRate),@times,TermCoefficient.new(cost),@eq,TermCoefficient.new(increase)]
+		latexStringList << "Hence when price including tax is "+cost.to_s ", the original price "+ exp.toLatexString()
+	end
+	def calcCompoundInterest(principal,rate,yearCount)
+		increasedRate = rate+100
+		frac = TermFraction.new(rate,100)
+		exp=Expression.new()
+		exp.expressionItemList=[TermCoefficient.new(1),@add,frac]
+		exp.setExponent(yearCount)
+		latexStringList << "We have, A = P{(1 + \\frac{R}{100})}^{n} "
+		latexStringList << "where Principal(P)="+principal.to_s+", Rate(R)="+rate.to_s+",Number of years(n) = "+yearCount.to_s
+		latexStringList << "="+principal.to_s+exp.toLatexString()
+		frac.setBaseNumerator(increasedRate) 
+		frac.setExponent(yearCount)
+		latexStringList << "="+principal.to_s+frac.toLatexString()
+		frac.setExponent(1)
+		exp.expressionItemList = [TermCoefficient.new(principal)]
+		yearCount.each do |i|
+			exp.concat[@times,frac]
+		end
+		amount = principal*(frac.calcFinalValue()**yearCount)
+		exp.concat[@eq,amount]
+		latexStringList << "= "+exp.toLatexString()
+		latexStringList << "CI = A - P ="+amount.to_s+" - "+principal.to_s+" = "+(amount-principal).to_s
+
+	end
+
 end
