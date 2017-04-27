@@ -1,6 +1,6 @@
 require_relative '../ui_math/TermFraction'
 require 'prime'
-class RationalNumber
+class Exponent
 	attr_accessor :latexStringList
 	def initialize()
 		latexStringList=[]

@@ -1,4 +1,5 @@
-require_relative 'Expression'
+require_relative 'Term'
+require_relative 'TermFraction'
 require_relative 'Operator'
 class Expression
 	attr_accessor :expressionItemList, :exponent, :negative
@@ -38,19 +39,16 @@ class Expression
 		return coeffFlag
 	end
 	def toLatexString
-		self.sortExpressionItem()
 		latexString =""
-		self.expressionItemList.each do |expressionItem|
-			if expressionItem.class.name != "Operator"
-				if expressionItem.negativeFlag()
-					latexString += "("+expressionItem.toLatexString()+")"
-				else
-					latexString += expressionItem.toLatexString()
-				end
+		self.expressionItemList.each do |expressionItem|\
+			if expressionItem.class.name != "Operator" && expressionItem.negativeFlag()
+				latexString += "("+expressionItem.toLatexString()+")"
+			else
+				latexString += expressionItem.toLatexString()
 			end
 		end
-		if exponentFlag()
-			latexString="("+latexString+")"
+		if exponentFlag() || negativeFlag()
+			latexString="{("+latexString+")}"
 		end
 		exponentString =""
 		exponentString ="^{"+@exponent.to_s+"}" if exponentFlag()
@@ -73,7 +71,7 @@ class Expression
 		self.expressionItemList.each do |expressionItem|
 			variableList += expressionItem.getVariableList()
 		end
-		variableList = variableList.uniq
+		variableList = variableList.uniq{ |var| var.symbol}
 		return variableList
 	end
 end

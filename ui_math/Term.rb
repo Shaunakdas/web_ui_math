@@ -76,7 +76,7 @@ class Term
 			end
 		end
 		if exponentFlag()
-			latexString="("+latexString+")"
+			latexString="{("+latexString+")}"
 		end
 		exponentString =""
 		exponentString ="^{"+@exponent.to_s+"}" if exponentFlag()
@@ -230,7 +230,7 @@ class Term
 		self.termItemList.each do |termItem|
 			variableList += termItem.getVariableList()
 		end
-		variableList = variableList.uniq
+		variableList = variableList.uniq{ |var| var.symbol}
 		return variableList
 	end
 end

@@ -15,4 +15,11 @@ class Operator
 	def getVariableList()
 		return []
 	end
+
+	def consistsCoefficient()
+		return false
+	end
+	def consistsVariable()
+		return false
+	end
 end

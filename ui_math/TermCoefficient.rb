@@ -26,6 +26,12 @@ class TermCoefficient
 	def baseNegativeFlag()
 		return !(defined?(@baseNegative)).nil? && @baseNegative ==true
 	end
+	def consistsCoefficient()
+		return true
+	end
+	def consistsVariable()
+		return false
+	end
 	def toLatexString
 		#Display precaution
 		exponentString =""

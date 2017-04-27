@@ -25,6 +25,12 @@ class TermVariable
 	def baseNegativeFlag()
 		return false
 	end
+	def consistsCoefficient()
+		return false
+	end
+	def consistsVariable()
+		return true
+	end
 	def toLatexString
 		exponentString =""
 		exponentString ="^{"+@exponent.to_s+"}" if exponentFlag()

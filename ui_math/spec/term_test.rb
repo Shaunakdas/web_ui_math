@@ -26,7 +26,7 @@ describe Term do
 			term.addTermItem(termCoeff)
 			expect(term.toLatexString()).to eq "2x"
 		end
-		it "Full TermCoefficient & Full TermVariable: should say '((-2^{2})(-x^{2}))^{2}' when we use TermVariable.new(-x^{2}), TermCoefficient.new(-2^{2}) and toLatexString() method" do
+		it "Full TermCoefficient & Full TermVariable: should say '((-2^{2})(-x^{2}))}^{2}' when we use TermVariable.new(-x^{2}), TermCoefficient.new(-2^{2}) and toLatexString() method" do
 			term = Term.new()
 			termVar = TermVariable.new("x")
 			termVar.setNegative(true)
@@ -51,11 +51,11 @@ describe Term do
 			term.addTermItem(termCoeff)
 			term.setExponent(3)
 			term.setNegative(true)
-			expect(term.toLatexString()).to eq "-((-2^{3})(-x^{3}))^{3}"
+			expect(term.toLatexString()).to eq "-{((-2^{3})(-x^{3}))}^{3}"
 			term.simplifyItemExponent()
-			expect(term.toLatexString()).to eq "-((-8)(-x^{3}))^{3}"
+			expect(term.toLatexString()).to eq "-{((-8)(-x^{3}))}^{3}"
 			term.simplifyItemNegative()
-			expect(term.toLatexString()).to eq "-((-8)(-x^{3}))^{3}"
+			expect(term.toLatexString()).to eq "-{((-8)(-x^{3}))}^{3}"
 			term.simplifyExponent()
 			expect(term.toLatexString()).to eq "-(-8^{3})(-x^{9})"
 			term.simplifyNegative()
@@ -67,11 +67,11 @@ describe Term do
 			term.addTermCoefficient(2,3,true)
 			term.setExponent(2)
 			term.setNegative(true)
-			expect(term.toLatexString()).to eq "-((-2^{3})(-x^{3}))^{2}"
+			expect(term.toLatexString()).to eq "-{((-2^{3})(-x^{3}))}^{2}"
 			term.simplifyItemExponent()
-			expect(term.toLatexString()).to eq "-((-8)(-x^{3}))^{2}"
+			expect(term.toLatexString()).to eq "-{((-8)(-x^{3}))}^{2}"
 			term.simplifyItemNegative()
-			expect(term.toLatexString()).to eq "-((-8)(-x^{3}))^{2}"
+			expect(term.toLatexString()).to eq "-{((-8)(-x^{3}))}^{2}"
 			term.simplifyExponent()
 			expect(term.toLatexString()).to eq "-8^{2}x^{6}"
 			term.simplifyCoefficient()
@@ -85,11 +85,11 @@ describe Term do
 			term.addTermVariable("x",2,false)
 			term.setExponent(2)
 			term.setNegative(true)
-			expect(term.toLatexString()).to eq "-(((-2)^{3})(-2^{3})(-x^{3})x^{2})^{2}"
+			expect(term.toLatexString()).to eq "-{(((-2)^{3})(-2^{3})(-x^{3})x^{2})}^{2}"
 			term.simplifyItemExponent()
-			expect(term.toLatexString()).to eq "-((-8)(-8)(-x^{3})x^{2})^{2}"
+			expect(term.toLatexString()).to eq "-{((-8)(-8)(-x^{3})x^{2})}^{2}"
 			term.simplifyItemNegative()
-			expect(term.toLatexString()).to eq "-((-8)(-8)(-x^{3})x^{2})^{2}"
+			expect(term.toLatexString()).to eq "-{((-8)(-8)(-x^{3})x^{2})}^{2}"
 			term.simplifyExponent()
 			expect(term.toLatexString()).to eq "-8^{2}8^{2}x^{6}x^{4}"
 			term.simplifyCoefficient()
@@ -105,7 +105,7 @@ describe Term do
 			term.addTermVariable("y",2,false)
 			term.setExponent(2)
 			term.setNegative(true)
-			expect(term.toLatexString()).to eq "-(((-2)^{3})(-2^{3})(-x^{3})y^{2})^{2}"
+			expect(term.toLatexString()).to eq "-{(((-2)^{3})(-2^{3})(-x^{3})y^{2})}^{2}"
 		end
 		it "setValueList: should say '2x' when we use TermVariable.new(-x^{3}), TermCoefficient.new(-2^{3}) and toLatexString() method" do
 			term = Term.new()
@@ -148,7 +148,7 @@ describe Term do
 			term1.setNegative(true)
 			term2 = Term.new()
 			term2.addTermCoefficient(1,3,true)
-			expect(term1.toLatexString()).to eq "-(((-2)^{3}))^{2}"
+			expect(term1.toLatexString()).to eq "-{(((-2)^{3}))}^{2}"
 			expect(term2.toLatexString()).to eq "(-1^{3})"
 			term1 = term1.addCoefficientTerm(term2)
 			expect(term1.toLatexString()).to eq "-65"
@@ -157,6 +157,21 @@ describe Term do
 			expect(term1.toLatexString()).to eq "-64"
 			term1 = term1.multiplyCoefficientTerm(term2)
 			expect(term1.toLatexString()).to eq "64"
+		end
+		it "getVariableList: should say '2x' when we use TermVariable.new(-x^{3}), TermCoefficient.new(-2^{3}) and toLatexString() method" do
+			term = Term.new()
+			term.addTermCoefficient(-2,3,false)
+			term.addTermVariable("x",3,true)
+			term.addTermCoefficient(1,3,true)
+			term.addTermVariable("y",2,false)
+			term.setExponent(2)
+			term.setNegative(true)
+			term.simplify()
+			expect(term.toLatexString()).to eq "-64x^{6}y^{4}"
+			expect(term.getVariableList().join(",").to_s).to eq "x,y"
+			term.termItemList = [TermVariable.new("x"),TermCoefficient.new(4),TermVariable.new("x")]
+			expect(term.toLatexString()).to eq "-4xx"
+			expect(term.getVariableList().join(",").to_s).to eq "x"
 		end
 	end
 end

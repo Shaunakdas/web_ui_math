@@ -1,4 +1,5 @@
 require_relative 'Term'
+require_relative 'Expression'
 class TermFraction
 	include Comparable
 	attr_accessor :baseNumerator,:baseDenominator, :exponent, :negative
@@ -28,6 +29,12 @@ class TermFraction
 	end
 	def denominator()
 		return @baseDenominator.cloneForOperation()
+	end
+	def consistsCoefficient()
+		return baseNumerator.consistsCoefficient() || baseDenominator.consistsCoefficient() 
+	end
+	def consistsVariable()
+		return getVariableList().length>0 ? true:false
 	end
 	def <=>(otherTermFrac)
 
