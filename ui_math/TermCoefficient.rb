@@ -35,7 +35,7 @@ class TermCoefficient
 	def toLatexString
 		#Display precaution
 		exponentString =""
-		exponentString ="^{"+@exponent.to_s+"}" if exponentFlag()
+		exponentString ="^{"+@exponent.to_s+"}" if exponentFlag() && @exponent != 0.5
 		negativeString = ""
 		negativeString = "-" if negativeFlag()
 		baseString = @base.to_s
@@ -45,6 +45,7 @@ class TermCoefficient
 				baseString="("+baseString+")"
 			end
 		end
+		baseString="\\sqrt{"+baseString+"}" if @exponent == 0.5
 		return negativeString+baseString+exponentString
 	end
 	def to_s
@@ -118,7 +119,7 @@ class TermCoefficient
 		return final
 	end
 	def calcFinalValue()
-		selfRef = selfRef = Marshal.load(Marshal.dump(self))
+		selfRef = Marshal.load(Marshal.dump(self))
 		selfRef.simplify()
 		return -selfRef.base if selfRef.negative
 		return selfRef.base

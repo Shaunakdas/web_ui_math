@@ -4,7 +4,7 @@ class TermFraction
 	include Comparable
 	attr_accessor :baseNumerator,:baseDenominator, :exponent, :negative
 	def initialize(baseNumerator,baseDenominator)
-		if baseNumerator.is_a?Integer
+		if baseNumerator.is_a?(Integer) || baseNumerator.is_a?(Float)
 			@baseNumerator = TermCoefficient.new(baseNumerator) 
 			@baseNumerator.negative = @baseNumerator.baseNegative
 		else
@@ -13,7 +13,7 @@ class TermFraction
 		end
 		@baseNumerator.baseNegative = false
 
-		if baseDenominator.is_a?Integer
+		if baseDenominator.is_a?(Integer) || baseDenominator.is_a?(Float)
 			@baseDenominator = TermCoefficient.new(baseDenominator)
 			@baseDenominator.negative = @baseDenominator.baseNegative
 		else 
@@ -65,11 +65,12 @@ class TermFraction
 	end
 	def toLatexString
 		exponentString =""
-		exponentString ="^{"+@exponent.to_s+"}" if exponentFlag()
+		exponentString ="^{"+@exponent.to_s+"}" if exponentFlag()&& @exponent != 0.5
 		negativeString = ""
 		negativeString = "-" if negativeFlag()
 		baseString = "\\frac{"+@baseNumerator.toLatexString()+"}{"+@baseDenominator.toLatexString()+"}"
 		baseString="{("+baseString+")}" if exponentFlag()
+		baseString="\\sqrt"+baseString if @exponent == 0.5
 		return negativeString+baseString+exponentString
 	end
 	def to_s
@@ -140,6 +141,28 @@ class TermFraction
 		baseGcd = gcd(@baseNumerator.base,@baseDenominator.base)
 		@baseNumerator.base = @baseNumerator.base/baseGcd
 		@baseDenominator.base = @baseDenominator.base/baseGcd
+	end
+	def reduceDenominator()
+		if @baseDenominator.base ==1
+			newTerm = TermCoefficient.new(@baseNumerator)
+			newTerm.setExponent(@exponent)
+			newTerm.setNegative(@negative)
+			return newTerm
+		else
+			return self
+		end
+	end
+	def reduceForm()
+		selfRef = Marshal.load(Marshal.dump(self))
+		selfRef.simpleFraction()
+		if selfRef.baseDenominator.base ==1
+			return selfRef.baseNumerator
+		elsif selfRef.baseDenominator.base ==-1
+			return selfRef.baseNumerator.negateTerm()
+		else
+			return selfRef
+		end
+
 	end
 	def simpleFraction()
 		simplify()

@@ -2,11 +2,12 @@ require_relative 'Term'
 require_relative 'TermFraction'
 require_relative 'Operator'
 class Expression
-	attr_accessor :expressionItemList, :exponent, :negative
+	attr_accessor :expressionItemList, :exponent, :negative, :baseNegative
 	def initialize()
 		self.expressionItemList = []
 		@exponent=1
 		@negative=false
+		@baseNegative = @negative
 	end
 	def setExponent(exponent)
 		@exponent = exponent
@@ -23,6 +24,12 @@ class Expression
 	
 	def addExpressionItem(expressionItem)
 		self.expressionItemList << expressionItem
+	end
+	def deleteItem(index)
+		self.expressionItemList.delete_at(index)
+	end
+	def empty()
+		self.expressionItemList =[]
 	end
 	def consistsVariable()
 		variableFlag = false
@@ -49,9 +56,10 @@ class Expression
 		end
 		if exponentFlag() || negativeFlag()
 			latexString="{("+latexString+")}"
+			latexString="\\sqrt"+latexString if exponent == 0.5
 		end
 		exponentString =""
-		exponentString ="^{"+@exponent.to_s+"}" if exponentFlag()
+		exponentString ="^{"+@exponent.to_s+"}" if exponentFlag()&& @exponent != 0.5
 		negativeString = ""
 		negativeString = "-" if negativeFlag()
 		return negativeString+latexString+exponentString;

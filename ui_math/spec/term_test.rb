@@ -39,6 +39,20 @@ describe Term do
 			expect(term.toLatexString()).to eq "(-2^{2})(-x^{2})"
 
 		end
+		it "Full TermCoefficient, Full TermVariable & Exponent0.5: should say '((-2^{2})(-x^{2}))}^{2}' when we use TermVariable.new(-x^{2}), TermCoefficient.new(-2^{2}) and toLatexString() method" do
+			term = Term.new()
+			termVar = TermVariable.new("x")
+			termVar.setNegative(true)
+			termVar.setExponent(2)
+			term.addTermItem(termVar)
+			termCoeff = TermCoefficient.new(2)
+			termCoeff.setNegative(true)
+			termCoeff.setExponent(2)
+			term.addTermItem(termCoeff)
+			term.setExponent(0.5)
+			expect(term.toLatexString()).to eq "\\sqrt{((-2^{2})(-x^{2}))}"
+
+		end
 		it "simplifyItemExponent,simplifyItemNegative,simplifyExponent,simplifyNegative: should say '2x' when we use TermVariable.new(-x^{3}), TermCoefficient.new(-2^{3}) and toLatexString() method" do
 			term = Term.new()
 			termVar = TermVariable.new("x")

@@ -20,6 +20,11 @@ describe TermFraction do
 			termFrac.setExponent(2)
 			expect(termFrac.toLatexString()).to eq "{(\\frac{2}{3})}^{2}"
 		end
+		it "Exponent 0.5: should say '(2/3)^{2}' when we use initialize(2,3),setExponent(2) method" do
+			termFrac = TermFraction.new(2,3)
+			termFrac.setExponent(0.5)
+			expect(termFrac.toLatexString()).to eq "\\sqrt{(\\frac{2}{3})}"
+		end
 		it "Negative Base & Exponent: should say '(-2/3)^{2}' when we check initialize(-2,3),setExponent(2) method" do
 			termFrac = TermFraction.new(-2,3)
 			termFrac.setExponent(2)

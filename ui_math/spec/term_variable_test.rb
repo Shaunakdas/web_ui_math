@@ -16,6 +16,11 @@ describe TermVariable do
 			termVar.setExponent(2)
 			expect(termVar.toLatexString()).to eq "x^{2}"
 		end
+		it "Exponent: should say '\\sqrt{x}' when we use setExponent(0.5) and toLatexString() method" do
+			termVar = TermVariable.new("x")
+			termVar.setExponent(0.5)
+			expect(termVar.toLatexString()).to eq "\\sqrt{x}"
+		end
 		it "Negative: should say '-x' when we use setNegative(false) and toLatexString() method" do
 			termVar = TermVariable.new("x")
 			termVar.setNegative(true)

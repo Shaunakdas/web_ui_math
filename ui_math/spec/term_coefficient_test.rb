@@ -20,6 +20,11 @@ describe TermCoefficient do
 			termCoeff.setExponent(2)
 			expect(termCoeff.toLatexString()).to eq "2^{2}"
 		end
+		it "Exponent: should say '\\sqrt{2}' when we use setExponent(2) and toLatexString() method" do
+			termCoeff = TermCoefficient.new(2)
+			termCoeff.setExponent(0.5)
+			expect(termCoeff.toLatexString()).to eq "\\sqrt{2}"
+		end
 		it "Negative Base & Exponent: should say '(-2)^2' when we check initialize method" do
 			termCoeff = TermCoefficient.new(-2)
 			termCoeff.setExponent(2)

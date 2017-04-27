@@ -63,6 +63,20 @@ describe Expression do
 			expect(exp.toLatexString()).to eq "-{((-2^{2})+(-x^{2}))}^{2}"
 
 		end
+		it "Full TermCoefficient, Operator, Full TermVariable & Exponent 0.5: should say '(-2^{2})(-x^{2})' when we use TermVariable.new(-2^{2}), Operator.new("+"), TermCoefficient.new(-x^{2}) and toLatexString() method" do
+			exp = Expression.new()
+			termVar = TermVariable.new("x")
+			termVar.setNegative(true)
+			termVar.setExponent(2)
+			termCoeff = TermCoefficient.new(2)
+			termCoeff.setNegative(true)
+			termCoeff.setExponent(2)
+			exp.expressionItemList = [termCoeff,Operator.new("+"),termVar]
+			exp.setNegative(true)
+			exp.setExponent(0.5)
+			expect(exp.toLatexString()).to eq "-\\sqrt{((-2^{2})+(-x^{2}))}"
+
+		end
 		it "Full TermCoefficient, Operator, Full TermVariable & Negative: should say '(-2^{2})(-x^{2})' when we use TermVariable.new(-2^{2}), Operator.new("+"), TermCoefficient.new(-x^{2}) and toLatexString() method" do
 			exp = Expression.new()
 			termVar = TermVariable.new("x")

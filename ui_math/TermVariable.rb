@@ -33,10 +33,12 @@ class TermVariable
 	end
 	def toLatexString
 		exponentString =""
-		exponentString ="^{"+@exponent.to_s+"}" if exponentFlag()
+		exponentString ="^{"+@exponent.to_s+"}" if exponentFlag() && @exponent != 0.5
 		negativeString = ""
 		negativeString = "-" if negativeFlag()
-		return negativeString+@variable.toLatexString()+exponentString
+		baseString=@variable.toLatexString()
+		baseString="\\sqrt{"+baseString +"}" if @exponent == 0.5
+		return negativeString+baseString+exponentString
 	end
 	def negateTermItem()
 		negativeTermVar = Marshal.load(Marshal.dump(self))
