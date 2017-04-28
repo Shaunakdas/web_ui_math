@@ -31,8 +31,8 @@ class Term
 		termVar.setExponent(exponent)
 		addTermItem(termVar)
 	end
-	def addSimpleFraction(num,den,exponent,negative)
-		simpleFrac  = SimpleFraction.new(num,den)
+	def addTermFraction(num,den,exponent,negative)
+		simpleFrac  = TermFraction.new(num,den)
 		simpleFrac.setNegative(negative)
 		simpleFrac.setExponent(exponent)
 		addTermItem(simpleFrac)
@@ -55,11 +55,16 @@ class Term
 		end
 		return false
 	end
-	def consistsSimpleFraction()
+	def consistsTermFraction()
 		self.termItemList.each do |termItem|
-			return true if(termItem.class.name=="SimpleFraction")
+			return true if(termItem.class.name=="TermFraction")
 		end
 		return false
+	end
+	def reduceTerm()
+		self.termItemList.each do |termItem|
+			self.termItemList.delete(termItem) if (termItem.class.name=="TermCoefficient" && termItem.base ==1)
+		end
 	end
 
 	def sortTermItem()
@@ -237,5 +242,10 @@ class Term
 		end
 		variableList = variableList.uniq{ |var| var.symbol}
 		return variableList
+	end
+	def operateExpression(op,termItem)
+		exp = Expression.new()
+		exp.expressionItemList=[self,op,termItem]
+		return exp
 	end
 end

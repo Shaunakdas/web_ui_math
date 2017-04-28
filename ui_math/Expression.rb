@@ -82,4 +82,59 @@ class Expression
 		variableList = variableList.uniq{ |var| var.symbol}
 		return variableList
 	end
+	def cloneForOperation()
+		return Marshal.load(Marshal.dump(self))
+	end
+	def *(other)
+		selfRef = self.cloneForOperation()
+		if other.class.name != "Expression"
+			selfRef.expressionItemList.each do |expressionItem|
+				expressionItem = expressionItem*other if expressionItem.class.name != "Operator"
+			end
+			return selfRef
+		else
+			# Pending
+		end
+	end
+	def /(other)
+		selfRef = self.cloneForOperation()
+		if other.class.name != "Expression"
+			selfRef.expressionItemList.each do |expressionItem|
+				expressionItem = expressionItem/other if expressionItem.class.name != "Operator"
+			end
+			return selfRef
+		else
+			# Pending
+		end
+	end
+	def +(other)
+		selfRef = self.cloneForOperation()
+		otherRef = TermCoefficient.new(other) if other.is_a?(Integer) || other.is_a?(Float)
+		if other.class.name != "Expression"
+			selfRef.expressionItemList.each do |expressionItem|
+				if otherRef.class.name == selfRef.class.name
+					expressionItem = expressionItem+otherRef
+					break
+				end
+			end
+			return selfRef
+		else
+			# Pending
+		end
+	end
+	def -(other)
+		selfRef = self.cloneForOperation()
+		otherRef = TermCoefficient.new(other) if other.is_a?(Integer) || other.is_a?(Float)
+		if other.class.name != "Expression"
+			selfRef.expressionItemList.each do |expressionItem|
+				if otherRef.class.name == selfRef.class.name
+					expressionItem = expressionItem-otherRef
+					break
+				end
+			end
+			return selfRef
+		else
+			# Pending
+		end
+	end
 end

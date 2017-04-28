@@ -144,7 +144,7 @@ class TermFraction
 	end
 	def reduceDenominator()
 		if @baseDenominator.base ==1
-			newTerm = TermCoefficient.new(@baseNumerator)
+			newTerm = @baseNumerator
 			newTerm.setExponent(@exponent)
 			newTerm.setNegative(@negative)
 			return newTerm
@@ -211,5 +211,96 @@ class TermFraction
 	end
 	def percentage()
 		return 100*self.calcFinalValue()
+	end
+	def operateExpression(op,termItem)
+		exp = Expression.new()
+		exp.expressionItemList=[self,op,termItem]
+		return exp
+	end
+	def *(other)
+		resultTerm = Term.new()
+		selfRef = self.cloneForOperation()
+		if other.is_a?(Integer) || other.is_a?(Float)
+			selfRef.baseNumerator=selfRef.baseNumerator*other
+			return selfRef
+		else
+			otherRef = other.cloneForOperation()
+			if other.class.name == "TermCoefficient"
+				selfRef.baseNumerator=selfRef.baseNumerator*other
+				return selfRef
+			elsif other.class.name == "TermVariable"
+				resultTerm.termItemList=[selfRef,otherRef]
+				return resultTerm
+			elsif other.class.name == "TermFraction"
+				selfRef.baseNumerator=selfRef.baseNumerator*otherRef.baseNumerator
+				selfRef.baseDenominator=selfRef.baseDenominator*otherRef.baseDenominator
+				selfRef.negative= selfRef.negative^otherRef.negative
+				return selfRef
+			elsif other.class.name == "Expression"
+				return otherRef*selfRef
+			else
+				return selfRef
+			end
+		end
+	end
+	def /(other)
+		selfRef = self.cloneForOperation()
+		if other.is_a?(Integer) || other.is_a?(Float)
+			selfRef.baseDenominator=selfRef.baseDenominator*other
+			return selfRef
+		else
+			otherRef = other.cloneForOperation()
+			if other.class.name == "TermCoefficient"
+				selfRef.baseDenominator=selfRef.baseDenominator*other
+				return selfRef
+			elsif other.class.name == "TermVariable"
+				selfRef.baseDenominator=selfRef.baseDenominator*other
+				return selfRef
+			elsif other.class.name == "TermFraction"
+				return reciprocal(otherRef)*selfRef
+			elsif other.class.name == "Expression"
+				return otherRef/selfRef
+			else
+				return selfRef
+			end
+		end
+	end
+	def +(other)
+		selfRef = self.cloneForOperation()
+		if other.is_a?(Integer) || other.is_a?(Float)
+			return selfRef.add(TermFraction.new(other,1))
+		else
+			otherRef = other.cloneForOperation()
+			if other.class.name == "TermCoefficient"
+				return selfRef.add(TermFraction.new(otherRef,1))
+			elsif other.class.name == "TermVariable"
+				return selfRef.operateExpression(Operator.new("+"),otherRef)
+			elsif other.class.name == "TermFraction"
+				return selfRef.add(otherRef)
+			elsif other.class.name == "Expression"
+				return otherRef+selfRef
+			else
+				return add(otherRef)
+			end
+		end
+	end
+	def -(other)
+		if other.is_a?(Integer) || other.is_a?(Float)
+			return selfRef.add(TermFraction.new(-other,1))
+		else
+			otherRef = other.cloneForOperation()
+			selfRef = self.cloneForOperation()
+			if other.class.name == "TermCoefficient"
+				return selfRef.add(TermFraction.new(otherRef.negateTermItem(),1))
+			elsif other.class.name == "TermVariable"
+				return selfRef.operateExpression(Operator.new("-"),otherRef)
+			elsif other.class.name == "TermFraction"
+				return otherRef.negateTermItem()+selfRef
+			elsif other.class.name == "Expression"
+				return otherRef-selfRef
+			else
+				return selfRef.divide(otherRef)
+			end
+		end
 	end
 end

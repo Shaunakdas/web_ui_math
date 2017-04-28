@@ -69,5 +69,128 @@ class TermVariable
 	def getVariableList()
 		return [@variable]
 	end
+	def operateExpression(op,termItem)
+		exp = Expression.new()
+		exp.expressionItemList=[self,op,termItem]
+		return exp
+	end
+	def *(other)
+		resultTerm = Term.new()
+		if other.is_a?(Integer) || other.is_a?(Float)
+			resultTerm.termItemList=[TermCoefficient.new(other),var]
+			return resultTerm
+		else
+			otherRef = other.cloneForOperation()
+			selfRef = self.cloneForOperation()
+			if other.class.name == "TermCoefficient"
+				resultTerm.termItemList=[other,var]
+				return resultTerm
+			elsif other.class.name == "TermVariable"
+				if selfRef == otherRef && selfRef.exponent == otherRef.exponent && selfRef.negative == otherRef.negative
+					resultTerm.termItemList=[TermCoefficient.new(2),var]
+					return resultTerm
+				elsif selfRef == otherRef && selfRef.exponent == otherRef.exponent && selfRef.negative != otherRef.negative
+					return TermCoefficient.new(0)
+				else
 
+				end
+				
+			elsif other.class.name == "TermFraction"
+				return otherRef*selfRef
+			elsif other.class.name == "Expression"
+				return otherRef*selfRef
+			else
+				return otherRef*selfRef
+			end
+		end
+	end
+	def /(other)
+		if other.is_a?(Integer) || other.is_a?(Float)
+			return multiply(TermCoefficient.new(other))
+		else
+			otherRef = other.cloneForOperation()
+			selfRef = self.cloneForOperation()
+			if other.class.name == "TermCoefficient"
+				return divide(other)
+			elsif other.class.name == "TermVariable"
+				if selfRef == otherRef && selfRef.exponent == otherRef.exponent && selfRef.negative == otherRef.negative
+					return TermCoefficient.new(1)
+				elsif selfRef == otherRef && selfRef.exponent == otherRef.exponent && selfRef.negative != otherRef.negative
+					return TermCoefficient.new(-1)
+				elsif selfRef == otherRef && selfRef.exponent > otherRef.exponent
+					selfRef.exponent = selfRef.exponent-otherRef.exponent
+					selfRef.negative = selfRef.negative^otherRef.negative
+					return selfRef
+				elsif selfRef == otherRef && selfRef.exponent < otherRef.exponent
+					otherRef.exponent = selfRef.exponent-otherRef.exponent
+					otherRef.negative = selfRef.exponent^otherRef.exponent
+					denExp = Expression.new()
+					denExp.expressionItemList=[otherRef]
+					return TermFraction.new(1,denExp)
+				elsif selfRef == otherRef && selfRef.exponent == otherRef.exponent && selfRef.negative != otherRef.negative
+					return TermCoefficient.new(-1)
+				else
+					return selfRef.operateExpression(Operator.new("+"),otherRef)
+				end
+			elsif other.class.name == "TermFraction"
+				return reciprocal(otherRef)*selfRef
+			elsif other.class.name == "Expression"
+				return TermFraction.new(selfRef,other)
+			else
+				return selfRef.divide(otherRef)
+			end
+		end
+	end
+	def +(other)
+		if other.is_a?(Integer) || other.is_a?(Float)
+			return multiply(TermCoefficient.new(other))
+		else
+			otherRef = other.cloneForOperation()
+			selfRef = self.cloneForOperation()
+			if other.class.name == "TermCoefficient"
+				return selfRef.operateExpression(Operator.new("+"),otherRef)
+			elsif other.class.name == "TermVariable"
+				if selfRef == otherRef && selfRef.exponent == otherRef.exponent && selfRef.negative == otherRef.negative
+					resultTerm.termItemList=[TermCoefficient.new(2),var]
+					return resultTerm
+				elsif selfRef == otherRef && selfRef.exponent == otherRef.exponent && selfRef.negative != otherRef.negative
+					return TermCoefficient.new(0)
+				else
+					return selfRef.operateExpression(Operator.new("+"),otherRef)
+				end
+			elsif other.class.name == "TermFraction"
+				return otherRef+selfRef
+			elsif other.class.name == "Expression"
+				return otherRef+selfRef
+			else
+				return selfRef
+			end
+		end
+	end
+	def -(other)
+		if other.is_a?(Integer) || other.is_a?(Float)
+			return multiply(TermCoefficient.new(other))
+		else
+			otherRef = other.cloneForOperation()
+			selfRef = self.cloneForOperation()
+			if other.class.name == "TermCoefficient"
+				return selfRef.operateExpression(Operator.new("+"),otherRef)
+			elsif other.class.name == "TermVariable"
+				if selfRef == otherRef && selfRef.exponent == otherRef.exponent && selfRef.negative != otherRef.negative
+					resultTerm.termItemList=[TermCoefficient.new(2),var]
+					return resultTerm
+				elsif selfRef == otherRef && selfRef.exponent == otherRef.exponent && selfRef.negative == otherRef.negative
+					return TermCoefficient.new(0)
+				else
+					return selfRef.operateExpression(Operator.new("-"),otherRef)
+				end
+			elsif other.class.name == "TermFraction"
+				return otherRef-selfRef
+			elsif other.class.name == "Expression"
+				return otherRef-selfRef
+			else
+				return selfRef
+			end
+		end
+	end
 end
