@@ -236,10 +236,8 @@ class TermFraction
 				selfRef.baseDenominator=selfRef.baseDenominator*otherRef.baseDenominator
 				selfRef.negative= selfRef.negative^otherRef.negative
 				return selfRef
-			elsif other.class.name == "Expression"
-				return otherRef*selfRef
 			else
-				return selfRef
+				return otherRef*selfRef
 			end
 		end
 	end
@@ -258,14 +256,12 @@ class TermFraction
 				return selfRef
 			elsif other.class.name == "TermFraction"
 				return reciprocal(otherRef)*selfRef
-			elsif other.class.name == "Expression"
-				return otherRef/selfRef
 			else
-				return selfRef
+				return otherRef/selfRef
 			end
 		end
 	end
-	def +(other)
+	def +@(other)
 		selfRef = self.cloneForOperation()
 		if other.is_a?(Integer) || other.is_a?(Float)
 			return selfRef.add(TermFraction.new(other,1))
@@ -277,14 +273,12 @@ class TermFraction
 				return selfRef.operateExpression(Operator.new("+"),otherRef)
 			elsif other.class.name == "TermFraction"
 				return selfRef.add(otherRef)
-			elsif other.class.name == "Expression"
-				return otherRef+selfRef
 			else
-				return add(otherRef)
+				return otherRef+selfRef
 			end
 		end
 	end
-	def -(other)
+	def -@(other)
 		if other.is_a?(Integer) || other.is_a?(Float)
 			return selfRef.add(TermFraction.new(-other,1))
 		else
@@ -296,10 +290,8 @@ class TermFraction
 				return selfRef.operateExpression(Operator.new("-"),otherRef)
 			elsif other.class.name == "TermFraction"
 				return otherRef.negateTermItem()+selfRef
-			elsif other.class.name == "Expression"
-				return otherRef-selfRef
 			else
-				return selfRef.divide(otherRef)
+				return otherRef-selfRef
 			end
 		end
 	end

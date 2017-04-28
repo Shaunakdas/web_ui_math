@@ -49,17 +49,26 @@ class Term
 		end
 		return false
 	end
+	def consistsVariableOnly()
+		return (!consistsCoefficient()) && (!consistsFraction())
+	end
 	def consistsCoefficient()
 		self.termItemList.each do |termItem|
 			return true if(termItem.class.name=="TermCoefficient")
 		end
 		return false
 	end
-	def consistsTermFraction()
+	def consistsCoefficientOnly()
+		return (!consistsVariable()) && (!consistsFraction())
+	end
+	def consistsFraction()
 		self.termItemList.each do |termItem|
 			return true if(termItem.class.name=="TermFraction")
 		end
 		return false
+	end
+	def consistsFractionOnly()
+		return (!consistsVariable()) && (!consistsCoefficient())
 	end
 	def reduceTerm()
 		self.termItemList.each do |termItem|
@@ -247,5 +256,75 @@ class Term
 		exp = Expression.new()
 		exp.expressionItemList=[self,op,termItem]
 		return exp
+	end
+	def *(other)
+		selfRef = self.cloneForOperation()
+		otherRef = TermCoefficient.new(other) if other.is_a?(Integer) || other.is_a?(Float)
+		if other.class.name != "Expression" && other.class.name != "Term"
+			common=false
+			selfRef.expressionItemList.each do |expressionItem|
+				if otherRef.class.name == selfRef.class.name
+					common = true
+					expressionItem = expressionItem*otherRef
+					break
+				end
+			end
+			selfRef.expressionItemList << otherRef if !common
+			return selfRef
+		else
+			# Pending
+		end
+	end
+	def /(other)
+		selfRef = self.cloneForOperation()
+		otherRef = TermCoefficient.new(other) if other.is_a?(Integer) || other.is_a?(Float)
+		if other.class.name != "Expression" && other.class.name != "Term"
+			common=false
+			selfRef.expressionItemList.each do |expressionItem|
+				if otherRef.class.name == selfRef.class.name
+					common = true
+					expressionItem = expressionItem/otherRef
+					break
+				end
+			end
+			selfRef.expressionItemList << TermFraction.new(1,otherRef) if !common
+			return selfRef
+		else
+			# Pending
+		end
+	end
+	def +@(other)
+		selfRef = self.cloneForOperation()
+		exp = Expression.new()
+		otherRef = TermCoefficient.new(other) if other.is_a?(Integer) || other.is_a?(Float)
+		if other.class.name != "Expression" && other.class.name != "Term"
+			if selfRef.termItemList.size ==1 && otherRef.class.name == selfRef.class.name
+				selfRef.termItemList[0] = selfRef.termItemList[0]+otherRef.termItemList[0]
+				return selfRef 
+			else
+				exp.expressionItemList=[selfRef,otherRef]
+				return exp
+			end
+			
+		else
+			# Pending
+		end
+	end
+	def -@(other)
+		selfRef = self.cloneForOperation()
+		exp = Expression.new()
+		otherRef = TermCoefficient.new(other) if other.is_a?(Integer) || other.is_a?(Float)
+		if other.class.name != "Expression" && other.class.name != "Term"
+			if selfRef.termItemList.size ==1 && otherRef.class.name == selfRef.class.name
+				selfRef.termItemList[0] = selfRef.termItemList[0]-otherRef.termItemList[0]
+				return selfRef 
+			else
+				exp.expressionItemList=[selfRef,otherRef.negateTermItem()]
+				return exp
+			end
+			
+		else
+			# Pending
+		end
 	end
 end

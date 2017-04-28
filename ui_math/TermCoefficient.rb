@@ -152,10 +152,6 @@ class TermCoefficient
 				term = new Term()
 				term.termItemList = [selfRef,other]
 				return term
-			elsif other.class.name == "TermFraction"
-				return otherRef*selfRef
-			elsif other.class.name == "Expression"
-				return otherRef*selfRef
 			else
 				return otherRef*selfRef
 			end
@@ -175,14 +171,12 @@ class TermCoefficient
 				return TermFraction.new(selfRef,denExp)
 			elsif other.class.name == "TermFraction"
 				return reciprocal(otherRef)*selfRef
-			elsif other.class.name == "Expression"
-				return TermFraction.new(selfRef,other)
 			else
-				return selfRef.divide(otherRef)
+				return TermFraction.new(selfRef,other)
 			end
 		end
 	end
-	def +(other)
+	def +@(other)
 		if other.is_a?(Integer) || other.is_a?(Float)
 			return multiply(TermCoefficient.new(other))
 		else
@@ -192,16 +186,12 @@ class TermCoefficient
 				return add(other)
 			elsif other.class.name == "TermVariable"
 				return selfRef.operateExpression(Operator.new("+"),otherRef)
-			elsif other.class.name == "TermFraction"
-				return otherRef+selfRef
-			elsif other.class.name == "Expression"
-				return otherRef+selfRef
 			else
-				return add(otherRef)
+				return otherRef+selfRef
 			end
 		end
 	end
-	def -(other)
+	def -@(other)
 		if other.is_a?(Integer) || other.is_a?(Float)
 			return multiply(TermCoefficient.new(other))
 		else
@@ -211,12 +201,8 @@ class TermCoefficient
 				return add(other.negateTermItem())
 			elsif other.class.name == "TermVariable"
 				return selfRef.operateExpression(Operator.new("-"),otherRef)
-			elsif other.class.name == "TermFraction"
-				return otherRef-selfRef
-			elsif other.class.name == "Expression"
-				return otherRef-selfRef
 			else
-				return selfRef.divide(otherRef)
+				return otherRef-selfRef
 			end
 		end
 	end

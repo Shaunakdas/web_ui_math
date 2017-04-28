@@ -95,10 +95,6 @@ class TermVariable
 
 				end
 				
-			elsif other.class.name == "TermFraction"
-				return otherRef*selfRef
-			elsif other.class.name == "Expression"
-				return otherRef*selfRef
 			else
 				return otherRef*selfRef
 			end
@@ -134,14 +130,12 @@ class TermVariable
 				end
 			elsif other.class.name == "TermFraction"
 				return reciprocal(otherRef)*selfRef
-			elsif other.class.name == "Expression"
-				return TermFraction.new(selfRef,other)
 			else
-				return selfRef.divide(otherRef)
+				return TermFraction.new(selfRef,other)
 			end
 		end
 	end
-	def +(other)
+	def +@(other)
 		if other.is_a?(Integer) || other.is_a?(Float)
 			return multiply(TermCoefficient.new(other))
 		else
@@ -158,16 +152,12 @@ class TermVariable
 				else
 					return selfRef.operateExpression(Operator.new("+"),otherRef)
 				end
-			elsif other.class.name == "TermFraction"
-				return otherRef+selfRef
-			elsif other.class.name == "Expression"
-				return otherRef+selfRef
 			else
-				return selfRef
+				return otherRef+selfRef
 			end
 		end
 	end
-	def -(other)
+	def -@(other)
 		if other.is_a?(Integer) || other.is_a?(Float)
 			return multiply(TermCoefficient.new(other))
 		else
@@ -184,12 +174,8 @@ class TermVariable
 				else
 					return selfRef.operateExpression(Operator.new("-"),otherRef)
 				end
-			elsif other.class.name == "TermFraction"
-				return otherRef-selfRef
-			elsif other.class.name == "Expression"
-				return otherRef-selfRef
 			else
-				return selfRef
+				return otherRef-selfRef
 			end
 		end
 	end

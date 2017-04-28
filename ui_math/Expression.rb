@@ -107,31 +107,37 @@ class Expression
 			# Pending
 		end
 	end
-	def +(other)
+	def +@(other)
 		selfRef = self.cloneForOperation()
 		otherRef = TermCoefficient.new(other) if other.is_a?(Integer) || other.is_a?(Float)
 		if other.class.name != "Expression"
+			common=false
 			selfRef.expressionItemList.each do |expressionItem|
 				if otherRef.class.name == selfRef.class.name
+					common = true
 					expressionItem = expressionItem+otherRef
 					break
 				end
 			end
+			selfRef.expressionItemList << otherRef if !common
 			return selfRef
 		else
 			# Pending
 		end
 	end
-	def -(other)
+	def -@(other)
 		selfRef = self.cloneForOperation()
 		otherRef = TermCoefficient.new(other) if other.is_a?(Integer) || other.is_a?(Float)
 		if other.class.name != "Expression"
+			common = false
 			selfRef.expressionItemList.each do |expressionItem|
 				if otherRef.class.name == selfRef.class.name
+					common = true
 					expressionItem = expressionItem-otherRef
 					break
 				end
 			end
+			selfRef.expressionItemList << otherRef.negateTermItem() if !common
 			return selfRef
 		else
 			# Pending
