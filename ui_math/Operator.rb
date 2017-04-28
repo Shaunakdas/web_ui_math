@@ -22,4 +22,35 @@ class Operator
 	def consistsVariable()
 		return false
 	end
+	def opposite()
+		puts case @symbol
+		when "+"
+			return Operator.new("-")
+		when "-"
+			return Operator.new("+")
+		when "\\times"
+			return Operator.new("\\div")
+		when "\\div"
+			return Operator.new("\\times")
+		when "("
+			return Operator.new(")")
+		when ")"
+			return Operator.new("(")
+		when "{"
+			return Operator.new("}")
+		when "}"
+			return Operator.new("{")
+		when "["
+			return Operator.new("]")
+		when "]"
+			return Operator.new("[")
+		when "<"
+			return Operator.new(">")
+		when ">"
+			return Operator.new("<")
+		else
+			return Operator.new("_")
+		end
+			
+	end
 end

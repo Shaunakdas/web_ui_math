@@ -41,6 +41,8 @@ class TermFraction
 		selfRef = self.cloneForOperation()
 		otherTermFracRef = otherTermFrac.cloneForOperation()
 		finalDenominator = selfRef.lcmDenominator(otherTermFracRef)
+		puts selfRef.toLatexString()
+		puts otherTermFracRef.toLatexString()
 		selfRef.baseNumerator = selfRef.baseNumerator.multiply(finalDenominator.divide(selfRef.baseDenominator))
 		otherTermFracRef.baseNumerator = otherTermFracRef.baseNumerator.multiply(finalDenominator.divide(otherTermFracRef.baseDenominator))
 		selfRef.baseNumerator <=> otherTermFracRef.baseNumerator
@@ -63,12 +65,23 @@ class TermFraction
 	def negativeFlag()
 		return !(defined?(@negative)).nil? && @negative ==true
 	end
+	def baseNegativeFlag()
+		return false
+	end
 	def toLatexString
 		exponentString =""
 		exponentString ="^{"+@exponent.to_s+"}" if exponentFlag()&& @exponent != 0.5
 		negativeString = ""
 		negativeString = "-" if negativeFlag()
-		baseString = "\\frac{"+@baseNumerator.toLatexString()+"}{"+@baseDenominator.toLatexString()+"}"
+		if @baseDenominator.class.name == "TermCoefficient"
+			if @baseDenominator.base == 1
+				baseString = @baseNumerator.toLatexString() 
+			else
+				baseString = "\\frac{"+@baseNumerator.toLatexString()+"}{"+@baseDenominator.toLatexString()+"}"
+			end
+		else
+			baseString = "\\frac{"+@baseNumerator.toLatexString()+"}{"+@baseDenominator.toLatexString()+"}"
+		end
 		baseString="{("+baseString+")}" if exponentFlag()
 		baseString="\\sqrt"+baseString if @exponent == 0.5
 		return negativeString+baseString+exponentString
@@ -152,6 +165,12 @@ class TermFraction
 			return self
 		end
 	end
+	def reduceFormWithDen()
+		selfRef = Marshal.load(Marshal.dump(self))
+		selfRef.simpleFraction()
+		puts "reduceFormWithDen"+ selfRef.toLatexString()
+		return selfRef
+	end
 	def reduceForm()
 		selfRef = Marshal.load(Marshal.dump(self))
 		selfRef.simpleFraction()
@@ -163,6 +182,9 @@ class TermFraction
 			return selfRef
 		end
 
+	end
+	def ratioForm()
+		return baseNumerator.toLatexString()+":"+baseDenominator.toLatexString()
 	end
 	def simpleFraction()
 		simplify()
@@ -217,6 +239,21 @@ class TermFraction
 		exp.expressionItemList=[self,op,termItem]
 		return exp
 	end
+	def operate(op,termItem)
+		puts "Symbol"+op.symbol
+		puts case op.symbol
+		when "+"
+			return self.+@termItem
+		when "-"
+			return self.-@termItem
+		when "\\times"
+			return self*@termItem
+		when "\\div"
+			return self/@termItem
+		else
+
+		end
+	end
 	def *(other)
 		resultTerm = Term.new()
 		selfRef = self.cloneForOperation()
@@ -255,7 +292,7 @@ class TermFraction
 				selfRef.baseDenominator=selfRef.baseDenominator*other
 				return selfRef
 			elsif other.class.name == "TermFraction"
-				return reciprocal(otherRef)*selfRef
+				return otherRef.reciprocal*selfRef
 			else
 				return otherRef/selfRef
 			end
@@ -274,7 +311,7 @@ class TermFraction
 			elsif other.class.name == "TermFraction"
 				return selfRef.add(otherRef)
 			else
-				return otherRef+selfRef
+				return otherRef.+@selfRef
 			end
 		end
 	end
@@ -289,9 +326,9 @@ class TermFraction
 			elsif other.class.name == "TermVariable"
 				return selfRef.operateExpression(Operator.new("-"),otherRef)
 			elsif other.class.name == "TermFraction"
-				return otherRef.negateTermItem()+selfRef
+				return otherRef.negateTermItem().+@selfRef
 			else
-				return otherRef-selfRef
+				return selfRef.-@otherRef
 			end
 		end
 	end

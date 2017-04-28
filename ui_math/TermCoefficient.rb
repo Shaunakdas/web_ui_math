@@ -10,7 +10,12 @@ class TermCoefficient
 		@negative=false
 	end
 	def <=>(another)
+		puts "TermCoefficient Compare"
 		self.calcFinalValue() <=> another.calcFinalValue()
+	end
+	def cloneForOperation()
+		selfRef = Marshal.load(Marshal.dump(self))
+		return selfRef
 	end
 	def setExponent(exponent)
 		@exponent = exponent
@@ -39,7 +44,7 @@ class TermCoefficient
 		exponentString ="^{"+@exponent.to_s+"}" if exponentFlag() && @exponent != 0.5
 		negativeString = ""
 		negativeString = "-" if negativeFlag()
-		baseString = @base.to_s
+		baseString = @base.to_s 
 		if baseNegativeFlag()
 			baseString  = (baseNegativeFlag()? "-":"+")+baseString
 			if negativeFlag() || exponentFlag()
@@ -140,6 +145,20 @@ class TermCoefficient
 		exp.expressionItemList=[self,op,termItem]
 		return exp
 	end
+	def operate(op,termItem)
+		puts case op.symbol
+		when "+"
+			return self.+@termItem
+		when "-"
+			return self.-@termItem
+		when "\\times"
+			return self*@termItem
+		when "\\div"
+			return self/@termItem
+		else
+
+		end
+	end
 	def *(other)
 		if other.is_a?(Integer) || other.is_a?(Float)
 			return multiply(TermCoefficient.new(other))
@@ -170,7 +189,7 @@ class TermCoefficient
 				denExp.expressionItemList = [other]
 				return TermFraction.new(selfRef,denExp)
 			elsif other.class.name == "TermFraction"
-				return reciprocal(otherRef)*selfRef
+				return (otherRef).reciprocal*selfRef
 			else
 				return TermFraction.new(selfRef,other)
 			end
@@ -187,7 +206,7 @@ class TermCoefficient
 			elsif other.class.name == "TermVariable"
 				return selfRef.operateExpression(Operator.new("+"),otherRef)
 			else
-				return otherRef+selfRef
+				return otherRef.+@selfRef
 			end
 		end
 	end
@@ -202,7 +221,7 @@ class TermCoefficient
 			elsif other.class.name == "TermVariable"
 				return selfRef.operateExpression(Operator.new("-"),otherRef)
 			else
-				return otherRef-selfRef
+				return otherRef.-@selfRef
 			end
 		end
 	end

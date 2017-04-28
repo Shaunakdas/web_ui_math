@@ -7,6 +7,7 @@ class RationalNumber
 		commonOpInit()
 	end
 	def commonOpInit()
+		puts "commonOpInit"
 		@bracStart = Operator.new("(")
 		@bracEnd = Operator.new(")")
 		@curlyStart = Operator.new("{")
@@ -22,7 +23,20 @@ class RationalNumber
 		@sqrt = Operator.new("\\sqrt")
 		@cbrt = Operator.new("\\cbrt")
 	end
+	def checkForPrimitive(item)
+		if item.is_a?(Integer) || item.is_a?(Float)
+			return true
+		else
+			return false
+		end
+	end
+	def getBase(item)
+		return item.base if !checkForPrimitive(item)
+		return item
+	end
 	def solveLinearEqWithVariableOnLeftSide(a,b,c,d,e,f,x,operator)
+		puts "solveLinearEqWithVariableOnLeftSide"
+		a=getBase(a);b=getBase(b);c=getBase(c);d=getBase(d);e=getBase(e);f=getBase(f)
 		exp=Expression.new()
 		#Variable Initiation
 		var=TermVariable.new(x)
@@ -31,16 +45,17 @@ class RationalNumber
 		termItem3 = TermFraction.new(e,f)
 		op = Operator.new(operator)
 		#If denominator is 1, remove denominator
-		termItem1 = termItem1.reduceDenominator()
-		termItem2 = termItem2.reduceDenominator()
-		termItem3 = termItem3.reduceDenominator()
+		termItem1 = termItem1.reduceFormWithDen()
+		termItem2 = termItem2.reduceFormWithDen()
+		termItem3 = termItem3.reduceFormWithDen()
 		termItem2Clone = termItem2.cloneForOperation()
 		term1 = Term.new()
 		term1.termItemList = [termItem1,var]
 		#If coefficient base is 1, 
-		term1 = term1.reduceTerm()
+		term1.reduceTerm()
+		
 		#If termItem2 is 0, then transposing termItem2 is not needed
-		if termItem2.finalCalcValue() != 0
+		if termItem2.calcFinalValue() != 0
 			exp.expressionItemList=[term1,op,termItem2,@eq,termItem3]
 			@latexStringList << exp.toLatexString()
 			# @latexStringList << (term1.toLatexString()+op.toLatexString()+termItem2.toLatexString()+"="+termItem3.toLatexString())
@@ -48,8 +63,8 @@ class RationalNumber
 			op1=op.opposite()
 			exp.expressionItemList=[term1,@eq,termItem3,op1,termItem2]; @latexStringList << exp.toLatexString()
 			# @latexStringList << (term1.toLatexString()+"="+termItem3.toLatexString()+op1.toLatexString()+termItem2.toLatexString())
-			termItem2 = termItem3.operate(termItem2,op1)
-			termItem2 = termItem2.simplify()
+			termItem2 = termItem3.operate(op1,termItem2)
+			termItem2.simplify()
 			exp.expressionItemList=[term1,@eq,termItem2]
 			@latexStringList << exp.toLatexString()
 			# @latexStringList << (term1.toLatexString()+"="+termItem2.toLatexString())
@@ -57,7 +72,7 @@ class RationalNumber
 		
 
 		#If term1[0] is not 1, equation is unsolved
-		if term1[0].finalCalcValue()!=1
+		if term1[0].class.name == "TermFraction" && term1[0].calcFinalValue()!=1
 			if term1[0].baseDenominator.base==1
 				@latexStringList << "Dividing both sides by "+term1[0].toLatexString()+"to RHS" 
 			elsif term1[0].baseNumerator.base==1
@@ -65,25 +80,30 @@ class RationalNumber
 			else
 				@latexStringList << "Transposing "+term1[0].toLatexString()+"to RHS" 
 			end
-			exp.expressionItemList=[var,@eq,termItem2.operateExpression(term1[0])]; @latexStringList << exp.toLatexString()
+			exp.expressionItemList=[var,@eq,termItem2.operateExpression(op,term1[0])]; @latexStringList << exp.toLatexString()
 			# @latexStringList << var.toLatexString() + "=" + termItem2.operateExpression(term1[0])
-			termItem2 = termItem2.divide(term1[0])
+			termItem2 = termItem2/term1[0]
 			exp.expressionItemList=[var,@eq,termItem2]; @latexStringList << exp.toLatexString()
 			# @latexStringList << var.toLatexStringList + "=" + termItem2.toLatexString()
 		end
 		solution = termItem2
+		puts "TERM1a"+term1.toLatexString()
 		@latexStringList << "Required Solution "
 		termItem1b = TermFraction.new(1,1)
 		term1[1] = termItem1b.convertTermVariable(var,solution.numerator(),solution.denominator())
 		latexStringFinal = "To check the answer: LHS ="+term1.toLatexString()+op.toLatexString()+termItem2Clone.toLatexString()
-		term1=term1.simplify()
+		puts "TERM1b"+term1.toLatexString()
+		term1.simplify()
+		puts "TERM1b"+term1.toLatexString()
 		latexStringFinal += "= "+term1.toLatexString()+op.toLatexString()+termItem2Clone.toLatexString()
-		term1[0] = term1[0].operate(termItem2Clone,op)
+		term1[0] = term1[0].operate(op,termItem2Clone)
 		latexStringFinal += "= "+term1.toLatexString()+"= RHS (as required)"
 		@latexStringList << latexStringFinal
 		return @latexStringList
 	end
 	def solveLinearEqWithVariableOnBothSides(a,b,c,d,e,f,g,h,x,operator1,operator2)
+		puts "solveLinearEqWithVariableOnBothSides"
+		exp=Expression.new()
 		var=TermVariable.new(x)
 		termItem1 = TermFraction.new(a,b)
 		termItem2 = TermFraction.new(c,d)
@@ -92,21 +112,22 @@ class RationalNumber
 		op1 = Operator.new(operator1)
 		op2 = Operator.new(operator2)
 		#If denominator is 1, remove denominator
-		termItem1 = termItem1.reduceDenominator()
-		termItem2 = termItem2.reduceDenominator()
-		termItem3 = termItem3.reduceDenominator()
+		termItem1 = termItem1.reduceFormWithDen()
+		termItem2 = termItem2.reduceFormWithDen()
+		termItem3 = termItem3.reduceFormWithDen()
+		termItem4 = termItem4.reduceFormWithDen()
 		termItem2Clone = termItem2.cloneForOperation()
 		term1 = Term.new()
 		term1.termItemList = [termItem1,var]
 		term3 = Term.new()
 		term3.termItemList = [termItem3,var]
 		#If coefficient base is 1, 
-		term1 = term1.reduceTerm()
-		term3 = term3.reduceTerm()
-
+		term1.reduceTerm()
+		term3.reduceTerm()
+		puts "term1.reduceTerm()"+term1.toLatexString()
 		#If termItem2 is 0, then transposing termItem2 is not needed
-		if termItem2.finalCalcValue() != 0
-			exp.expressionItemList=[term1,op,termItem2,@eq,term3,op2,termItem4]; @latexStringList << exp.toLatexString()
+		if termItem2.calcFinalValue() != 0
+			exp.expressionItemList=[term1,op1,termItem2,@eq,term3,op2,termItem4]; @latexStringList << exp.toLatexString()
 			# @latexStringList << (term1.toLatexString()+op.toLatexString()+termItem2.toLatexString()+"="+term3.toLatexString()+op2.toLatexString()+termItem4.toLatexString())
 			@latexStringList << "Transposing "+term3.toLatexString()+"to LHS"
 			op2=op2.opposite()
@@ -115,17 +136,37 @@ class RationalNumber
 			# @latexStringList << (term1.toLatexString()+op1.toLatexString()+termItem2.toLatexString()+op2.toLatexString()+term3.toLatexString() + "="+term3.toLatexString())
 			exp.expressionItemList=[var,@bracStart,term1[0],op2,term3[0],@bracEnd,op1,termItem2,@eq,term3]; @latexStringList << exp.toLatexString()
 			# @latexStringList << (var.toLatexString()+"("+term1[0]+op2.toLatexString()+term3[0].toLatexString()+")"+op1.toLatexString()+termItem2.toLatexString() + "="+term3.toLatexString())
-			exp.expressionItemList=[var,@bracStart,term1[0].operateExpression(op,term3[0]),@bracEnd,op1,termItem2,@eq,term3]; @latexStringList << exp.toLatexString()
+			exp.expressionItemList=[var,@bracStart,term1[0].operateExpression(op2,term3[0]),@bracEnd,op1,termItem2,@eq,term3]; @latexStringList << exp.toLatexString()
 			# @latexStringList << (var.toLatexString()+"("+term1[0].operateDisplay(term3[0],op)+")"+op1.toLatexString()+termItem2.toLatexString() + "="+term3.toLatexString())
-			term1[0] = term1[0].operate(term3[0],op)
+			term1[0] = term1[0].operate(op2,term3[0])
 			exp.expressionItemList=[term1,op1,termItem2,@eq,term3]; @latexStringList << exp.toLatexString()
 			# @latexStringList << (term1.toLatexString()+op1.toLatexString()+termItem2.toLatexString() + "="+term3.toLatexString())
 			
 		end
-		solveLinearEqWithVariableOnLeftSide(term1[0].numerator(),term1[0].denominator(),termItem2.numerator(),termItem2.numerator(),termItem4.numerator(),termItem4.denominator(),x,operator1)
+		puts "Term1[0]"+term1[0].toLatexString()
+		puts "Term1[0]"+term1[0].class.name
+		if term1[0].class.name == "TermCoefficient"
+			a=term1[0];b=1
+		else
+			a=term1[0].numerator();b=term1[0].denominator()
+		end
+		if termItem2.class.name == "TermCoefficient"
+			c=termItem2;c=1
+		else
+			c=termItem2.numerator();d=termItem2.denominator()
+		end
+		if termItem4.class.name == "TermCoefficient"
+			e=termItem4;f=1
+		else
+			e=termItem4.numerator();f=termItem4.denominator()
+		end
+		solveLinearEqWithVariableOnLeftSide(a,b,c,d,e,f,x,operator1)
+		# solveLinearEqWithVariableOnLeftSide(term1[0].numerator(),term1[0].denominator(),termItem2.numerator(),termItem2.numerator(),termItem4.numerator(),termItem4.denominator(),x,operator1)
 		
 	end
 	def equivalentRationalNumber(a,b,c,numeratorFlag)
+		puts "equivalentRationalNumber"
+		exp=Expression.new()
 		# if NumeratorFlag, then input at numerator is asked
 		mult = c/a
 		mult = c/b if numeratorFlag
@@ -161,19 +202,28 @@ class RationalNumber
 
 	end
 	def equivalentRationalNumberSmall(a,b,requiredDen)
+		puts "equivalentRationalNumberSmall"
 		# if NumeratorFlag, then input at numerator is asked
+		a=getBase(a);b=getBase(b);requiredDen=getBase(requiredDen)
+		a=a.base if !checkForPrimitive(a)
+		b=b.base if !checkForPrimitive(b)
+		requiredDen=requiredDen.base if !checkForPrimitive(requiredDen)
+		exp=Expression.new()
 		multiplier = requiredDen/b
+		puts "multiplier"+multiplier.to_s
 		frac = TermFraction.new(a,b)
 		numExp = Expression.new()
 		denExp = Expression.new()
-		numExp.expressionItemList=[frac.baseNumerator,@times,multiplier]
-		denExp.expressionItemList=[frac.baseDenominator,@times,multiplier]
+		numExp.expressionItemList=[frac.baseNumerator,@times,TermCoefficient.new(multiplier)]
+		denExp.expressionItemList=[frac.baseDenominator,@times,TermCoefficient.new(multiplier)]
 		equiFrac = TermFraction.new(a*multiplier,b*multiplier)
 		exp = Expression.new()
-		exp.expressionItemList=[frac,@eq,TermFraction.new(exp1,exp2),@eq,equiFrac]
+		exp.expressionItemList=[frac,@eq,TermFraction.new(numExp,denExp),@eq,equiFrac]
 		@latexStringList << exp.toLatexString()
 	end
 	def simplestForm(a,b)
+		puts "simplestForm"
+		exp=Expression.new()
 		displayExp = Expression.new()
 		frac = TermFraction.new(a,b)
 		termItema = TermCoefficient.new(a)
@@ -201,21 +251,26 @@ class RationalNumber
 		@latexStringList << "The fraction "+TermFraction.new(termItemaEquiv,termItembEquiv).toLatexString()
 	end
 	def simplestFormSmall(a,b)
+		puts "simplestFormSmall"
+		exp=Expression.new();exp1=Expression.new();exp2=Expression.new()
 		frac = TermFraction.new(a,b)
 		frac.simplifyItemNegative()
 		termItemgcd = TermCoefficient.new(gcd(a.abs,b.abs))
 		termItemgcd.negative = true if b<0
-		exp1 = [frac.baseNumerator,@div,termItemgcd]
-		exp2 = [frac.baseDenominator,@div,termItemgcd]
+		exp1.expressionItemList  = [frac.baseNumerator,@div,termItemgcd]
+		exp2.expressionItemList  = [frac.baseDenominator,@div,termItemgcd]
 		frac1 = TermFraction.new(exp1,exp2)
 		frac2 = TermFraction.new(frac.baseNumerator.divide(termItemgcd),frac.baseDenominator.divide(termItemgcd))
 		exp.expressionItemList=[frac,@eq,frac1,@eq,frac2]; @latexStringList << exp.toLatexString()
 		# @latexStringList <<  frac.toLatexString()+frac1.toLatexString()+frac2.toLatexString()
 	end
 	def gcd(a, b)
+		puts "gcd"
 	 	b == 0 ? a : gcd(b, a.modulo(b))
 	end
 	def negativeFlag(a,b)
+		puts "negativeFlag"
+		exp=Expression.new();exp1=Expression.new();exp2=Expression.new()
 		frac = TermFraction.new(a,b)
 		frac.simplifyItemNegative()
 		if frac.baseNumerator.negative && !frac.baseNumerator.negative
@@ -223,8 +278,8 @@ class RationalNumber
 		elsif !frac.baseNumerator.negative && !frac.baseNumerator.negative
 			@latexStringList << "Both the numerator and denominator of this number are positive integers. Such a rational number is called a positive rational number"
 		else
-			exp1 = [frac.baseNumerator,@times,TermCoefficient.new(-1)]
-			exp2 = [frac.baseDenominator,@times,TermCoefficient.new(-1)]
+			exp1.expressionItemList = [frac.baseNumerator,@times,TermCoefficient.new(-1)]
+			exp2.expressionItemList  = [frac.baseDenominator,@times,TermCoefficient.new(-1)]
 			frac1 = TermFraction.new(exp1,exp2)
 			frac2 = TermFraction.new(frac.baseNumerator.negateTermItem(),frac.baseDenominator.negateTermItem())
 			exp.expressionItemList=[frac,@eq,frac1,@eq,frac2]; @latexStringList << "We know that"+exp.toLatexString()
@@ -233,6 +288,8 @@ class RationalNumber
 		end
 	end
 	def compare(a,b,c,d)
+		puts "compare"
+		exp=Expression.new()
 		frac1 = TermFraction.new(a,b)
 		frac2 = TermFraction.new(c,d)
 		simplestFormSmall(a,b)
@@ -258,6 +315,8 @@ class RationalNumber
 	end
 
 	def compareFraction(a,b,c,d)
+		puts "compareFraction"
+		exp=Expression.new()
 		frac1 = TermFraction.new(a,b)
 		frac2 = TermFraction.new(c,d)
 		if frac1> frac2
@@ -271,83 +330,93 @@ class RationalNumber
 			@latexStringList << "Both are equal fractions."
 			exp.expressionItemList=[higherFrac,@eq,lowerFrac]; @latexStringList << exp.toLatexString()
 			# @latexStringList << higherFrac.toLatexString() + @eq+ lowerFrac.toLatexString()
-		elsif frac1.baseDenominator.equals(frac2.baseDenominator)
+		elsif frac1.baseDenominator == (frac2.baseDenominator)
 			@latexStringList << "Both are like fraction."
-			@latexStringList << "In both the fractions the whole is divided into "+frac1.baseDenominator+" equal parts. For we take "+frac1.baseNumerator+" and "+frac2.baseNumerator+" parts respectively out of the "+frac1.baseDenominator+" equal parts. "
-			@latexStringList << "Clearly, out of "+frac1.baseDenominator+" equal parts, the portion corresponding to "+higherFrac.baseNumerator+" parts is larger than the portion corresponding to "+lowerFrac.baseNumerator+" parts."
+			@latexStringList << "In both the fractions the whole is divided into "+frac1.baseDenominator.toLatexString()+" equal parts. For we take "+frac1.baseNumerator.toLatexString()+" and "+frac2.baseNumerator.toLatexString()+" parts respectively out of the "+frac1.baseDenominator.toLatexString()+" equal parts. "
+			@latexStringList << "Clearly, out of "+frac1.baseDenominator.toLatexString()+" equal parts, the portion corresponding to "+higherFrac.baseNumerator.toLatexString()+" parts is larger than the portion corresponding to "+lowerFrac.baseNumerator.toLatexString()+" parts."
 			exp.expressionItemList=[higherFrac,@gt,lowerFrac]; @latexStringList << exp.toLatexString()
 			# @latexStringList << higherFrac.toLatexString() + @gt+ lowerFrac.toLatexString()
-		elsif frac1.baseNumerator.equals (frac2.baseNumerator)
+		elsif frac1.baseNumerator == (frac2.baseNumerator)
 			@latexStringList << "Both are unlike fractions with same numerator."
-			@latexStringList << "In "+frac1.toLatexString()+", we divide the whole into "+frac1.baseDenominator+" equal parts and take "+frac1.baseNumerator+" parts. In"+frac2.toLatexString()+", we divide the whole into "+frac2.baseDenominator+" equal parts and take "+frac2.baseNumerator+" part."
+			@latexStringList << "In "+frac1.toLatexString()+", we divide the whole into "+frac1.baseDenominator.toLatexString()+" equal parts and take "+frac1.baseNumerator.toLatexString()+" parts. In"+frac2.toLatexString()+", we divide the whole into "+frac2.baseDenominator.toLatexString()+" equal parts and take "+frac2.baseNumerator.toLatexString()+" part."
 			@latexStringList << "Note that in"+higherFrac.toLatexString()+" , the whole is divided into a smaller number of parts than in "+lowerFrac.toLatexString()
 			@latexStringList << "Therefore, each equal part of the whole in case of"+higherFrac.toLatexString()+" is larger than that in case of "+lowerFrac.toLatexString()
 			exp.expressionItemList=[higherFrac,@gt,lowerFrac]; @latexStringList << exp.toLatexString()
 			# @latexStringList << higherFrac.toLatexString() + @gt+ lowerFrac.toLatexString()
 		else 
-			@latexStringList << "The fractions are unlike. We should first get their equivalent fractions with a denominator which is a LCM of "+frac1.baseDenominator+" and "+frac2.baseDenominator+"."
+			@latexStringList << "The fractions are unlike. We should first get their equivalent fractions with a denominator which is a LCM of "+frac1.baseDenominator.toLatexString()+" and "+frac2.baseDenominator.toLatexString()+"."
 			lcm = frac1.lcmDenominator(frac2)
-			equivalentRationalNumberSmall(a,b,lcm.base)
-			equivalentRationalNumberSmall(c,d,lcm.base)
-			compareFraction(a*lcm.base,b*lcm.base,c*lcm.base,d*lcm.base)
+			a=getBase(a);b=getBase(b);c=getBase(c);d=getBase(d);lcm=getBase(lcm)
+			equivalentRationalNumberSmall(a,b,lcm)
+			equivalentRationalNumberSmall(c,d,lcm)
+			compareFraction(a*lcm/b,lcm,c*lcm/d,lcm)
 			exp.expressionItemList=[higherFrac,@gt,lowerFrac]; @latexStringList << exp.toLatexString()
 			# @latexStringList << higherFrac.toLatexString() + @gt+ lowerFrac.toLatexString()
 		end
 
 	end
 	def addFraction(a,b,c,d)
+		puts "addFraction"
+		exp=Expression.new()
 		frac1 = TermFraction.new(a,b)
 		frac2 = TermFraction.new(c,d)
-		if frac1.baseDenominator.equals(frac2.baseDenominator)
+		if frac1.baseDenominator==(frac2.baseDenominator)
 			@latexStringList << "Both are like fraction.The sum of two or more like fractions can be obtained as follows"
 			@latexStringList << "Retain the (common) denominator and add the numerators"
 			numExp = Expression.new()
-			numExp.expressionItemList = [frac1.baseNumerator+@add+frac2.baseNumerator]
+			numExp.expressionItemList = [frac1.baseNumerator,@add,frac2.baseNumerator]
 			exp = Expression.new()
 			exp.expressionItemList = [frac1,@add,frac2,@eq,TermFraction.new(numExp,frac1.baseDenominator),@eq,frac1.add(frac2)]
 			@latexStringList << exp.toLatexString()
 		else
-			@latexStringList << "The fractions are unlike. We should first get their equivalent fractions with a denominator which is a LCM of "+frac1.baseDenominator+" and "+frac2.baseDenominator+"."
+			@latexStringList << "The fractions are unlike. We should first get their equivalent fractions with a denominator which is a LCM of "+frac1.baseDenominator.toLatexString()+" and "+frac2.baseDenominator.toLatexString()+"."
 			lcm = frac1.lcmDenominator(frac2)
-			equivalentRationalNumberSmall(a,b,lcm.base,true)
-			equivalentRationalNumberSmall(c,d,lcm.base,true)
-			addFraction(a*lcm.base,b*lcm.base,c*lcm.base,d*lcm.base)
+			a=getBase(a);b=getBase(b);c=getBase(c);d=getBase(d);lcm=getBase(lcm)
+			equivalentRationalNumberSmall(a,b,lcm)
+			equivalentRationalNumberSmall(c,d,lcm)
+			addFraction(a*lcm/b,lcm,c*lcm/d,lcm)
 		end
 
 	end
 	def subtractFraction(a,b,c,d)
+		puts "subtractFraction"
+		exp=Expression.new()
 		frac1 = TermFraction.new(a,b)
 		frac2 = TermFraction.new(c,d)
-		if frac1.baseDenominator.equals(frac2.baseDenominator)
+		if frac1.baseDenominator == (frac2.baseDenominator)
 			@latexStringList << "Both are like fraction.The difference of two like fractions can be obtained as follows"
 			@latexStringList << "Retain the (common) denominator and subtract the numerators"
 			numExp = Expression.new()
-			numExp.expressionItemList = [frac1.baseNumerator+@subtract+frac2.baseNumerator]
+			numExp.expressionItemList = [frac1.baseNumerator,@subtract,frac2.baseNumerator]
 			exp = Expression.new()
-			exp.expressionItemList = [frac1,@subtract,frac2,@eq,TermFraction.new(numExp,frac1.baseDenominator),@eq,frac1.subtract(frac2)]
+			exp.expressionItemList = [frac1,@subtract,frac2,@eq,TermFraction.new(numExp,frac1.baseDenominator),@eq,frac1.add(frac2.negateTermItem())]
 			@latexStringList << exp.toLatexString()
 		else
-			@latexStringList << "The fractions are unlike. We should first get their equivalent fractions with a denominator which is a LCM of "+frac1.baseDenominator+" and "+frac2.baseDenominator+"."
+			@latexStringList << "The fractions are unlike. We should first get their equivalent fractions with a denominator which is a LCM of "+frac1.baseDenominator.toLatexString()+" and "+frac2.baseDenominator.toLatexString()+"."
 			lcm = frac1.lcmDenominator(frac2)
-			equivalentRationalNumberSmall(a,b,lcm.base,true)
-			equivalentRationalNumberSmall(c,d,lcm.base,true)
-			subtractFraction(a*lcm.base,b*lcm.base,c*lcm.base,d*lcm.base)
+			a=getBase(a);b=getBase(b);c=getBase(c);d=getBase(d);lcm=getBase(lcm)
+			equivalentRationalNumberSmall(a,b,lcm)
+			equivalentRationalNumberSmall(c,d,lcm)
+			subtractFraction(a*lcm/b,lcm,c*lcm/d,lcm)
 		end
 
 	end
 	def additiveInverse(a,b)
+		puts "additiveInverse"
+		exp=Expression.new()
 		frac = TermFraction.new(a,b)
 		negativeFrac = frac.negateTermItem()
 		numExp = Expression.new()
 		numExp.expressionItemList = [frac.baseNumerator,@add,negativeFrac.baseNumerator]
 		finalExp = Expression.new()
-		finalExp.expressionItemList = [frac1,@add,negativeFrac,@eq,TermFraction.new(numExp,frac.baseDenominator),@eq,frac.add(negativeFrac),@eq,TermCoefficient.new(0)]
+		finalExp.expressionItemList = [frac,@add,negativeFrac,@eq,TermFraction.new(numExp,frac.baseDenominator),@eq,frac.add(negativeFrac),@eq,TermCoefficient.new(0)]
 		@latexStringList << finalExp.toLatexString()
 	end
 	def multiplicativeInverse(a,b)
+		puts "multiplicativeInverse"
+		exp=Expression.new()
 		frac = TermFraction.new(a,b)
 		reciprocalFrac = frac.reciprocal()
-		exp = Expression.new()
 		exp.expressionItemList = [frac,@times,reciprocalFrac,@eq,TermCoefficient.new(1)]
 		@latexStringList << frac.toLatexString()+"must be multiplied by"+reciprocalFrac.toLatexString()+"so as to get product 1 because "+exp.toLatexString()
 	end

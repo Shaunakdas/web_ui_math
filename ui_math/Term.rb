@@ -22,8 +22,18 @@ class Term
 		return !(defined?(@negative)).nil? && @negative ==true
 	end
 
+	def cloneForOperation()
+		selfRef = Marshal.load(Marshal.dump(self))
+		return selfRef
+	end
 	def addTermItem(termItem)
 		self.termItemList << termItem
+	end
+	def [](index)
+		return self.termItemList[index]
+	end
+	def []=(index,value)
+		self.termItemList[index] = value
 	end
 	def addTermVariable(symbol,exponent,negative)
 		termVar = TermVariable.new(symbol)
@@ -80,6 +90,7 @@ class Term
 		groupedTermItemList = self.termItemList.group_by {|x| x.class.name}
 		self.termItemList =[]
 		self.termItemList += groupedTermItemList["TermCoefficient"] if groupedTermItemList["TermCoefficient"]
+		self.termItemList += groupedTermItemList["TermFraction"] if   groupedTermItemList["TermFraction"]
 		self.termItemList += groupedTermItemList["TermVariable"] if   groupedTermItemList["TermVariable"]
 	end
 	def toLatexString
@@ -137,8 +148,9 @@ class Term
 	def simplifyCoefficient()
 		#Calculating Final TermCoefficient
 		groupedTermItemList = self.termItemList.group_by {|x| x.class.name}
-		self.termItemList =[]
+		
 		if groupedTermItemList["TermCoefficient"]
+			self.termItemList =[]
 			finalTermCoeffItem=1
 			termCoeffList = groupedTermItemList["TermCoefficient"] 
 			
@@ -176,12 +188,19 @@ class Term
 	end
 
 	def simplify()
+		puts "1:"+toLatexString()
 		simplifyItemExponent()
+		puts "2:"+toLatexString()
 		simplifyItemNegative()
+		puts "3:"+toLatexString()
 		simplifyExponent()
+		puts "4:"+toLatexString()
 		simplifyNegative()
+		puts "5:"+toLatexString()
 		simplifyCoefficient()
+		puts "6:"+toLatexString()
 		simplifyVariable()
+		puts "7:"+toLatexString()
 	end
 	def setValueList(variableList)
 		self.termItemList.each_with_index do |termItem,index|

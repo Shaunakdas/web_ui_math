@@ -31,6 +31,12 @@ class Expression
 	def empty()
 		self.expressionItemList =[]
 	end
+	def [](index)
+		return self.expressionItemList[index]
+	end
+	def []=(index,value)
+		self.expressionItemList[index] = value
+	end
 	def consistsVariable()
 		variableFlag = false
 		self.expressionItemList.each do |expressionItem|

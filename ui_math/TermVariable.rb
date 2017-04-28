@@ -10,6 +10,11 @@ class TermVariable
 	def <=>(another)
 	    @variable.symbol <=> another.variable.symbol
 	end
+
+	def cloneForOperation()
+		selfRef = Marshal.load(Marshal.dump(self))
+		return selfRef
+	end
 	def setExponent(exponent)
 		@exponent = exponent
 	end
@@ -59,13 +64,6 @@ class TermVariable
 		@value = value
 		@value = value**@exponent if @exponent
 	end
-	def ==(other)
-		if (defined?(@exponent)).nil?
-			return @variable == (other.variable)
-		else
-			return (@variable == (other) && (@exponent==other.exponent))
-		end
-	end
 	def getVariableList()
 		return [@variable]
 	end
@@ -73,6 +71,20 @@ class TermVariable
 		exp = Expression.new()
 		exp.expressionItemList=[self,op,termItem]
 		return exp
+	end
+	def operate(op,termItem)
+		puts case op.symbol
+		when "+"
+			return self.+@termItem
+		when "-"
+			return self.-@termItem
+		when "\\times"
+			return self*@termItem
+		when "\\div"
+			return self/@termItem
+		else
+
+		end
 	end
 	def *(other)
 		resultTerm = Term.new()
@@ -129,7 +141,7 @@ class TermVariable
 					return selfRef.operateExpression(Operator.new("+"),otherRef)
 				end
 			elsif other.class.name == "TermFraction"
-				return reciprocal(otherRef)*selfRef
+				return (otherRef).reciprocal*selfRef
 			else
 				return TermFraction.new(selfRef,other)
 			end
@@ -153,7 +165,7 @@ class TermVariable
 					return selfRef.operateExpression(Operator.new("+"),otherRef)
 				end
 			else
-				return otherRef+selfRef
+				return otherRef.+@selfRef
 			end
 		end
 	end
@@ -175,7 +187,7 @@ class TermVariable
 					return selfRef.operateExpression(Operator.new("-"),otherRef)
 				end
 			else
-				return otherRef-selfRef
+				return otherRef.-@selfRef
 			end
 		end
 	end
