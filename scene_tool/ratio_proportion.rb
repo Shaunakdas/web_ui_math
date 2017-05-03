@@ -61,6 +61,7 @@ class RatioProportion
 		@latexStringList << "Ratio of "+a.to_s+" to "+b.to_s
  		@latexStringList += rationalNumber.latexStringList
 		rationalNumber.latexStringList = []
+		rationalNumber.simplestFormSmall(c,d)
 		@latexStringList << "Ratio of "+c.to_s+" to "+d.to_s
  		@latexStringList += rationalNumber.latexStringList
  		if frac1 == frac2
@@ -92,6 +93,7 @@ class RatioProportion
 		@latexStringList << "Ratio of "+a.to_s+" to "+b.to_s
  		@latexStringList += rationalNumber.latexStringList
 		rationalNumber.latexStringList = []
+		rationalNumber.simplestFormSmall(c,d)
 		@latexStringList << "Ratio of "+c.to_s+" to "+d.to_s
  		@latexStringList += rationalNumber.latexStringList
  		if frac1 == frac2
@@ -109,7 +111,7 @@ class RatioProportion
 		percent = frac1.percentage
 		exp = Expression.new()
 		exp.expressionItemList = [frac1,TermFraction.new(100,100),@eq,TermFraction.new(percent,100)]
-		@latexStringList << exp.toLatexString()+percent.to_s+"(out of hundred)"
+		@latexStringList << exp.toLatexString()+"= "+percent.to_s+"(out of hundred)"
 		@latexStringList << percent.to_s+@percent.toLatexString()
 	end
 	def decimalToPercentage(a)
@@ -125,8 +127,8 @@ class RatioProportion
 	end
 
 	def ratioToPercentage(a,b)
-		firstPart = TermCoefficient.new((100*a.to_f)/(a+b))
-		secondPart = TermCoefficient.new((100*b.to_f)/(a+b))
+		firstPart = TermCoefficient.new(((100*a.to_f)/(a+b)).round(2))
+		secondPart = TermCoefficient.new(((100*b.to_f)/(a+b)).round(2))
 		denExp = Expression.new()
 		denExp.expressionItemList = [TermCoefficient.new(a),@add,TermCoefficient.new(b)]
 		@latexStringList << " Total part is "+(a+b).to_s
@@ -138,8 +140,9 @@ class RatioProportion
 		@latexStringList << "First percentage is "+exp.toLatexString()
 	end
 	def calcProfitPercent(profit,cost)
+		percent = (profit.to_f*100/cost).round(2)
 		exp = Expression.new()
-		exp.expressionItemList = [TermFraction.new(profit,cost),@times,TermCoefficient.new(100)]
+		exp.expressionItemList = [TermFraction.new(profit,cost),@times,TermCoefficient.new(100),@eq,TermCoefficient.new(percent),@percent]
 		@latexStringList << " Profit percent is = \\frac{Profit}{Cost} \\times 100 "+exp.toLatexString()
 	end
 	def calcProfit(profitPercent,cost)
@@ -153,8 +156,9 @@ class RatioProportion
 		@latexStringList << " Selling Price = "+(cost+profit).to_s
 	end
 	def calcLossPercent(loss,cost)
+		percent = (loss.to_f*100/cost).round(2)
 		exp = Expression.new()
-		exp.expressionItemList = [TermFraction.new(loss,cost),@times,TermCoefficient.new(100)]
+		exp.expressionItemList = [TermFraction.new(loss,cost),@times,TermCoefficient.new(100),@eq,TermCoefficient.new(percent),@percent]
 		@latexStringList << " Loss percent is = \\frac{Loss}{Cost} \\times 100 "+exp.toLatexString()
 	end
 	def calcLoss(lossPercent,cost)
@@ -202,11 +206,11 @@ class RatioProportion
 	end
 	def calcDiscountPercent(markedPrice,salesPrice)
 		discount = markedPrice - salesPrice
-		dscountPercent = (discount.to_f*100)/markedPrice
+		discountPercent = ((discount.to_f*100).to_f/markedPrice).round(2)
 		@latexStringList << "Discount =  Marked Price - Sales Price"
 		@latexStringList << "New Price = "+markedPrice.to_s+" - "+salesPrice.to_s+" = "+(markedPrice-salesPrice).to_s 
 		exp = Expression.new()
-		exp.expressionItemList = [TermFraction.new(discount,markedPrice),@times,TermCoefficient.new(100),@eq,TermCoefficient.new(discount),@percent]
+		exp.expressionItemList = [TermFraction.new(discount,markedPrice),@times,TermCoefficient.new(100),@eq,TermCoefficient.new(discountPercent),@percent]
 		@latexStringList << "Discount Percentage =  \\frac{Discount}{Marked Price}"
 		@latexStringList << "Discount Percentage =  "+exp.toLatexString()
 	end
@@ -219,7 +223,7 @@ class RatioProportion
 	end
 	def calcVAT(cost,rate)
 		increasedRate = rate+100
-		increase = (cost.to_f*100)/increasedRate
+		increase = ((cost.to_f*100)/increasedRate).round(2)
 		@latexStringList << "The price includes the VAT, i.e., the value added tax. Thus, a "+rate.to_s+"\\% VAT means if the price without VAT is 100 then price including VAT is "+(increasedRate).to_s+". "
 		@latexStringList << "Now, when price including VAT is "+(100+rate).to_s+", original price is  100."
 		exp = Expression.new()
@@ -243,10 +247,10 @@ class RatioProportion
 		for i in 1..yearCount
 			exp.expressionItemList.concat([@times,frac])
 		end
-		amount = principal*(frac.calcFinalValue()**yearCount)
+		amount = principal*(frac.calcFinalValue()**yearCount).round(2)
 		exp.expressionItemList.concat([@eq,TermCoefficient.new(amount)])
 		@latexStringList << "= "+exp.toLatexString()
-		@latexStringList << "CI = A - P ="+amount.to_s+" - "+principal.to_s+" = "+(amount-principal).to_s
+		@latexStringList << "CI = A - P ="+amount.to_s+" - "+principal.to_s+" = "+(amount-principal).round(2).to_s
 
 	end
 

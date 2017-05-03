@@ -97,7 +97,7 @@ class Term
 		self.sortTermItem()
 		latexString =""
 		self.termItemList.each do |termItem|
-			if termItem.negativeFlag() || termItem.baseNegativeFlag()
+			if termItem.negativeFlag() || termItem.baseNegativeFlag() ||!consistsVariable
 				latexString += "("+termItem.toLatexString()+")"
 			else
 				latexString += termItem.toLatexString()
@@ -148,7 +148,6 @@ class Term
 	def simplifyCoefficient()
 		#Calculating Final TermCoefficient
 		groupedTermItemList = self.termItemList.group_by {|x| x.class.name}
-		
 		if groupedTermItemList["TermCoefficient"]
 			self.termItemList =[]
 			finalTermCoeffItem=1
@@ -169,6 +168,7 @@ class Term
 		groupedTermItemList = self.termItemList.group_by {|x| x.class.name}
 		self.termItemList =[]
 		self.termItemList += groupedTermItemList["TermCoefficient"] if groupedTermItemList["TermCoefficient"]
+		self.termItemList += groupedTermItemList["TermFraction"] if   groupedTermItemList["TermFraction"]
 		if groupedTermItemList["TermVariable"]
 			termVarList = groupedTermItemList["TermVariable"] 
 			termVarList.each_with_index do |termVar,indexer|

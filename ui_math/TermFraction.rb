@@ -50,7 +50,8 @@ class TermFraction
 	def cloneForOperation()
 		selfRef = Marshal.load(Marshal.dump(self))
 		selfRef.simplify()
-		selfRef.baseNumerator.negative = !selfRef.baseNumerator.negative if selfRef.negative
+		selfRef.baseNumerator.negative = true if selfRef.negative
+		selfRef.negative = false
 		return selfRef
 	end
 	def setExponent(exponent)
@@ -126,7 +127,7 @@ class TermFraction
 	def add(otherTermFrac)
 		selfRef = self.cloneForOperation()
 		otherTermFracRef = otherTermFrac.cloneForOperation()
-		
+		puts "otherTermFrac-add"+otherTermFrac.toLatexString()
 		finalDenominator = selfRef.lcmDenominator(otherTermFracRef)
 		selfRef.baseNumerator = selfRef.baseNumerator.multiply(finalDenominator.divide(selfRef.baseDenominator))
 		otherTermFracRef.baseNumerator = otherTermFracRef.baseNumerator.multiply(finalDenominator.divide(otherTermFracRef.baseDenominator))
@@ -241,6 +242,7 @@ class TermFraction
 	end
 	def operate(op,termItem)
 		puts "Symbol"+op.symbol
+		puts termItem.class.name
 		puts case op.symbol
 		when "+"
 			return self.+@termItem
@@ -309,6 +311,7 @@ class TermFraction
 			elsif other.class.name == "TermVariable"
 				return selfRef.operateExpression(Operator.new("+"),otherRef)
 			elsif other.class.name == "TermFraction"
+				puts "+otherRef.class.name"+otherRef.toLatexString()
 				return selfRef.add(otherRef)
 			else
 				return otherRef.+@selfRef
@@ -326,9 +329,12 @@ class TermFraction
 			elsif other.class.name == "TermVariable"
 				return selfRef.operateExpression(Operator.new("-"),otherRef)
 			elsif other.class.name == "TermFraction"
-				return otherRef.negateTermItem().+@selfRef
+				puts "otherRef.class.name"+otherRef.class.name
+				otherRef= otherRef.negateTermItem()
+				puts "otherRef.class.name"+otherRef.toLatexString()
+				return selfRef.+@otherRef
 			else
-				return selfRef.-@otherRef
+				return selfRef.+@otherRef
 			end
 		end
 	end

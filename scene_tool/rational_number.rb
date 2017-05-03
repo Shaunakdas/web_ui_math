@@ -63,6 +63,7 @@ class RationalNumber
 			op1=op.opposite()
 			exp.expressionItemList=[term1,@eq,termItem3,op1,termItem2]; @latexStringList << exp.toLatexString()
 			# @latexStringList << (term1.toLatexString()+"="+termItem3.toLatexString()+op1.toLatexString()+termItem2.toLatexString())
+			puts "Symbol minus"+op1.symbol
 			termItem2 = termItem3.operate(op1,termItem2)
 			termItem2.simplify()
 			exp.expressionItemList=[term1,@eq,termItem2]
@@ -74,27 +75,31 @@ class RationalNumber
 		#If term1[0] is not 1, equation is unsolved
 		if term1[0].class.name == "TermFraction" && term1[0].calcFinalValue()!=1
 			if term1[0].baseDenominator.base==1
-				@latexStringList << "Dividing both sides by "+term1[0].toLatexString()+"to RHS" 
+				@latexStringList << "Dividing both sides by "+term1[0].toLatexString() 
+				exp.expressionItemList=[var,@eq,termItem2.operateExpression(@div,term1[0])]; @latexStringList << exp.toLatexString()
 			elsif term1[0].baseNumerator.base==1
-				@latexStringList << "Multiplying both sides by "+term1[0].baseDenominator.toLatexString()+"to RHS" 
+				@latexStringList << "Multiplying both sides by "+term1[0].baseDenominator.toLatexString()
+				exp.expressionItemList=[var,@eq,termItem2.operateExpression(@times,term1[0].baseDenominator)]; @latexStringList << exp.toLatexString()
 			else
 				@latexStringList << "Transposing "+term1[0].toLatexString()+"to RHS" 
+				exp.expressionItemList=[var,@eq,termItem2.operateExpression(@div,term1[0])]; @latexStringList << exp.toLatexString()
 			end
-			exp.expressionItemList=[var,@eq,termItem2.operateExpression(op,term1[0])]; @latexStringList << exp.toLatexString()
+			
 			# @latexStringList << var.toLatexString() + "=" + termItem2.operateExpression(term1[0])
 			termItem2 = termItem2/term1[0]
+			termItem2.simplify()
 			exp.expressionItemList=[var,@eq,termItem2]; @latexStringList << exp.toLatexString()
 			# @latexStringList << var.toLatexStringList + "=" + termItem2.toLatexString()
 		end
 		solution = termItem2
-		puts "TERM1a"+term1.toLatexString()
+		puts "solution class"+solution.class.name
 		@latexStringList << "Required Solution "
 		termItem1b = TermFraction.new(1,1)
 		term1[1] = termItem1b.convertTermVariable(var,solution.numerator(),solution.denominator())
 		latexStringFinal = "To check the answer: LHS ="+term1.toLatexString()+op.toLatexString()+termItem2Clone.toLatexString()
-		puts "TERM1b"+term1.toLatexString()
+		puts "95: TERM1b"+term1.toLatexString()
 		term1.simplify()
-		puts "TERM1b"+term1.toLatexString()
+		puts "97: TERM1b"+term1.toLatexString()
 		latexStringFinal += "= "+term1.toLatexString()+op.toLatexString()+termItem2Clone.toLatexString()
 		term1[0] = term1[0].operate(op,termItem2Clone)
 		latexStringFinal += "= "+term1.toLatexString()+"= RHS (as required)"
@@ -132,11 +137,11 @@ class RationalNumber
 			@latexStringList << "Transposing "+term3.toLatexString()+"to LHS"
 			op2=op2.opposite()
 
-			exp.expressionItemList=[term1,op1,termItem2,op2,term3,@eq,term3]; @latexStringList << exp.toLatexString()
+			exp.expressionItemList=[term1,op1,termItem2,op2,term3,@eq,termItem4]; @latexStringList << exp.toLatexString()
 			# @latexStringList << (term1.toLatexString()+op1.toLatexString()+termItem2.toLatexString()+op2.toLatexString()+term3.toLatexString() + "="+term3.toLatexString())
-			exp.expressionItemList=[var,@bracStart,term1[0],op2,term3[0],@bracEnd,op1,termItem2,@eq,term3]; @latexStringList << exp.toLatexString()
+			exp.expressionItemList=[var,@bracStart,term1[0],op2,term3[0],@bracEnd,op1,termItem2,@eq,termItem4]; @latexStringList << exp.toLatexString()
 			# @latexStringList << (var.toLatexString()+"("+term1[0]+op2.toLatexString()+term3[0].toLatexString()+")"+op1.toLatexString()+termItem2.toLatexString() + "="+term3.toLatexString())
-			exp.expressionItemList=[var,@bracStart,term1[0].operateExpression(op2,term3[0]),@bracEnd,op1,termItem2,@eq,term3]; @latexStringList << exp.toLatexString()
+			exp.expressionItemList=[var,@bracStart,term1[0].operateExpression(op2,term3[0]),@bracEnd,op1,termItem2,@eq,termItem4]; @latexStringList << exp.toLatexString()
 			# @latexStringList << (var.toLatexString()+"("+term1[0].operateDisplay(term3[0],op)+")"+op1.toLatexString()+termItem2.toLatexString() + "="+term3.toLatexString())
 			term1[0] = term1[0].operate(op2,term3[0])
 			exp.expressionItemList=[term1,op1,termItem2,@eq,term3]; @latexStringList << exp.toLatexString()
@@ -145,6 +150,8 @@ class RationalNumber
 		end
 		puts "Term1[0]"+term1[0].toLatexString()
 		puts "Term1[0]"+term1[0].class.name
+		#Shifting negative sign inside the numerator
+		term1[0] = term1[0].cloneForOperation()
 		if term1[0].class.name == "TermCoefficient"
 			a=term1[0];b=1
 		else

@@ -14,12 +14,14 @@ describe RatioProportion do
 		it "equivalentRatio: should say '' when we check method" do
 			ratio = RatioProportion.new()
 			ratio.equivalentRatio(2,3,4,false)
-			expect(ratio.latexStringList.join(";").to_s).to eq "Required ratio is 2 : 3;= \\frac{2}{3};We know 2\\times2=4;This means we need to multiply both the n...imes2};\\frac{2}{3}=\\frac{4}{6};\\frac{4}{6} is required equivalent fraction;Required Ratio is 4:6"
+			puts ratio.latexStringList.join(";").to_s
+			expect(ratio.latexStringList.join(";").to_s).to eq "Required ratio is 2 : 3;= \\frac{2}{3};We know 2\\times2=4;This means we need to multiply both the numerator and denominator by 2to get the equivalent fraction;Hence ;\\frac{2}{3}=\\frac{2\\times2}{3\\times2};\\frac{2}{3}=\\frac{4}{6};\\frac{4}{6} is required equivalent fraction;Required Ratio is 4:6"
 		end
 		it "checkProportion: should say '' when we check method" do
 			ratio = RatioProportion.new()
 			ratio.checkProportion(2,3,6,9)
-			expect(ratio.latexStringList.join(";").to_s).to eq "Ratio of 2 to 3;\\frac{2}{3}=\\frac{2\\div1}{3\\div1}=\\frac{2}{3};Ratio of 6 to 9;Since both the ratios are same;Hence2:3 = 6:9;Therefore 2, 3, 6 and 9 are in proportion"
+			puts ratio.latexStringList.join(";").to_s
+			expect(ratio.latexStringList.join(";").to_s).to eq "Ratio of 2 to 3;\\frac{2}{3}=\\frac{2\\div1}{3\\div1}=\\frac{2}{3};Ratio of 6 to 9;\\frac{6}{9}=\\frac{6\\div3}{9\\div3}=\\frac{2}{3};Since both the ratios are same;Hence2:3 = 6:9;Therefore 2, 3, 6 and 9 are in proportion"
 		end
 		it "unitaryMethod: should say '' when we check method" do
 			ratio = RatioProportion.new()
@@ -29,12 +31,13 @@ describe RatioProportion do
 		it "checkEquivalence: should say '' when we check method" do
 			ratio = RatioProportion.new()
 			ratio.checkEquivalence(2,4,6,12)
-			expect(ratio.latexStringList.join(";").to_s).to eq "Ratio of 2 to 4;\\frac{2}{4}=\\frac{2\\div2}{4\\div2}=\\frac{1}{2};Ratio of 6 to 12;Since both the ratios are same;Hence2:4 = 6:12;Therefore 2:4 and 6:12 are in equivalence"
+			puts ratio.latexStringList.join(";").to_s
+			expect(ratio.latexStringList.join(";").to_s).to eq "Ratio of 2 to 4;\\frac{2}{4}=\\frac{2\\div2}{4\\div2}=\\frac{1}{2};Ratio of 6 to 12;\\frac{6}{12}=\\frac{6\\div6}{12\\div6}=\\frac{1}{2};Since both the ratios are same;Hence2:4 = 6:12;Therefore 2:4 and 6:12 are in equivalence"
 		end
 		it "fractionToPercentage: should say '' when we check method" do
 			ratio = RatioProportion.new()
 			ratio.fractionToPercentage(2,4)
-			expect(ratio.latexStringList.join(";").to_s).to eq "\\frac{2}{4}\\frac{100}{100}=\\frac{50.0}{100}50.0(out of hundred);50.0\\%"
+			expect(ratio.latexStringList.join(";").to_s).to eq "\\frac{2}{4}\\frac{100}{100}=\\frac{50.0}{100}= 50.0(out of hundred);50.0\\%"
 		end
 		it "decimalToPercentage: should say '' when we check method" do
 			ratio = RatioProportion.new()
@@ -44,12 +47,12 @@ describe RatioProportion do
 		it "ratioToPercentage: should say '' when we check method" do
 			ratio = RatioProportion.new()
 			ratio.ratioToPercentage(2,4)
-			expect(ratio.latexStringList.join(";").to_s).to eq " Total part is 6; First percentage is \\frac{2}{2+4}\\times100\\%=33.333333333333336;First percentage is \\frac{4}{2+4}\\times100\\%=66.66666666666667"
+			expect(ratio.latexStringList.join(";").to_s).to eq " Total part is 6; First percentage is \\frac{2}{2+4}\\times100\\%=33.33;First percentage is \\frac{4}{2+4}\\times100\\%=66.67"
 		end
 		it "calcProfitPercent: should say '' when we check method" do
 			ratio = RatioProportion.new()
 			ratio.calcProfitPercent(50,100)
-			expect(ratio.latexStringList.join(";").to_s).to eq " Profit percent is = \\frac{Profit}{Cost} \\times 100 \\frac{50}{100}\\times100"
+			expect(ratio.latexStringList.join(";").to_s).to eq " Profit percent is = \\frac{Profit}{Cost} \\times 100 \\frac{50}{100}\\times100=50.0\\%"
 		end
 		it "calcProfit: should say '' when we check method" do
 			ratio = RatioProportion.new()
@@ -59,7 +62,7 @@ describe RatioProportion do
 		it "calcLossPercent: should say '' when we check method" do
 			ratio = RatioProportion.new()
 			ratio.calcLossPercent(50,100)
-			expect(ratio.latexStringList.join(";").to_s).to eq " Loss percent is = \\frac{Loss}{Cost} \\times 100 \\frac{50}{100}\\times100"
+			expect(ratio.latexStringList.join(";").to_s).to eq " Loss percent is = \\frac{Loss}{Cost} \\times 100 \\frac{50}{100}\\times100=50.0\\%"
 		end
 		it "calcLoss: should say '' when we check method" do
 			ratio = RatioProportion.new()
@@ -69,7 +72,8 @@ describe RatioProportion do
 		it "calcSimpleInterest: should say '' when we check method" do
 			ratio = RatioProportion.new()
 			ratio.calcSimpleInterest(200,2,2)
-			expect(ratio.latexStringList.join(";").to_s).to eq " The sum borrowed = 200; Rate of interest = 2\\% per year; The interest to paid after 1 year = =\\fr...o be paid after T years = A = P + I; Hence the total amount to be paid after 2 years = 200+8.0=208.0"
+			puts ratio.latexStringList.join(";").to_s
+			expect(ratio.latexStringList.join(";").to_s).to eq " The sum borrowed = 200; Rate of interest = 2\\% per year; The interest to paid after 1 year = =\\frac{15}{100}\\times200=4.0; The interest to paid after 2 years = 8.0\\times2=8.0; The total amount to be paid after T years = A = P + I; Hence the total amount to be paid after 2 years = 200+8.0=208.0"
 		end
 		it "calcIncreaseFromPercent: should say '' when we check method" do
 			ratio = RatioProportion.new()
@@ -84,7 +88,7 @@ describe RatioProportion do
 		it "calcDiscountPercent: should say '' when we check method" do
 			ratio = RatioProportion.new()
 			ratio.calcDiscountPercent(120,80)
-			expect(ratio.latexStringList.join(";").to_s).to eq "Discount =  Marked Price - Sales Price;New Price = 120 - 80 = 40;Discount Percentage =  \\frac{Discount}{Marked Price};Discount Percentage =  \\frac{40}{120}\\times100=40\\%"
+			expect(ratio.latexStringList.join(";").to_s).to eq "Discount =  Marked Price - Sales Price;New Price = 120 - 80 = 40;Discount Percentage =  \\frac{Discount}{Marked Price};Discount Percentage =  \\frac{40}{120}\\times100=33.33\\%"
 		end
 		it "calcSalesTax: should say '' when we check method" do
 			ratio = RatioProportion.new()
@@ -94,12 +98,14 @@ describe RatioProportion do
 		it "calcVAT: should say '' when we check method" do
 			ratio = RatioProportion.new()
 			ratio.calcVAT(120,20)
-			expect(ratio.latexStringList.join(";").to_s).to eq "The price includes the VAT, i.e., the value added tax. Thus, a 20\\% VAT means if the price without ... is  100.;Hence when price including tax is 120, the original price \\frac{20}{120}\\times120=100.0"
+			puts ratio.latexStringList.join(";").to_s
+			expect(ratio.latexStringList.join(";").to_s).to eq "The price includes the VAT, i.e., the value added tax. Thus, a 20\\% VAT means if the price without VAT is 100 then price including VAT is 120. ;Now, when price including VAT is 120, original price is  100.;Hence when price including tax is 120, the original price \\frac{20}{120}\\times120=100.0"
 		end
 		it "calcCompoundInterest: should say '' when we check method" do
 			ratio = RatioProportion.new()
 			ratio.calcCompoundInterest(100,4,4)
-			expect(ratio.latexStringList.join(";").to_s).to eq "We have, A = P{(1 + \\frac{R}{100})}^{n} ;where Principal(P)=100, Rate(R)=4,Number of years(n) = 4;=...\\frac{104}{100}=116.98585600000003)}^{4};CI = A - P =116.98585600000003 - 100 = 16.985856000000027"
+			puts ratio.latexStringList.join(";").to_s
+			expect(ratio.latexStringList.join(";").to_s).to eq "We have, A = P{(1 + \\frac{R}{100})}^{n} ;where Principal(P)=100, Rate(R)=4,Number of years(n) = 4;=100{(1+\\frac{4}{100})}^{4};=100{(\\frac{104}{100})}^{4};= {(100\\times\\frac{104}{100}\\times\\frac{104}{100}\\times\\frac{104}{100}\\times\\frac{104}{100}=117.0)}^{4};CI = A - P =117.0 - 100 = 17.0"
 		end
 
 	end

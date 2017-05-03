@@ -46,57 +46,63 @@ describe Exponent do
 			expo.squareRootValue(25)
 			expect(expo.latexStringList.join(";").to_s).to eq "We know that;5.0\\times5.0=25;5.0 is a square root of 25"
 		end
-=begin
+
 		it "numSquareZero: should say '' when we check numSquareZero method" do
 			expo = Exponent.new()
 			expo.numSquareZero(200)
-			expect(expo.latexStringList.join(";").to_s).to eq ""
+			expect(expo.latexStringList.join(";").to_s).to eq "If zero in 2 = 2;Then zero in 2^{2} = 2\\times2;4"
 		end
-=end
+
 		it "numNonSquareBetween: should say '' when we check numNonSquareBetween method" do
 			expo = Exponent.new()
 			expo.numNonSquareBetween(20)
-			expect(expo.latexStringList.join(";").to_s).to eq "There are 2n non perfect square numbers between the squares of the numbers n and (n + 1).;Hence between 20^{2} and 21^{2} there are 2\\times20 non perfect square numbers "
+			expect(expo.latexStringList.join(";").to_s).to eq "There are 2n non perfect square numbers between the squares of the numbers n and (n + 1).;Hence between 20^{2} and 21^{2} there are 2\\times20 = 40 non perfect square numbers "
 		end
 		it "calcSquareBracket: should say '' when we check calcSquareBracket method" do
 			expo = Exponent.new()
 			expo.calcSquareBracket(25)
-			expect(expo.latexStringList.join(";").to_s).to eq "We know that for a number with unit digit 5, i.e., a5;{(a5)}^{2} = a(a+1) hunderd + 25"
+			expect(expo.latexStringList.join(";").to_s).to eq "We know that for a number with unit digit 5, i.e., a5;{(a5)}^{2} = a(a+1) hunderd + 25;{(a)}^{2} = 2(3) hunderd + 25 = 625"
 		end
 		it "calcSquareBracket: should say '' when we check calcSquareBracket method" do
 			expo = Exponent.new()
 			expo.calcSquareBracket(16)
-			expect(expo.latexStringList.join(";").to_s).to eq "6^{2};{(6+6)}^{2};6(6+6)+6(6+6);6^{2}+6^{2}6^{2}+6^{2}6^{2}+6^{2};36+1296+1296+36;36"
+			expect(expo.latexStringList.join(";").to_s).to eq "16^{2};{(10+6)}^{2};10(10+6)+6(10+6);10^{2}+(10)(6)+(6)(10)+6^{2};10^{2}+(60)+(60)+6^{2};256"
 		end
 		it "calcRootPrime: should say '' when we check calcRootPrime method" do
 			expo = Exponent.new()
 			expo.calcRootPrime(576,true)
-			expect(expo.latexStringList.join(";").to_s).to eq "Prime Factors of 576;2\\times2\\times2\\times2\\times2\\times2\\times3\\times3;2^{2}\\times2^{2}\\ti...es3^{2};{(2\\times2\\times2\\times3)}^{2};\\sqrt{576} = 2\\times2\\times2\\times31.4142135623730951"
+			puts expo.latexStringList.join(";").to_s
+			expect(expo.latexStringList.join(";").to_s).to eq "Prime Factors of 576;2\\times2\\times2\\times2\\times2\\times2\\times3\\times3;2^{2}\\times2^{2}\\times2^{2}\\times3^{2};{(2\\times2\\times2\\times3)}^{2};\\sqrt{576}=2\\times2\\times2\\times3=24"
 		end
 		it "calcRootPrime: should say '' when we check calcRootPrime method" do
 			expo = Exponent.new()
 			expo.calcRootPrime(256,true)
-			expect(expo.latexStringList.join(";").to_s).to eq "Prime Factors of 256;2\\times2\\times2\\times2\\times2\\times2\\times2\\times2;2^{2}\\times2^{2}\\ti...es2^{2};{(2\\times2\\times2\\times2)}^{2};\\sqrt{256} = 2\\times2\\times2\\times21.4142135623730951"
+			puts expo.latexStringList.join(";").to_s
+			expect(expo.latexStringList.join(";").to_s).to eq "Prime Factors of 256;2\\times2\\times2\\times2\\times2\\times2\\times2\\times2;2^{2}\\times2^{2}\\times2^{2}\\times2^{2};{(2\\times2\\times2\\times2)}^{2};\\sqrt{256}=2\\times2\\times2\\times2=16"
 		end
 		it "calcRequiredNumberForRoot: should say '' when we check calcRequiredNumberForRoot method" do
 			expo = Exponent.new()
 			expo.calcRequiredNumberForRoot(9408,true,true)
-			expect(expo.latexStringList.join(";").to_s).to eq "Prime Factors of a;2\\times2\\times2\\times2\\times2\\times2\\times3\\times7\\times7;2^{2}\\times2^{...s7^{2};{(2\\times2\\times2\\times7)}^{2};\\sqrt{3136} = 2\\times2\\times2\\times71.4142135623730951"
+			puts expo.latexStringList.join(";").to_s
+			expect(expo.latexStringList.join(";").to_s).to eq "Prime Factors of 9408;2\\times2\\times2\\times2\\times2\\times2\\times3\\times7\\times7;2^{2}\\times2^{2}\\times2^{2}\\times3\\times7^{2};We know that prime factor 3 has no pair.;If we divide9408 by the factor 3;9408\\div3=3136;Prime Factors of 3136;2\\times2\\times2\\times2\\times2\\times2\\times7\\times7;2^{2}\\times2^{2}\\times2^{2}\\times7^{2};{(2\\times2\\times2\\times7)}^{2};\\sqrt{3136}=2\\times2\\times2\\times7=56"
 		end
 		it "calcRequiredNumberForRoot: should say '' when we check calcRequiredNumberForRoot method" do
 			expo = Exponent.new()
 			expo.calcRequiredNumberForRoot(53240,true,false)
-			expect(expo.latexStringList.join(";").to_s).to eq "Prime Factors of a;2\\times2\\times2\\times5\\times11\\times11\\times11;2^{2}\\times11^{2};We know t...times11\\times11;2^{3}\\times11^{3};{(2\\times11)}^{3};\\cbrt{10648} = 2\\times111.4422495703074083"
+			puts expo.latexStringList.join(";").to_s
+			expect(expo.latexStringList.join(";").to_s).to eq "Prime Factors of 53240;2\\times2\\times2\\times5\\times11\\times11\\times11;2^{3}\\times5\\times11^{3};We know that prime factor 5 doess not appear in a group of three.;If we divide53240 by the factor 5;53240\\div5=10648;Prime Factors of 10648;2\\times2\\times2\\times11\\times11\\times11;2^{3}\\times11^{3};{(2\\times11)}^{3};\\cbrt{10648}=2\\times11=22"
 		end
 		it "calcRequiredNumberForRoot: should say '' when we check calcRequiredNumberForRoot method" do
 			expo = Exponent.new()
 			expo.calcRequiredNumberForRoot(2352,false,true)
-			expect(expo.latexStringList.join(";").to_s).to eq "Prime Factors of a;2\\times2\\times2\\times2\\times3\\times7\\times7;2^{2}\\times2^{2}\\times7^{2};W...s7^{2};{(2\\times2\\times3\\times7)}^{2};\\sqrt{7056} = 2\\times2\\times3\\times71.4142135623730951"
+			puts expo.latexStringList.join(";").to_s
+			expect(expo.latexStringList.join(";").to_s).to eq "Prime Factors of 2352;2\\times2\\times2\\times2\\times3\\times7\\times7;2^{2}\\times2^{2}\\times3\\times7^{2};We know that prime factor 3 has no pair.;If we multiply2352 by the factor 3;2352\\times3=7056;Prime Factors of 7056;2\\times2\\times2\\times2\\times3\\times3\\times7\\times7;2^{2}\\times2^{2}\\times3^{2}\\times7^{2};{(2\\times2\\times3\\times7)}^{2};\\sqrt{7056}=2\\times2\\times3\\times7=84"
 		end
 		it "calcRequiredNumberForRoot: should say '' when we check calcRequiredNumberForRoot method" do
 			expo = Exponent.new()
 			expo.calcRequiredNumberForRoot(392,false,false)
-			expect(expo.latexStringList.join(";").to_s).to eq "Prime Factors of a;2\\times2\\times2\\times7\\times7;2^{2}\\times7^{2};We know that prime factors  a...es7\\times7\\times7;2^{3}\\times7^{3};{(2\\times7)}^{3};\\cbrt{19208} = 2\\times71.4422495703074083"
+			puts expo.latexStringList.join(";").to_s
+			expect(expo.latexStringList.join(";").to_s).to eq "Prime Factors of 392;2\\times2\\times2\\times7\\times7;2^{3}\\times7\\times7\\times7^{3};We know that prime factors  and 7  and 7  doess not appear in a group of three.;If we multiply392 by the factor 49;392\\times49=19208;Prime Factors of 19208;2\\times2\\times2\\times7\\times7\\times7\\times7;2^{3}\\times7^{3};{(2\\times7)}^{3};\\cbrt{19208}=2\\times7=26"
 		end
 		it "estimateSquareRoot: should say '' when we check estimateSquareRoot method" do
 			expo = Exponent.new()
@@ -127,7 +133,7 @@ describe Exponent do
 			expo = Exponent.new()
 			expo.expressUsingExponent(1.2)
 			puts expo.latexStringList.join(";").to_s
-			expect(expo.latexStringList.join(";").to_s).to eq "1025.63=+1\\times1000+0\\times100+2\\times10+5\\times1+\\frac{0}{10}+\\frac{0}{100}+\\frac{6}{1000}+...12}+0\\times10^{13}+0\\times10^{14}+1\\times10^{15}+0\\times10^{16}+9\\times10^{17}+1\\times10^{18}"
+			expect(expo.latexStringList.join(";").to_s).to eq "1.2=1\\times1+\\frac{2}{10};+1\\times10^{0}+2\\times10"
 		end
 		it "simplifyExponentValue: should say '' when we check simplifyExponentValue method" do
 			expo = Exponent.new()
@@ -214,7 +220,7 @@ describe Exponent do
 		it "exponentialForm: should say '' when we check exponentialForm method" do
 			expo = Exponent.new()
 			expo.exponentialForm(12900000)
-			expect(expo.latexStringList.join(";").to_s).to eq "12900000=1\\times10000000;12900000=1\\times10^{7}"
+			expect(expo.latexStringList.join(";").to_s).to eq "12900000=1.29\\times10000000;12900000=1.29\\times10^{7}"
 		end
 
 		it "exponentialForm: should say '' when we check exponentialForm method" do

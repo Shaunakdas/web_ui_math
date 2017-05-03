@@ -135,6 +135,7 @@ class TermCoefficient
 		negativeTermCoeff = Marshal.load(Marshal.dump(self))
 		negativeTermCoeff.negative= true
 		negativeTermCoeff.negative = !@negative if @negative
+		
 		return negativeTermCoeff
 	end
 	def getVariableList()

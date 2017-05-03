@@ -56,27 +56,30 @@ class Exponent
 		end
 		while (a%10 ==0) do
 			numZero += 1
-			a = a%10
+			a = a/10
 		end
 		squareNumZero = 2*numZero
-		@latexStringList << "If zero in "+a+" = "+ numZero.to_s
+		@latexStringList << "If zero in "+a.to_s+" = "+ numZero.to_s
 		exp = Expression.new()
 		exp.expressionItemList = [TermCoefficient.new(2),@times,TermCoefficient.new(numZero)]
-		@latexStringList << "Then zero in "+a+"^{2} = "+exp.toLatexString()
+		@latexStringList << "Then zero in "+a.to_s+"^{2} = "+exp.toLatexString()
 		@latexStringList << squareNumZero.to_s
 	end
 	def numNonSquareBetween(n)
 		n_next = n+1
 		@latexStringList << "There are 2n non perfect square numbers between the squares of the numbers n and (n + 1)."
-		@latexStringList << "Hence between "+n.to_s+"^{2} and "+n_next.to_s+"^{2} there are 2\\times"+n.to_s+" non perfect square numbers "
+		@latexStringList << "Hence between "+n.to_s+"^{2} and "+n_next.to_s+"^{2} there are 2\\times"+n.to_s+" = "+(2*n).to_s+" non perfect square numbers "
 	end
 	def calcSquareBracket(a)
 		if a%5==0 && a%10!=0
+			square = a**2
+			tens = a/10
 			@latexStringList << "We know that for a number with unit digit 5, i.e., a5"
 			@latexStringList << "{(a5)}^{2} = a(a+1) hunderd + 25"
+			@latexStringList << "{(a)}^{2} = "+tens.to_s+"("+(tens+1).to_s+") hunderd + 25 = "+square.to_s
 		else
-			first = TermCoefficient.new(a%10)
-			second = TermCoefficient.new(a=a%10)
+			first = TermCoefficient.new(a-a%10)
+			second = TermCoefficient.new(a%10)
 			exp1 = Expression.new();exp2 = Expression.new();exp3 = Expression.new();exp4 = Expression.new()
 			@latexStringList << a.to_s+"^{2}"
 			exp1.expressionItemList = [first,@add,second]; exp1.setExponent(2)
@@ -85,8 +88,9 @@ class Exponent
 			@latexStringList << exp2.toLatexString()
 			termAB = Term.new(); termAB.termItemList = [first,second]
 			termBA = Term.new(); termBA.termItemList = [second,first]
-			first.setExponent(2);second.setExponent(2)
-			exp3.expressionItemList = [first,@add,termAB,@add,termBA,@add,second]
+			firstSquare =first.cloneForOperation();firstSquare.setExponent(2)
+			secondSquare=second.cloneForOperation();secondSquare.setExponent(2)
+			exp3.expressionItemList = [firstSquare,@add,termAB,@add,termBA,@add,secondSquare]
 			@latexStringList << exp3.toLatexString()
 			first.simplify();second.simplify();termAB.simplify();termBA.simplify()
 			@latexStringList << exp3.toLatexString()
@@ -96,11 +100,12 @@ class Exponent
 	end
 	def calcRootPrime(a,squareFlag)
 		root = squareFlag ? 2:3
-		rootValue = squareFlag ? Math.sqrt(2):Math.cbrt(3)
+		rootValue = squareFlag ? Math.sqrt(a):Math.cbrt(a)
+		rootValue = rootValue.to_i
 		op = squareFlag ? @sqrt:@cbrt
 		primeList = Prime.prime_division(a)
 		@latexStringList << "Prime Factors of "+a.to_s
-		exp = Expression.new()
+		exp = Expression.new();fullExp = Expression.new()
 		primeList.each do |pair|
 			for i in 1..pair[1]
 				exp.expressionItemList.concat([@times, TermCoefficient.new(pair[0])])
@@ -128,12 +133,14 @@ class Exponent
 		exp.setExponent(root)
 		@latexStringList << exp.toLatexString()
 		exp.setExponent(1)
-		@latexStringList <<  op.toLatexString()+"{"+a.to_s+"} = "+exp.toLatexString()+rootValue.to_s
+		fullExp.expressionItemList = [op,@curlyStart,TermCoefficient.new(a),@curlyEnd,@eq,exp,@eq,TermCoefficient.new(rootValue)]
+		@latexStringList <<  fullExp.toLatexString()
 
 	end
 	def calcRequiredNumberForRoot(a,divideFlag,squareFlag)
 		root = squareFlag ? 2:3
-		rootValue = squareFlag ? Math.sqrt(2):Math.cbrt(3)
+		rootValue = squareFlag ? Math.sqrt(a):Math.cbrt(a)
+		rootValue = rootValue.to_i
 		op = squareFlag ? @sqrt:@cbrt
 		opString = divideFlag ? "divide":"multiply"
 		op = divideFlag ? @div:@times
@@ -141,7 +148,7 @@ class Exponent
 		
 		requiredList = []
 		primeList = Prime.prime_division(a)
-		@latexStringList << "Prime Factors of a"
+		@latexStringList << "Prime Factors of "+a.to_s
 		exp = Expression.new()
 		primeList.each do |pair|
 			for i in 1..pair[1]
@@ -152,12 +159,14 @@ class Exponent
 		@latexStringList << exp.toLatexString()
 		exp.empty()
 		primeList.each do |pair|
+			oddPrime = TermCoefficient.new(pair[0]);
 			remainingCount = pair[1]%root
 			for j in 1..remainingCount
 				requiredList << pair[0]
+				exp.expressionItemList.concat([@times,oddPrime]) 
 			end
 			prime = TermCoefficient.new(pair[0]);
-			prime.setExponent(2)
+			prime.setExponent(root)
 			for i in 1..pair[1]
 				exp.expressionItemList.concat([@times,prime]) if i%2 ==0
 			end
@@ -255,9 +264,9 @@ class Exponent
 		@latexStringList << exp.toLatexString()
 	end
 	def expressUsingExponent(a)
-		abs = a.abs
-		integral = abs.to_i
-		decimal = abs-abs.to_i
+		parts = a.to_s.split(".")
+		integral = parts[0].to_i
+		decimal = parts[1].to_i if parts.count > 1
 		exp = Expression.new()
 		exp.expressionItemList.concat([TermCoefficient.new(a),@eq])
 		if integral!=0
@@ -268,12 +277,14 @@ class Exponent
 			end
 		end
 		if decimal!=0
+
 			decimalList = decimal.to_s.chars.map(&:to_i)
 			decimalList.each_with_index do |i,index|
 				exponent = 1+index
 				exp.expressionItemList.concat([@add,TermFraction.new(i,10**exponent)])
 			end
 		end
+		exp.deleteItem(2)
 		@latexStringList << exp.toLatexString()
 		exp.empty()
 		if integral!=0
@@ -347,7 +358,7 @@ class Exponent
 	def exponentialForm(a)
 		abs = a.abs
 		exponent = Math.log10(abs).floor
-		constant = abs/(10**exponent)
+		constant = abs.to_f/(10**exponent)
 		constantTerm = TermCoefficient.new(constant)
 		exponentTerm = TermCoefficient.new(10)
 		exponentTerm.setExponent(exponent)
