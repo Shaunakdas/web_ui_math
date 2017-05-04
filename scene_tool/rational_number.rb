@@ -23,18 +23,21 @@ class RationalNumber
 		@sqrt = Operator.new("\\sqrt")
 		@cbrt = Operator.new("\\cbrt")
 	end
-	def checkForPrimitive(item)
+	def checkForPrimitive(*args)
+		item = args[0]
 		if item.is_a?(Integer) || item.is_a?(Float)
 			return true
 		else
 			return false
 		end
 	end
-	def getBase(item)
+	def getBase(*args)
+		item = args[0]
 		return item.base if !checkForPrimitive(item)
 		return item
 	end
-	def solveLinearEqWithVariableOnLeftSide(a,b,c,d,e,f,x,operator)
+	def solveLinearEqWithVariableOnLeftSide(*args)
+		a=args[0];b=args[1];c=args[2];d=args[3];e=args[4];f=args[5];x=args[6];operator=args[7]
 		puts "solveLinearEqWithVariableOnLeftSide"
 		a=getBase(a);b=getBase(b);c=getBase(c);d=getBase(d);e=getBase(e);f=getBase(f)
 		exp=Expression.new()
@@ -106,7 +109,8 @@ class RationalNumber
 		@latexStringList << latexStringFinal
 		return @latexStringList
 	end
-	def solveLinearEqWithVariableOnBothSides(a,b,c,d,e,f,g,h,x,operator1,operator2)
+	def solveLinearEqWithVariableOnBothSides(*args)
+		a=args[0];b=args[1];c=args[2];d=args[3];e=args[4];f=args[5];g=args[6];h=args[7];x=args[8];operator1=args[9];operator2=args[9]
 		puts "solveLinearEqWithVariableOnBothSides"
 		exp=Expression.new()
 		var=TermVariable.new(x)
@@ -171,7 +175,8 @@ class RationalNumber
 		# solveLinearEqWithVariableOnLeftSide(term1[0].numerator(),term1[0].denominator(),termItem2.numerator(),termItem2.numerator(),termItem4.numerator(),termItem4.denominator(),x,operator1)
 		
 	end
-	def equivalentRationalNumber(a,b,c,numeratorFlag)
+	def equivalentRationalNumber(*args)
+		a=args[0];b=args[1];c=args[2];numeratorFlag=args[3]
 		puts "equivalentRationalNumber"
 		exp=Expression.new()
 		# if NumeratorFlag, then input at numerator is asked
@@ -208,8 +213,9 @@ class RationalNumber
 		# @latexStringList << TermFraction.new(termItemaEquiv,termItembEquiv).toLatexString()+" is required equivalent fraction"
 
 	end
-	def equivalentRationalNumberSmall(a,b,requiredDen)
+	def equivalentRationalNumberSmall(*args)
 		puts "equivalentRationalNumberSmall"
+		a=args[0];b=args[1];requiredDen=args[2]
 		# if NumeratorFlag, then input at numerator is asked
 		a=getBase(a);b=getBase(b);requiredDen=getBase(requiredDen)
 		a=a.base if !checkForPrimitive(a)
@@ -228,8 +234,9 @@ class RationalNumber
 		exp.expressionItemList=[frac,@eq,TermFraction.new(numExp,denExp),@eq,equiFrac]
 		@latexStringList << exp.toLatexString()
 	end
-	def simplestForm(a,b)
+	def simplestForm(*args)
 		puts "simplestForm"
+		a=args[0];b=args[1]
 		exp=Expression.new()
 		displayExp = Expression.new()
 		frac = TermFraction.new(a,b)
@@ -257,8 +264,9 @@ class RationalNumber
 		# @latexStringList << frac.toLatexString() + @eq.toLatexString()+ TermFraction.new(termItemaEquiv,termItembEquiv).toLatexString()
 		@latexStringList << "The fraction "+TermFraction.new(termItemaEquiv,termItembEquiv).toLatexString()
 	end
-	def simplestFormSmall(a,b)
+	def simplestFormSmall(*args)
 		puts "simplestFormSmall"
+		a=args[0];b=args[1]
 		exp=Expression.new();exp1=Expression.new();exp2=Expression.new()
 		frac = TermFraction.new(a,b)
 		frac.simplifyItemNegative()
@@ -275,8 +283,9 @@ class RationalNumber
 		puts "gcd"
 	 	b == 0 ? a : gcd(b, a.modulo(b))
 	end
-	def negativeFlag(a,b)
+	def negativeFlag(*args)
 		puts "negativeFlag"
+		a=args[0];b=args[1]
 		exp=Expression.new();exp1=Expression.new();exp2=Expression.new()
 		frac = TermFraction.new(a,b)
 		frac.simplifyItemNegative()
@@ -294,8 +303,9 @@ class RationalNumber
 			negativeFlag(frac2.baseNumerator,frac2.baseDenominator)
 		end
 	end
-	def compare(a,b,c,d)
+	def compare(*args)
 		puts "compare"
+		a=args[0];b=args[1];c=args[2];d=args[3]
 		exp=Expression.new()
 		frac1 = TermFraction.new(a,b)
 		frac2 = TermFraction.new(c,d)
@@ -321,8 +331,9 @@ class RationalNumber
 
 	end
 
-	def compareFraction(a,b,c,d)
+	def compareFraction(*args)
 		puts "compareFraction"
+		a=args[0];b=args[1];c=args[2];d=args[3]
 		exp=Expression.new()
 		frac1 = TermFraction.new(a,b)
 		frac2 = TermFraction.new(c,d)
@@ -362,8 +373,9 @@ class RationalNumber
 		end
 
 	end
-	def addFraction(a,b,c,d)
+	def addFraction(*args)
 		puts "addFraction"
+		a=args[0];b=args[1];c=args[2];d=args[3]
 		exp=Expression.new()
 		frac1 = TermFraction.new(a,b)
 		frac2 = TermFraction.new(c,d)
@@ -385,8 +397,9 @@ class RationalNumber
 		end
 
 	end
-	def subtractFraction(a,b,c,d)
+	def subtractFraction(*args)
 		puts "subtractFraction"
+		a=args[0];b=args[1];c=args[2];d=args[3]
 		exp=Expression.new()
 		frac1 = TermFraction.new(a,b)
 		frac2 = TermFraction.new(c,d)
@@ -408,8 +421,9 @@ class RationalNumber
 		end
 
 	end
-	def additiveInverse(a,b)
+	def additiveInverse(*args)
 		puts "additiveInverse"
+		a=args[0];b=args[1]
 		exp=Expression.new()
 		frac = TermFraction.new(a,b)
 		negativeFrac = frac.negateTermItem()
@@ -419,8 +433,9 @@ class RationalNumber
 		finalExp.expressionItemList = [frac,@add,negativeFrac,@eq,TermFraction.new(numExp,frac.baseDenominator),@eq,frac.add(negativeFrac),@eq,TermCoefficient.new(0)]
 		@latexStringList << finalExp.toLatexString()
 	end
-	def multiplicativeInverse(a,b)
+	def multiplicativeInverse(*args)
 		puts "multiplicativeInverse"
+		a=args[0];b=args[1]
 		exp=Expression.new()
 		frac = TermFraction.new(a,b)
 		reciprocalFrac = frac.reciprocal()

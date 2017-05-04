@@ -22,7 +22,8 @@ class Exponent
 		@sqrt = Operator.new("\\sqrt")
 		@cbrt = Operator.new("\\cbrt")
 	end
-	def squareOneDigit(a)
+	def squareOneDigit(*args)
+		a=args[0]
 		oneDigit = a%10
 		if oneDigit==1 || oneDigit==9
 			@latexStringList << "if a number has "+oneDigit.to_s+" in the unit’s place, then it’s square ends in 1."
@@ -32,7 +33,8 @@ class Exponent
 			@latexStringList << "if a number has "+oneDigit.to_s+" in the unit’s place, then it’s square ends in 5."
 		end
 	end
-	def squareValue(a)
+	def squareValue(*args)
+		a=args[0]
 		termItem = TermCoefficient.new(a)
 		squareItem = termItem.cloneForOperation()
 		squareItem.setExponent(2)
@@ -40,7 +42,8 @@ class Exponent
 		exp.expressionItemList = [squareItem,@eq,termItem,@times,termItem,@eq,TermCoefficient.new(squareItem.calcFinalValue())]
 		@latexStringList << exp.toLatexString()
 	end
-	def squareRootValue(a)
+	def squareRootValue(*args)
+		a=args[0]
 		termItem = TermCoefficient.new(Math.sqrt(a))
 		squareItem = TermCoefficient.new(a)
 		exp = Expression.new()
@@ -49,7 +52,8 @@ class Exponent
 		@latexStringList << exp.toLatexString()
 		@latexStringList << termItem.toLatexString()+" is a square root of "+squareItem.toLatexString()
 	end
-	def numSquareZero(a)
+	def numSquareZero(*args)
+		a=args[0]
 		numZero =0
 		if a==0
 			numZero =0
@@ -65,12 +69,14 @@ class Exponent
 		@latexStringList << "Then zero in "+a.to_s+"^{2} = "+exp.toLatexString()
 		@latexStringList << squareNumZero.to_s
 	end
-	def numNonSquareBetween(n)
+	def numNonSquareBetween(*args)
+		n=args[0]
 		n_next = n+1
 		@latexStringList << "There are 2n non perfect square numbers between the squares of the numbers n and (n + 1)."
 		@latexStringList << "Hence between "+n.to_s+"^{2} and "+n_next.to_s+"^{2} there are 2\\times"+n.to_s+" = "+(2*n).to_s+" non perfect square numbers "
 	end
-	def calcSquareBracket(a)
+	def calcSquareBracket(*args)
+		a=args[0]
 		if a%5==0 && a%10!=0
 			square = a**2
 			tens = a/10
@@ -98,7 +104,8 @@ class Exponent
 		end
 			
 	end
-	def calcRootPrime(a,squareFlag)
+	def calcRootPrime(*args)
+		a=args[0];squareFlag=args[1]
 		root = squareFlag ? 2:3
 		rootValue = squareFlag ? Math.sqrt(a):Math.cbrt(a)
 		rootValue = rootValue.to_i
@@ -137,7 +144,8 @@ class Exponent
 		@latexStringList <<  fullExp.toLatexString()
 
 	end
-	def calcRequiredNumberForRoot(a,divideFlag,squareFlag)
+	def calcRequiredNumberForRoot(*args)
+		a=args[0];divideFlag=args[1];squareFlag=args[2]
 		root = squareFlag ? 2:3
 		rootValue = squareFlag ? Math.sqrt(a):Math.cbrt(a)
 		rootValue = rootValue.to_i
@@ -193,7 +201,8 @@ class Exponent
 		calcRootPrime(perfectA,squareFlag)
 
 	end
-	def estimateSquareRoot(a)
+	def estimateSquareRoot(*args)
+		a=args[0]
 		sqrt = Math.sqrt(a).to_i
 		sqrtTerm = TermCoefficient.new(a)
 		sqrtTerm.setExponent(0.5)
@@ -227,7 +236,8 @@ class Exponent
 		@latexStringList << sqrtTerm.toLatexString()+" is approximately "+ answer.to_s
 
 	end
-	def calcExponentValue(a,b,denominator)
+	def calcExponentValue(*args)
+		a=args[0];b=args[1];denominator=args[2]
 		positiveExponent = false
 		term =  TermCoefficient.new(a)
 		term.setExponent(b)
@@ -263,7 +273,8 @@ class Exponent
 		end
 		@latexStringList << exp.toLatexString()
 	end
-	def expressUsingExponent(a)
+	def expressUsingExponent(*args)
+		a=args[0]
 		parts = a.to_s.split(".")
 		integral = parts[0].to_i
 		decimal = parts[1].to_i if parts.count > 1
@@ -308,7 +319,8 @@ class Exponent
 		@latexStringList << exp.toLatexString()
 		
 	end
-	def simplifyExponentValue(a,b,c,d,calcValue,multiplyFlag)
+	def simplifyExponentValue(*args)
+		a=args[0];b=args[1];c=args[2];d=args[3];calcValue=args[4];multiplyFlag=args[5]
 		item1 = TermCoefficient.new(a)
 		item1.setExponent(b)
 		item2 = TermCoefficient.new(c)
@@ -355,7 +367,8 @@ class Exponent
 		
 
 	end
-	def exponentialForm(a)
+	def exponentialForm(*args)
+		a=args[0]
 		abs = a.abs
 		exponent = Math.log10(abs).floor
 		constant = abs.to_f/(10**exponent)
@@ -376,7 +389,8 @@ class Exponent
 		exp.expressionItemList = [TermCoefficient.new(abs),@eq,constantTerm,@times,exponentTerm]
 		@latexStringList << exp.toLatexString()
 	end
-	def exponentToUsualForm(a,b)
+	def exponentToUsualForm(*args)
+		a=args[0];b=args[1]
 		exponent = b
 		constant = a
 		constantTerm = TermCoefficient.new(constant)
