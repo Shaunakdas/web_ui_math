@@ -23,7 +23,7 @@ class RationalNumber
 		@sqrt = Operator.new("\\sqrt")
 		@cbrt = Operator.new("\\cbrt")
 	end
-	def checkForPrimitive(*args)
+	def ratNum_checkForPrimitive(*args)
 		item = args[0]
 		if item.is_a?(Integer) || item.is_a?(Float)
 			return true
@@ -31,15 +31,15 @@ class RationalNumber
 			return false
 		end
 	end
-	def getBase(*args)
+	def ratNum_getBase(*args)
 		item = args[0]
-		return item.base if !checkForPrimitive(item)
+		return item.base if !ratNum_checkForPrimitive(item)
 		return item
 	end
-	def solveLinearEqWithVariableOnLeftSide(*args)
+	def ratNum_solveLinearEqWithVariableOnLeftSide(*args)
 		a=args[0];b=args[1];c=args[2];d=args[3];e=args[4];f=args[5];x=args[6];operator=args[7]
 		puts "solveLinearEqWithVariableOnLeftSide"
-		a=getBase(a);b=getBase(b);c=getBase(c);d=getBase(d);e=getBase(e);f=getBase(f)
+		a=ratNum_getBase(a);b=ratNum_getBase(b);c=ratNum_getBase(c);d=ratNum_getBase(d);e=ratNum_getBase(e);f=ratNum_getBase(f)
 		exp=Expression.new()
 		#Variable Initiation
 		var=TermVariable.new(x)
@@ -109,7 +109,7 @@ class RationalNumber
 		@latexStringList << latexStringFinal
 		return @latexStringList
 	end
-	def solveLinearEqWithVariableOnBothSides(*args)
+	def ratNum_solveLinearEqWithVariableOnBothSides(*args)
 		a=args[0];b=args[1];c=args[2];d=args[3];e=args[4];f=args[5];g=args[6];h=args[7];x=args[8];operator1=args[9];operator2=args[9]
 		puts "solveLinearEqWithVariableOnBothSides"
 		exp=Expression.new()
@@ -171,11 +171,11 @@ class RationalNumber
 		else
 			e=termItem4.numerator();f=termItem4.denominator()
 		end
-		solveLinearEqWithVariableOnLeftSide(a,b,c,d,e,f,x,operator1)
-		# solveLinearEqWithVariableOnLeftSide(term1[0].numerator(),term1[0].denominator(),termItem2.numerator(),termItem2.numerator(),termItem4.numerator(),termItem4.denominator(),x,operator1)
+		ratNum_solveLinearEqWithVariableOnLeftSide(a,b,c,d,e,f,x,operator1)
+		# ratNum_solveLinearEqWithVariableOnLeftSide(term1[0].numerator(),term1[0].denominator(),termItem2.numerator(),termItem2.numerator(),termItem4.numerator(),termItem4.denominator(),x,operator1)
 		
 	end
-	def equivalentRationalNumber(*args)
+	def ratNum_equivalentRationalNumber(*args)
 		a=args[0];b=args[1];c=args[2];numeratorFlag=args[3]
 		puts "equivalentRationalNumber"
 		exp=Expression.new()
@@ -213,14 +213,14 @@ class RationalNumber
 		# @latexStringList << TermFraction.new(termItemaEquiv,termItembEquiv).toLatexString()+" is required equivalent fraction"
 
 	end
-	def equivalentRationalNumberSmall(*args)
+	def ratNum_equivalentRationalNumberSmall(*args)
 		puts "equivalentRationalNumberSmall"
 		a=args[0];b=args[1];requiredDen=args[2]
 		# if NumeratorFlag, then input at numerator is asked
-		a=getBase(a);b=getBase(b);requiredDen=getBase(requiredDen)
-		a=a.base if !checkForPrimitive(a)
-		b=b.base if !checkForPrimitive(b)
-		requiredDen=requiredDen.base if !checkForPrimitive(requiredDen)
+		a=ratNum_getBase(a);b=ratNum_getBase(b);requiredDen=ratNum_getBase(requiredDen)
+		a=a.base if !ratNum_checkForPrimitive(a)
+		b=b.base if !ratNum_checkForPrimitive(b)
+		requiredDen=requiredDen.base if !ratNum_checkForPrimitive(requiredDen)
 		exp=Expression.new()
 		multiplier = requiredDen/b
 		puts "multiplier"+multiplier.to_s
@@ -234,8 +234,8 @@ class RationalNumber
 		exp.expressionItemList=[frac,@eq,TermFraction.new(numExp,denExp),@eq,equiFrac]
 		@latexStringList << exp.toLatexString()
 	end
-	def simplestForm(*args)
-		puts "simplestForm"
+	def ratNum_simplestForm(*args)
+		puts "ratNum_simplestForm"
 		a=args[0];b=args[1]
 		exp=Expression.new()
 		displayExp = Expression.new()
@@ -264,8 +264,8 @@ class RationalNumber
 		# @latexStringList << frac.toLatexString() + @eq.toLatexString()+ TermFraction.new(termItemaEquiv,termItembEquiv).toLatexString()
 		@latexStringList << "The fraction "+TermFraction.new(termItemaEquiv,termItembEquiv).toLatexString()
 	end
-	def simplestFormSmall(*args)
-		puts "simplestFormSmall"
+	def ratNum_simplestFormSmall(*args)
+		puts "ratNum_simplestFormSmall"
 		a=args[0];b=args[1]
 		exp=Expression.new();exp1=Expression.new();exp2=Expression.new()
 		frac = TermFraction.new(a,b)
@@ -283,7 +283,7 @@ class RationalNumber
 		puts "gcd"
 	 	b == 0 ? a : gcd(b, a.modulo(b))
 	end
-	def negativeFlag(*args)
+	def ratNum_negativeFlag(*args)
 		puts "negativeFlag"
 		a=args[0];b=args[1]
 		exp=Expression.new();exp1=Expression.new();exp2=Expression.new()
@@ -303,22 +303,22 @@ class RationalNumber
 			negativeFlag(frac2.baseNumerator,frac2.baseDenominator)
 		end
 	end
-	def compare(*args)
+	def ratNum_compare(*args)
 		puts "compare"
 		a=args[0];b=args[1];c=args[2];d=args[3]
 		exp=Expression.new()
 		frac1 = TermFraction.new(a,b)
 		frac2 = TermFraction.new(c,d)
-		simplestFormSmall(a,b)
-		simplestFormSmall(c,d)
+		ratNum_simplestFormSmall(a,b)
+		ratNum_simplestFormSmall(c,d)
 		frac1.reduce()
 		frac2.reduce()
 		if !frac1.negative && !frac2.negative
-			compareFraction(frac1.baseNumerator,frac1.baseDenominator,frac2.baseNumerator,frac2.baseDenominator)
+			ratNum_compareFraction(frac1.baseNumerator,frac1.baseDenominator,frac2.baseNumerator,frac2.baseDenominator)
 		elsif frac1.negative && frac1.negative
 			frac3 = frac1.negateTermItem()
 			frac4 = frac2.negateTermItem()
-			compareFraction(frac3.baseNumerator,frac3.baseDenominator,frac4.baseNumerator,frac4.baseDenominator)
+			ratNum_compareFraction(frac3.baseNumerator,frac3.baseDenominator,frac4.baseNumerator,frac4.baseDenominator)
 		elsif frac1.negative
 			@latexStringList<< "Comparison of a negative and a positive rational number is obvious. A negative rational number is to the left of zero whereas a positive rational number is to the right of zero on a number line. So, a negative rational number will always be less than a positive rational number."
 			exp.expressionItemList=[frac1,@lt,frac2]; @latexStringList << exp.toLatexString()
@@ -331,8 +331,8 @@ class RationalNumber
 
 	end
 
-	def compareFraction(*args)
-		puts "compareFraction"
+	def ratNum_compareFraction(*args)
+		puts "ratNum_compareFraction"
 		a=args[0];b=args[1];c=args[2];d=args[3]
 		exp=Expression.new()
 		frac1 = TermFraction.new(a,b)
@@ -364,17 +364,17 @@ class RationalNumber
 		else 
 			@latexStringList << "The fractions are unlike. We should first get their equivalent fractions with a denominator which is a LCM of "+frac1.baseDenominator.toLatexString()+" and "+frac2.baseDenominator.toLatexString()+"."
 			lcm = frac1.lcmDenominator(frac2)
-			a=getBase(a);b=getBase(b);c=getBase(c);d=getBase(d);lcm=getBase(lcm)
-			equivalentRationalNumberSmall(a,b,lcm)
-			equivalentRationalNumberSmall(c,d,lcm)
-			compareFraction(a*lcm/b,lcm,c*lcm/d,lcm)
+			a=ratNum_getBase(a);b=ratNum_getBase(b);c=ratNum_getBase(c);d=ratNum_getBase(d);lcm=ratNum_getBase(lcm)
+			ratNum_equivalentRationalNumberSmall(a,b,lcm)
+			ratNum_equivalentRationalNumberSmall(c,d,lcm)
+			ratNum_compareFraction(a*lcm/b,lcm,c*lcm/d,lcm)
 			exp.expressionItemList=[higherFrac,@gt,lowerFrac]; @latexStringList << exp.toLatexString()
 			# @latexStringList << higherFrac.toLatexString() + @gt+ lowerFrac.toLatexString()
 		end
 
 	end
-	def addFraction(*args)
-		puts "addFraction"
+	def ratNum_addFraction(*args)
+		puts "ratNum_addFraction"
 		a=args[0];b=args[1];c=args[2];d=args[3]
 		exp=Expression.new()
 		frac1 = TermFraction.new(a,b)
@@ -390,15 +390,15 @@ class RationalNumber
 		else
 			@latexStringList << "The fractions are unlike. We should first get their equivalent fractions with a denominator which is a LCM of "+frac1.baseDenominator.toLatexString()+" and "+frac2.baseDenominator.toLatexString()+"."
 			lcm = frac1.lcmDenominator(frac2)
-			a=getBase(a);b=getBase(b);c=getBase(c);d=getBase(d);lcm=getBase(lcm)
-			equivalentRationalNumberSmall(a,b,lcm)
-			equivalentRationalNumberSmall(c,d,lcm)
-			addFraction(a*lcm/b,lcm,c*lcm/d,lcm)
+			a=ratNum_getBase(a);b=ratNum_getBase(b);c=ratNum_getBase(c);d=ratNum_getBase(d);lcm=ratNum_getBase(lcm)
+			ratNum_equivalentRationalNumberSmall(a,b,lcm)
+			ratNum_equivalentRationalNumberSmall(c,d,lcm)
+			ratNum_addFraction(a*lcm/b,lcm,c*lcm/d,lcm)
 		end
 
 	end
-	def subtractFraction(*args)
-		puts "subtractFraction"
+	def ratNum_subtractFraction(*args)
+		puts "ratNum_subtractFraction"
 		a=args[0];b=args[1];c=args[2];d=args[3]
 		exp=Expression.new()
 		frac1 = TermFraction.new(a,b)
@@ -414,15 +414,15 @@ class RationalNumber
 		else
 			@latexStringList << "The fractions are unlike. We should first get their equivalent fractions with a denominator which is a LCM of "+frac1.baseDenominator.toLatexString()+" and "+frac2.baseDenominator.toLatexString()+"."
 			lcm = frac1.lcmDenominator(frac2)
-			a=getBase(a);b=getBase(b);c=getBase(c);d=getBase(d);lcm=getBase(lcm)
-			equivalentRationalNumberSmall(a,b,lcm)
-			equivalentRationalNumberSmall(c,d,lcm)
-			subtractFraction(a*lcm/b,lcm,c*lcm/d,lcm)
+			a=ratNum_getBase(a);b=ratNum_getBase(b);c=ratNum_getBase(c);d=ratNum_getBase(d);lcm=ratNum_getBase(lcm)
+			ratNum_equivalentRationalNumberSmall(a,b,lcm)
+			ratNum_equivalentRationalNumberSmall(c,d,lcm)
+			ratNum_subtractFraction(a*lcm/b,lcm,c*lcm/d,lcm)
 		end
 
 	end
-	def additiveInverse(*args)
-		puts "additiveInverse"
+	def ratNum_additiveInverse(*args)
+		puts "ratNum_additiveInverse"
 		a=args[0];b=args[1]
 		exp=Expression.new()
 		frac = TermFraction.new(a,b)
@@ -433,8 +433,8 @@ class RationalNumber
 		finalExp.expressionItemList = [frac,@add,negativeFrac,@eq,TermFraction.new(numExp,frac.baseDenominator),@eq,frac.add(negativeFrac),@eq,TermCoefficient.new(0)]
 		@latexStringList << finalExp.toLatexString()
 	end
-	def multiplicativeInverse(*args)
-		puts "multiplicativeInverse"
+	def ratNum_multiplicativeInverse(*args)
+		puts "ratNum_multiplicativeInverse"
 		a=args[0];b=args[1]
 		exp=Expression.new()
 		frac = TermFraction.new(a,b)
