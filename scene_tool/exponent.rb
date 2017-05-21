@@ -22,6 +22,33 @@ class Exponent
 		@sqrt = Operator.new("\\sqrt")
 		@cbrt = Operator.new("\\cbrt")
 	end
+	def exp_expressPower(*args)
+		value = args[0]; base = args[1]; exponent = Math.log(value,base)	
+		coeffValue = TermCoefficient.new(value); coeffBase = TermCoefficient.new(base); coeffExpo = TermCoefficient.new(exponent)
+		displayExp = Expression.new()
+		displayExp.expressionItemList = [coeffValue,@eq]
+		for i in 1..exponent
+			displayExp.expressionItemList << @times if i!=0
+			displayExp.expressionItemList << coeffBase
+		end
+		latexStringList << displayExp.toLatexString()
+		coeffBase.setExponent(exponent)
+		displayExp.expressionItemList = [coeffValue,@eq,coeffBase]
+		latexStringList << "We can say that "+displayExp.toLatexString()
+	end
+	def exp_calExponent(*args)
+		base = args[0]; exponent = args[1]; value = base**exponent
+		coeffValue = TermCoefficient.new(value); coeffBase = TermCoefficient.new(base); coeffExpo = TermCoefficient.new(exponent)
+		displayExp = Expression.new()
+		coeffBase.setExponent(exponent)
+		displayExp.expressionItemList = [coeffBase,@eq]
+		for i in 1..exponent
+			displayExp.expressionItemList << @times if i!=0
+			displayExp.expressionItemList << TermCoefficient.new(base)
+		end
+		displayExp.expressionItemList.concat([@eq,coeffValue])
+		latexStringList << displayExp.toLatexString()
+	end
 	def exp_squareOneDigit(*args)
 		a=args[0]
 		oneDigit = a%10
@@ -412,5 +439,16 @@ class Exponent
 		exp.expressionItemList = []
 		exp.expressionItemList = [constantTerm,@times,exponentTerm,@eq,TermCoefficient.new(finalValue)]
 		@latexStringList << exp.toLatexString()
+	end
+	def exp_exponentOfExponent(*args)
+		base = args[0]; coeffBase=TermCoefficient.new(base);firstExpo = args[1]; secondExpo = args[2]
+		coeffBase.setExponent(firstExpo);coeffFirstExpo = TermCoefficient.new(firstExpo); coeffSecondExpo = TermCoefficient.new(secondExpo)
+		value = base**(firstExpo*secondExpo); coeffValue=TermCoefficient.new(value)
+
+		baseExp = Expression.new(); baseExp.expressionItemList = [coeffBase];baseExp.setExponent(secondExpo) 
+		latexStringList<< baseExp.toLatexString()
+		expoExp = Expression.new(); expoExp.expressionItemList=[coeffFirstExpo,@times,coeffSecondExpo]
+		coeffBase.setExponent(expoExo);baseExp.setExponent(1) ; baseExp.concat([@eq,coeffValue]);
+		latexStringList<< baseExp.toLatexString()
 	end
 end

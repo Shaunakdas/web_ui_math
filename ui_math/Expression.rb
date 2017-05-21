@@ -2,12 +2,13 @@ require_relative 'Term'
 require_relative 'TermFraction'
 require_relative 'Operator'
 class Expression
-	attr_accessor :expressionItemList, :exponent, :negative, :baseNegative
+	attr_accessor :expressionItemList, :exponent, :negative, :baseNegative,:type, :polynomialType, :latexString
 	def initialize()
 		self.expressionItemList = []
 		@exponent=1
 		@negative=false
 		@baseNegative = @negative
+		@latexString = ""
 	end
 	def setExponent(exponent)
 		@exponent = exponent
@@ -68,7 +69,17 @@ class Expression
 		exponentString ="^{"+@exponent.to_s+"}" if exponentFlag()&& @exponent != 0.5
 		negativeString = ""
 		negativeString = "-" if negativeFlag()
-		return negativeString+latexString+exponentString;
+		@latexString = negativeString+latexString+exponentString
+		return latexString
+	end
+	def setLatexString(latexString)
+		#remove spaces from LatexString
+		@latexString = latexString
+		parseLatexString(latexString)
+	end
+	def parseLatexString(latexString)
+		#break latexString into terms based on @add,@subtract,@eq,@lt,@gt
+		
 	end
 	def to_s
 		toLatexString()

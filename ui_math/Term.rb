@@ -1,19 +1,19 @@
 require_relative 'TermVariable'
 require_relative 'TermCoefficient'
 class Term
-	attr_accessor :termItemList, :exponent, :negative, :baseNegatve
+	attr_accessor :termItemList, :exponent, :negative, :baseNegative
 	def initialize()
 		self.termItemList = []
 		@exponent=1
 		@negative = false
-		@baseNegatve= @negative
+		@baseNegative= @negative
 	end
 	def setExponent(exponent)
 		@exponent = exponent
 	end
 	def setNegative(negative)
 		@negative = negative
-		@baseNegatve = negative
+		@baseNegative = negative
 	end
 	def exponentFlag()
 		return !(defined?(@exponent)).nil? && @exponent !=1
@@ -113,6 +113,15 @@ class Term
 		negativeString = "-" if negativeFlag()
 		return negativeString+latexString+exponentString;
 	end
+	def setLatexString(latexString)
+		#remove spaces from LatexString
+		@latexString = latexString
+		parseLatexString(latexString)
+	end
+	def parseLatexString(latexString)
+		#break latexString into terms based on @add,@subtract,@eq,@lt,@gt
+		
+	end
 	def to_s
 		toLatexString()
 	end
@@ -143,7 +152,7 @@ class Term
 			termItem.negative = false
 		end
 		@negative= ((negativeCount%2==0)? false:true)
-		@baseNegatve = @negative
+		@baseNegative = @negative
 	end
 	def simplifyCoefficient()
 		#Calculating Final TermCoefficient
