@@ -89,5 +89,42 @@ describe RationalNumber do
 			expect(rational.latexStringList.join(";").to_s).to eq "\\frac{1}{2}must be multiplied by2so as to get product 1 because \\frac{1}{2}\\times2=1"
 		end	
 
+		it "ratNum_productRationalWholeLarge: should say '' when we check this method" do
+			rational = RationalNumber.new()
+			rational.ratNum_productRationalWholeLarge(3,2,5)
+			expect(rational.latexStringList.join(";").to_s).to eq "3\\times\\frac{2}{5}=\\frac{2}{5}+\\frac{2}{5}+\\frac{2}{5}=\\frac{3\\times2}{5}=\\frac{6}{5}"
+		end
+
+		it "ratNum_productRationalWholeSmall: should say '' when we check this method" do
+			rational = RationalNumber.new()
+			rational.ratNum_productRationalWholeSmall(4,2,5)
+			expect(rational.latexStringList.join(";").to_s).to eq "4\\times\\frac{2}{5}=\\frac{4\\times2}{5}=\\frac{8}{5}"
+		end
+
+		it "ratNum_productMixedFracWhole: should say '' when we check this method" do
+			rational = RationalNumber.new()
+			rational.ratNum_productMixedFracWhole(4,1,1,5)
+			puts rational.latexStringList.join(";").to_s
+			expect(rational.latexStringList.join(";").to_s).to eq "To multiply a mixed fraction to a whole number, first convert the mixed fraction to an improper fraction and then multiply.;4\\times1\\frac{1}{5}=4\\times\\frac{6}{5}=\\frac{4\\times1}{5}=\\frac{24}{5}"
+		end
+
+		it "ratNum_productProperFracSmall: should say '' when we check this method" do
+			rational = RationalNumber.new()
+			rational.ratNum_productProperFracSmall(1,2,3,4)
+			expect(rational.latexStringList.join(";").to_s).to eq "\\frac{1}{2}\\times\\frac{3}{4}=\\frac{1\\times3}{2\\times4}=\\frac{3}{8}"
+		end
+
+		it "ratNum_productMixedFrac: should say '' when we check this method" do
+			rational = RationalNumber.new()
+			rational.ratNum_productMixedFrac(1,2,5,3,4,6)
+			expect(rational.latexStringList.join(";").to_s).to eq "To multiply a mixed fraction to another Fraction, first convert the mixed fraction to an improper fraction and then multiply.;1\\frac{2}{5}\\times3\\frac{4}{6}=\\frac{7}{5}\\times\\frac{22}{6}=\\frac{7\\times22}{5\\times6}=\\frac{154}{30}"
+		end
+
+		it "ratNum_divisionProperFracSmall: should say '' when we check this method" do
+			rational = RationalNumber.new()
+			rational.ratNum_divisionProperFracSmall(1,2,4,3)
+			expect(rational.latexStringList.join(";").to_s).to eq "\\frac{1}{2}\\div\\frac{4}{3}=\\frac{1}{2}\\times reciprocal of \\frac{4}{3};\\frac{1}{2}\\times\\frac{3}{4}=\\frac{1\\times3}{2\\times4}=\\frac{3}{8}"
+		end
+
 	end
 end

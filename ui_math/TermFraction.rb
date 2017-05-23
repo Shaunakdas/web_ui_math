@@ -4,6 +4,7 @@ class TermFraction
 	include Comparable
 	attr_accessor :baseNumerator,:baseDenominator, :exponent, :negative
 	def initialize(baseNumerator,baseDenominator)
+		
 		if baseNumerator.is_a?(Integer) || baseNumerator.is_a?(Float)
 			@baseNumerator = TermCoefficient.new(baseNumerator) 
 			@baseNumerator.negative = @baseNumerator.baseNegative

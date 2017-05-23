@@ -238,6 +238,22 @@ describe Exponent do
 			expo.exp_exponentToUsualForm(7,-6)
 			expect(expo.latexStringList.join(";").to_s).to eq "7\\times10^{-6}=7\\times1/1000000;7\\times10^{-6}=7/1000000"
 		end
+
+		it "exp_expressPower: should say '' when we check exp_expressPower method" do
+			expo = Exponent.new()
+			expo.exp_expressPower(8,2)
+			expect(expo.latexStringList.join(";").to_s).to eq "8=2\\times2\\times2;We can say that 8=2^{3.0}"
+		end
+		it "exp_calExponent: should say '' when we check exponentToUsualForm method" do
+			expo = Exponent.new()
+			expo.exp_calExponent(2,3)
+			expect(expo.latexStringList.join(";").to_s).to eq "2^{3}=2\\times2\\times2=8"
+		end
+		it "exp_exponentOfExponent: should say '' when we check exponentToUsualForm method" do
+			expo = Exponent.new()
+			expo.exp_exponentOfExponent(3,2,2)
+			expect(expo.latexStringList.join(";").to_s).to eq "{(3^{2})}^{2};3^{2\\times2}=81"
+		end
 # =end
 		
 	end

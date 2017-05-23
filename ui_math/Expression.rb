@@ -54,7 +54,9 @@ class Expression
 	end
 	def toLatexString
 		latexString =""
-		self.expressionItemList.each do |expressionItem|\
+
+		self.expressionItemList.each do |expressionItem|
+			# puts expressionItem.toLatexString()
 			if expressionItem.class.name != "Operator" && expressionItem.negativeFlag()
 				latexString += "("+expressionItem.toLatexString()+")"
 			else
@@ -69,8 +71,8 @@ class Expression
 		exponentString ="^{"+@exponent.to_s+"}" if exponentFlag()&& @exponent != 0.5
 		negativeString = ""
 		negativeString = "-" if negativeFlag()
-		@latexString = negativeString+latexString+exponentString
-		return latexString
+		# @latexString = negativeString+latexString+exponentString
+		return negativeString+latexString+exponentString
 	end
 	def setLatexString(latexString)
 		#remove spaces from LatexString

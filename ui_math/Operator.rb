@@ -48,6 +48,8 @@ class Operator
 			return Operator.new(">")
 		when ">"
 			return Operator.new("<")
+		when "="
+			return Operator.new("=")
 		else
 			return Operator.new("_")
 		end

@@ -445,34 +445,23 @@ class RationalNumber
 	def ratNum_productRationalWholeLarge(*args)
 		mult = args[0]; coeffMult = TermCoefficient.new(mult);frac = TermFraction.new(args[1],args[2])
 		displayExp = Expression.new()
-		displayExp.expressionItemList << [coeffMult,@times,frac,@eq]
+		displayExp.expressionItemList.concat([coeffMult,@times,frac,@eq])
 		for i in 1..mult
 			displayExp.expressionItemList << @add if i!=1
 			displayExp.expressionItemList << frac
 		end
 		numExp = Expression.new(); numExp.expressionItemList = [coeffMult,@times,frac.baseNumerator]
 		productNum = coeffMult*frac.baseNumerator
-		displayExp.expressionItemList.concat([@eq,TermFraction.new(numExp,frac.baseDenominator),@eq,TermFraction.new(productNum,frac.baseDenominator)])
-	end
-	def ratNum_productRationalWholeLarge(*args)
-		mult = args[0]; coeffMult = TermCoefficient.new(mult);frac = TermFraction.new(args[1],args[2])
-		displayExp = Expression.new()
-		displayExp.expressionItemList << [coeffMult,@times,frac,@eq]
-		for i in 1..mult
-			displayExp.expressionItemList << @add if i!=1
-			displayExp.expressionItemList << frac
-		end
-		numExp = Expression.new(); numExp.expressionItemList = [coeffMult,@times,frac.baseNumerator]
-		productNum = coeffMult*frac.baseNumerator
+		puts productNum.toLatexString()
 		displayExp.expressionItemList.concat([@eq,TermFraction.new(numExp,frac.baseDenominator),@eq,TermFraction.new(productNum,frac.baseDenominator)])
 		latexStringList << displayExp.toLatexString()
-	end
+	end 
 	def ratNum_productRationalWholeSmall(*args)
 		mult = args[0]; coeffMult = TermCoefficient.new(mult);frac = TermFraction.new(args[1],args[2])
 		displayExp = Expression.new()
 		numExp = Expression.new(); numExp.expressionItemList = [coeffMult,@times,frac.baseNumerator]
 		productNum = coeffMult*frac.baseNumerator
-		displayExp.expressionItemList << [coeffMult,@times,frac,@eq,TermFraction.new(numExp,frac.baseDenominator),@eq,TermFraction.new(productNum,frac.baseDenominator)]
+		displayExp.expressionItemList=[coeffMult,@times,frac,@eq,TermFraction.new(numExp,frac.baseDenominator),@eq,TermFraction.new(productNum,frac.baseDenominator)]
 		latexStringList << displayExp.toLatexString()
 	end
 	def ratNum_productMixedFracWhole(*args)
@@ -482,8 +471,8 @@ class RationalNumber
 		latexStringList << "To multiply a mixed fraction to a whole number, first convert the mixed fraction to an improper fraction and then multiply."
 		numExp = Expression.new(); numExp.expressionItemList = [coeffMult,@times,frac.baseNumerator]
 		improperNum = args[2]+(args[1]*args[3])
-		productNum = coeffMult*frac.baseNumerator
-		displayExp.expressionItemList << [coeffMult,@times,coeffWholePart,frac,@eq,coeffMult,@times,TermFraction.new(improperNum,frac.baseDenominator),@eq,TermFraction.new(numExp,frac.baseDenominator),@eq,TermFraction.new(productNum,frac.baseDenominator)]
+		productNum = TermCoefficient.new(mult*improperNum)
+		displayExp.expressionItemList = [coeffMult,@times,coeffWholePart,frac,@eq,coeffMult,@times,TermFraction.new(improperNum,frac.baseDenominator),@eq,TermFraction.new(numExp,frac.baseDenominator),@eq,TermFraction.new(productNum,frac.baseDenominator)]
 		latexStringList << displayExp.toLatexString()
 	end
 	def ratNum_productProperFracSmall(*args)
@@ -491,31 +480,31 @@ class RationalNumber
 		displayExp = Expression.new()
 		numExp = Expression.new(); numExp.expressionItemList = [fracA.baseNumerator,@times,fracB.baseNumerator]
 		denExp = Expression.new(); denExp.expressionItemList = [fracA.baseDenominator,@times,fracB.baseDenominator]
-		displayExp.expressionItemList << [fracA,@times,fracB,@eq,TermFraction.new(numExp,denExp),@eq,fracA*fracB]
+		displayExp.expressionItemList = [fracA,@times,fracB,@eq,TermFraction.new(numExp,denExp),@eq,fracA*fracB]
 		latexStringList << displayExp.toLatexString()
 	end
-	def ratNum_productMixedFracWhole(*args)
-		fracA = TermFraction.new(args[1],args[2]);fracB = TermFraction.new(args[4],args[5])
+	def ratNum_productMixedFrac(*args)
+		fracA = TermFraction.new(args[1],args[2])
+		fracB = TermFraction.new(args[4],args[5])
 		wholeA = args[0];coeffWholeA = TermCoefficient.new(wholeA);wholeB = args[3];coeffWholeB = TermCoefficient.new(wholeB)
 		displayExp = Expression.new()
 		latexStringList << "To multiply a mixed fraction to another Fraction, first convert the mixed fraction to an improper fraction and then multiply."
-		numExp = Expression.new(); numExp.expressionItemList = [coeffMult,@times,frac.baseNumerator]
 		improperNumA = args[1]+(args[0]*args[2]); improperNumB = args[4]+(args[3]*args[5]);
 		improperFracA = TermFraction.new(improperNumA,fracA.baseDenominator)
 		improperFracB = TermFraction.new(improperNumB,fracB.baseDenominator)
 		numProductExp = Expression.new(); numProductExp.expressionItemList=[improperFracA.baseNumerator,@times,improperFracB.baseNumerator]
 		denProductExp = Expression.new(); denProductExp.expressionItemList=[improperFracA.baseDenominator,@times,improperFracB.baseDenominator]
-		displayExp.expressionItemList << [wholeA,fracA,@times,wholeB,fracB,@eq,improperFracA,@times,improperFracB,@eq,TermFraction.new(numExp,denExp),@eq,improperFracA*improperFracB]
+		displayExp.expressionItemList = [coeffWholeA,fracA,@times,coeffWholeB,fracB,@eq,improperFracA,@times,improperFracB,@eq,TermFraction.new(numProductExp,denProductExp),@eq,improperFracA*improperFracB]
 		latexStringList << displayExp.toLatexString()
 	end
 	def ratNum_divisionProperFracSmall(*args)
 		fracA = TermFraction.new(args[0],args[1]);fracB = TermFraction.new(args[2],args[3])
 		displayExp = Expression.new()
-		displayExp.expressionItemList << [fracA,@div,fracB,@eq,fracA,@times]
+		displayExp.expressionItemList = [fracA,@div,fracB,@eq,fracA,@times]
 		latexStringList << displayExp.toLatexString()+" reciprocal of "+fracB.toLatexString()
 		numExp = Expression.new(); numExp.expressionItemList = [fracA.baseNumerator,@times,fracB.baseDenominator]
 		denExp = Expression.new(); denExp.expressionItemList = [fracA.baseDenominator,@times,fracB.baseNumerator]
-		displayExp.expressionItemList << [fracA,@times,fracB.reciprocal(),@eq,TermFraction.new(numExp,denExp),@eq,fracA*fracB.reciprocal()]
+		displayExp.expressionItemList = [fracA,@times,fracB.reciprocal(),@eq,TermFraction.new(numExp,denExp),@eq,fracA*fracB.reciprocal()]
 		latexStringList << displayExp.toLatexString()
 	end
 end

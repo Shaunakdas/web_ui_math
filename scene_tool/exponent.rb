@@ -28,7 +28,7 @@ class Exponent
 		displayExp = Expression.new()
 		displayExp.expressionItemList = [coeffValue,@eq]
 		for i in 1..exponent
-			displayExp.expressionItemList << @times if i!=0
+			displayExp.expressionItemList << @times if i!=1
 			displayExp.expressionItemList << coeffBase
 		end
 		latexStringList << displayExp.toLatexString()
@@ -43,7 +43,7 @@ class Exponent
 		coeffBase.setExponent(exponent)
 		displayExp.expressionItemList = [coeffBase,@eq]
 		for i in 1..exponent
-			displayExp.expressionItemList << @times if i!=0
+			displayExp.expressionItemList << @times if i!=1
 			displayExp.expressionItemList << TermCoefficient.new(base)
 		end
 		displayExp.expressionItemList.concat([@eq,coeffValue])
@@ -448,7 +448,7 @@ class Exponent
 		baseExp = Expression.new(); baseExp.expressionItemList = [coeffBase];baseExp.setExponent(secondExpo) 
 		latexStringList<< baseExp.toLatexString()
 		expoExp = Expression.new(); expoExp.expressionItemList=[coeffFirstExpo,@times,coeffSecondExpo]
-		coeffBase.setExponent(expoExo);baseExp.setExponent(1) ; baseExp.concat([@eq,coeffValue]);
+		coeffBase.setExponent(expoExp);baseExp.setExponent(1) ; baseExp.expressionItemList.concat([@eq,coeffValue]);
 		latexStringList<< baseExp.toLatexString()
 	end
 end

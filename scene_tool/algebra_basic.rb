@@ -23,11 +23,17 @@ class AlgebraBasic
 		@sqrt = Operator.new("\\sqrt")
 		@cbrt = Operator.new("\\cbrt")
 	end
-	def checkExpressionType(*args)
+	def validateAlpha str
+		chars = ('a'..'z').to_a + ('A'..'Z').to_a 
+		!str.chars.detect {|ch| chars.include?(ch)}.nil?
+	end
+	def algBas_checkExpressionType(*args)
 		exp_string= args[0];op_list=[];type=""
 		#check for @eq sign
 		#if exp_string has @eq-> Equation Pg6.238
+		if exp_string.include? @eq.symbol
 			type="equation"
+			if validateAlpha exp_string
 			#if exp_string has variable -> equation with variable 
 
 			#else ->equation without variable
@@ -46,13 +52,12 @@ class AlgebraBasic
 			#check for variable & coefficient in same term-> @times check
 
 	end
-	def solutionEquationBasic(*args)
+	def algBas_solutionEquationBasic(*args)
 		a=args[0];b=args[1];c=args[2];x=args[3];
+		coeffA = TermCoefficient.new(a);coeffB = TermCoefficient.new(b);coeffC = TermCoefficient.new(c);varX = TermVariable(x)
 		#Pg6.239
+		exp=Expression.new()
+		exp.expressionItemList = [decimal,@eq]
 		answer = (b-c).to_f/a
-
-
-	end
-	def  
 	end
 end
