@@ -183,6 +183,9 @@ class RatioProportion
 		@latexStringList << " Selling Price = "+cost.to_s+" - "+loss.to_s
 		@latexStringList << " Selling Price = "+(cost-loss).to_s
 	end
+	def ratPro_calcSimpleInterestRate(*args)
+		#Calculate Simple Interest Rate based on amount
+	end
 	def ratPro_calcSimpleInterest(*args)
 		sum=args[0];rate=args[1];yearCount=args[2]
 		@latexStringList << " The sum borrowed = "+sum.to_s

@@ -290,10 +290,52 @@ class NumberSystem
 		end
 		@latexStringList << lcmList.join("X")+" = "+lcm.to_s
 	end
-	def numSys_compare(*args)
-
+	def numSys_rearrangeDigit(*args)
+		#Based on given number, rearrange the digits to get highest and lowest number possible
+	end
+	def numSys_expand(*args)
+		#Expand number in indian system of numeration
+	end
+	def numSys_roundOff(*args)
+		#Rounding number to nearest tenths, hundreds or appropriately
+	end
+	def numSys_sumEstimate(*args)
+		#
+	end
+	def numSys_differenceEstimate(*args)
+		#
+	end
+	def numSys_productEstimate(*args)
+		#
+	end
+	def numSys_divideEstimate(*args)
+		#
+	end
+	def numSys_operateUsingBracket(*args)
+		#Doing operation by using brackets
+	end
+	def numSys_convertToRoman(*args)
+		#Convert number to roman form
+	end
+	def numSys_nearby(*args)
+		#write predecessor and successor
+	end
+	def numSys_multiple(*args)
+		#Write 3 multiples fo numbers
+	end
+	def numSys_primeInRange(*args)
+		#Write number if primes in a range of numbers (max and min)
 	end
 	def numSys_divisibilityTest(*args)
+		#Divisiblity test of number based on 6,7,8,etc
+	end
+	def numSys_commonFactorList(*args)
+		#Common factor list of list of numbers
+	end
+	def numSys_commonMultipleList(*args)
+		#Common factor list of list of numbers
+	end
+	def numSys_compare(*args)
 
 	end
 	def numSys_indianSystemExpansion(*args)

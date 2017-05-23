@@ -171,6 +171,13 @@ class Exponent
 		@latexStringList <<  fullExp.toLatexString()
 
 	end
+	def exp_calcRootRepeatedSubtract(*args)
+		#Calculate square root using repeated subtraction
+	end
+	def exp_calcRootRepeatedDivision(*args)
+		#Calculate square root using repeated subtraction
+	end
+
 	def exp_calcRequiredNumberForRoot(*args)
 		a=args[0];divideFlag=args[1];squareFlag=args[2]
 		root = squareFlag ? 2:3
@@ -261,6 +268,9 @@ class Exponent
 		differenceSecond = (second**2)-a
 		answer = (differenceFirst<differenceSecond) ? first:second
 		@latexStringList << sqrtTerm.toLatexString()+" is approximately "+ answer.to_s
+
+	end
+	def exp_estimateCubeRoot(*args)
 
 	end
 	def exp_calcExponentValue(*args)

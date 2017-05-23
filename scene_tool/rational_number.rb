@@ -421,6 +421,16 @@ class RationalNumber
 		end
 
 	end
+	
+	def ratNum_convertMixedImproper(*args)
+		#
+	end
+	def ratNum_addMixedFraction(*args)
+		#
+	end
+	def ratNum_subtractMixedFraction(*args)
+		#
+	end
 	def ratNum_additiveInverse(*args)
 		puts "ratNum_additiveInverse"
 		a=args[0];b=args[1]
