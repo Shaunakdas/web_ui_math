@@ -75,6 +75,12 @@ describe RatioProportion do
 			puts ratio.latexStringList.join(";").to_s
 			expect(ratio.latexStringList.join(";").to_s).to eq " The sum borrowed = 200; Rate of interest = 2\\% per year; The interest to paid after 1 year = =\\frac{15}{100}\\times200=4.0; The interest to paid after 2 years = 8.0\\times2=8.0; The total amount to be paid after T years = A = P + I; Hence the total amount to be paid after 2 years = 200+8.0=208.0"
 		end
+		it "calcSimpleInterestRate: should say '' when we check method" do
+			ratio = RatioProportion.new()
+			ratio.ratPro_calcSimpleInterestRate(4500,2,750)
+			puts ratio.latexStringList.join(";").to_s
+			expect(ratio.latexStringList.join(";").to_s).to eq "I = \\frac{P\\timesT\\times\\R}{100} ;Therefore, 750 = \\frac{4500\\times2\\times\\R}{100};or, \\frac{750\\times100}{4500\\times2} = R;Therefore, Rate = \\frac{75000}{9000} = \\frac{25}{3}\\%"
+		end
 		it "calcIncreaseFromPercent: should say '' when we check method" do
 			ratio = RatioProportion.new()
 			ratio.ratPro_calcIncreaseFromPercent(20,100)

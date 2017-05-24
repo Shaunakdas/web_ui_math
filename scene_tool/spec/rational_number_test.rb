@@ -76,6 +76,48 @@ describe RationalNumber do
 			# puts rational.latexStringList.join(";").to_s
 			expect(rational.latexStringList.join(";").to_s).to eq "The fractions are unlike. We should first get their equivalent fractions with a denominator which is a LCM of 2 and 5.;\\frac{1}{2}=\\frac{1\\times5}{2\\times5}=\\frac{5}{10};\\frac{4}{5}=\\frac{4\\times2}{5\\times2}=\\frac{8}{10};Both are like fraction.The difference of two like fractions can be obtained as follows;Retain the (common) denominator and subtract the numerators;\\frac{5}{10}-\\frac{8}{10}=\\frac{5-8}{10}=(-\\frac{3}{10})"
 		end
+		it "ratNum_convertMixedImproperLarge: should say '' when we check this method" do
+			rational = RationalNumber.new()
+			rational.ratNum_convertMixedImproperLarge(7,1,9)
+			# puts rational.latexStringList.join(";").to_s
+			expect(rational.latexStringList.join(";").to_s).to eq "we can express a mixed fraction as an improper fraction as \n \\frac{(Whole\\timesDenominator)+Numerator}{Denominator}.;7\\frac{1}{9}=\\frac{(7\\times9)+1}{9}=\\frac{64}{9}"
+		end
+		it "ratNum_convertMixedImproperLarge: should say '' when we check this method" do
+			rational = RationalNumber.new()
+			rational.ratNum_convertMixedImproperLarge(17,4)
+			puts rational.latexStringList.join(";").to_s
+			expect(rational.latexStringList.join(";").to_s).to eq "We can express an improper fraction as a mixed fraction by dividing the numerator by denominator to obtain the quotient and the remainder.Then the mixed fraction will be written as Quotient \\frac{Remainder}{Divisor};For 17\\div4, Quotient= 4 and Remainder=1;\\frac{17}{4} = 4\\frac{1}{4}"
+		end
+		it "ratNum_convertMixedImproperSmall: should say '' when we check this method" do
+			rational = RationalNumber.new()
+			rational.ratNum_convertMixedImproperSmall(7,1,9)
+			# puts rational.latexStringList.join(";").to_s
+			expect(rational.latexStringList.join(";").to_s).to eq "7\\frac{1}{9}=\\frac{(7\\times9)+1}{9}=\\frac{64}{9}"
+		end
+		it "ratNum_convertMixedImproperSmall: should say '' when we check this method" do
+			rational = RationalNumber.new()
+			rational.ratNum_convertMixedImproperSmall(17,4)
+			puts rational.latexStringList.join(";").to_s
+			expect(rational.latexStringList.join(";").to_s).to eq "\\frac{17}{4} = \\frac{16+1}{4} = 4+\\frac{1}{4}=4\\frac{1}{4}"
+		end
+		it "ratNum_addMixedFraction: should say '' when we check this method" do
+			rational = RationalNumber.new()
+			rational.ratNum_addMixedFraction(2,4,5,3,5,6)
+			puts rational.latexStringList.join(";").to_s
+			expect(rational.latexStringList.join(";").to_s).to eq "2\\frac{4}{5}+3\\frac{5}{6}=2+\\frac{4}{5}+3+\\frac{5}{6}=5+\\frac{4}{5}+\\frac{5}{6};The fractions are unlike. We should first get their equivalent fractions with a denominator which is a LCM of 5 and 6.;\\frac{4}{5}=\\frac{4\\times6}{5\\times6}=\\frac{24}{30};\\frac{5}{6}=\\frac{5\\times5}{6\\times5}=\\frac{25}{30};Both are like fraction.The sum of two or more like fractions can be obtained as follows;Retain the (common) denominator and add the numerators;\\frac{24}{30}+\\frac{25}{30}=\\frac{24+25}{30}=\\frac{49}{30};\\frac{49}{30} = \\frac{30+19}{30} = 1+\\frac{19}{30}=1\\frac{19}{30};2\\frac{4}{5}+3\\frac{5}{6} = 5+1+\\frac{19}{30}=6\\frac{19}{30}"
+		end
+		it "ratNum_subtractMixedFraction: should say '' when we check this method" do
+			rational = RationalNumber.new()
+			rational.ratNum_subtractMixedFraction(8,1,4,2,5,6)
+			puts rational.latexStringList.join(";").to_s
+			expect(rational.latexStringList.join(";").to_s).to eq "As 8>2 and \\frac{1}{4}<\\frac{5}{6}, we convert both the fractions into improper fractions and subtract them;8\\frac{1}{4}=\\frac{(8\\times4)+1}{4}=\\frac{33}{4};2\\frac{5}{6}=\\frac{(2\\times6)+5}{6}=\\frac{17}{6};The fractions are unlike. We should first get their equivalent fractions with a denominator which is a LCM of 4 and 6.;\\frac{33}{4}=\\frac{33\\times3}{4\\times3}=\\frac{99}{12};\\frac{17}{6}=\\frac{17\\times2}{6\\times2}=\\frac{34}{12};Both are like fraction.The difference of two like fractions can be obtained as follows;Retain the (common) denominator and subtract the numerators;\\frac{99}{12}-\\frac{34}{12}=\\frac{99-34}{12}=\\frac{65}{12};\\frac{65}{12} = \\frac{60+5}{12} = 5+\\frac{5}{12}=5\\frac{5}{12}"
+		end
+		it "ratNum_subtractMixedFraction: should say '' when we check this method" do
+			rational = RationalNumber.new()
+			rational.ratNum_subtractMixedFraction(4,2,5,2,1,5)
+			puts rational.latexStringList.join(";").to_s
+			expect(rational.latexStringList.join(";").to_s).to eq "As 4>2 and \\frac{2}{5}>\\frac{1}{5},;The whole numbers 4 and 2 and the fractional numbers \\frac{2}{5} and \\frac{1}{5} can be subtracted separately.;4\\frac{2}{5}-2\\frac{1}{5}=(4-2)+(\\frac{2}{5}-\\frac{1}{5})=2+\\frac{1}{5}=2\\frac{1}{5}"
+		end
 
 		it "additiveInverse: should say '' when we check this method" do
 			rational = RationalNumber.new()

@@ -185,6 +185,12 @@ class RatioProportion
 	end
 	def ratPro_calcSimpleInterestRate(*args)
 		#Calculate Simple Interest Rate based on amount
+		principal=args[0]; years=args[1]; interest=args[2]
+		rate = TermFraction.new(interest*100,years*principal)
+		@latexStringList << "I = \\frac{P\\timesT\\times\\R}{100} "
+		@latexStringList << "Therefore, #{interest} = \\frac{#{principal}\\times#{years}\\times\\R}{100}"
+		@latexStringList << "or, \\frac{#{interest}\\times100}{#{principal}\\times#{years}} = R"
+		@latexStringList << "Therefore, Rate = #{rate.toLatexString()} = #{rate.reduceFormWithDen().toLatexString()}"++@percent.toLatexString()
 	end
 	def ratPro_calcSimpleInterest(*args)
 		sum=args[0];rate=args[1];yearCount=args[2]

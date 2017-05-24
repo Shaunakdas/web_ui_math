@@ -1,5 +1,6 @@
 require_relative '../ui_math/TermFraction'
 require 'prime'
+require 'humanize'
 class NumberSystem
 	attr_accessor :latexStringList,:numberTableList
 	def initialize()
@@ -22,6 +23,102 @@ class NumberSystem
 		@and = Operator.new("&")
 		@sqrt = Operator.new("\\sqrt")
 		@cbrt = Operator.new("\\cbrt")
+	end
+	def name(a)
+		case a
+		when 10
+			return "tens"
+		when 100
+			return "hundreds"
+		when 1000
+			return "thousands"
+		else
+			return "tens"
+		end
+	end
+	def to_words(num)
+	  numbers_to_name = {
+	      10000000 => "crore",
+	      100000 => "lakh",
+	      1000 => "thousand",
+	      100 => "hundred",
+	      90 => "ninety",
+	      80 => "eighty",
+	      70 => "seventy",
+	      60 => "sixty",
+	      50 => "fifty",
+	      40 => "forty",
+	      30 => "thirty",
+	      20 => "twenty",
+	      19=>"nineteen",
+	      18=>"eighteen",
+	      17=>"seventeen", 
+	      16=>"sixteen",
+	      15=>"fifteen",
+	      14=>"fourteen",
+	      13=>"thirteen",              
+	      12=>"twelve",
+	      11 => "eleven",
+	      10 => "ten",
+	      9 => "nine",
+	      8 => "eight",
+	      7 => "seven",
+	      6 => "six",
+	      5 => "five",
+	      4 => "four",
+	      3 => "three",
+	      2 => "two",
+	      1 => "one"
+	    }
+
+	  log_floors_to_ten_powers = {
+	    0 => 1,
+	    1 => 10,
+	    2 => 100,
+	    3 => 1000,
+	    4 => 1000,
+	    5 => 100000,
+	    6 => 100000,
+	    7 => 10000000
+	  }
+
+	  num = num.to_i
+	  return '' if num <= 0 or num >= 100000000
+
+	  log_floor = Math.log(num, 10).floor
+	  ten_power = log_floors_to_ten_powers[log_floor]
+
+	  if num <= 20
+	    numbers_to_name[num]
+	  elsif log_floor == 1
+	    rem = num % 10
+	    [ numbers_to_name[num - rem], to_words(rem) ].join(' ')
+	  else
+	    [ to_words(num / ten_power), numbers_to_name[ten_power], to_words(num % ten_power) ].join(' ')
+	  end
+	end
+	def roman(n)
+		romanNumbers = {
+		    1000 => "M",  
+		     900 => "CM",  
+		     500 => "D",  
+		     400 => "CD",
+		     100 => "C",  
+		      90 => "XC",  
+		      50 => "L",  
+		      40 => "XL",  
+		      10 => "X",  
+		        9 => "IX",  
+		        5 => "V",  
+		        4 => "IV",  
+		        1 => "I",  
+		  }
+	    roman = ""
+	    romanNumbers.each do |value, letter|
+	      roman << letter*(n / value)
+	      n = n % value
+	    end
+	    return roman
 	end
 	def numberTableToString(a)
 		#convert 2 dim array into html table
@@ -254,7 +351,7 @@ class NumberSystem
 			primeList.each do |pair|
 				factorList[i].concat(Array.new(pair[1],pair[0]))
 			end
-			commonFactorList = commonFactorList & factorList[i]
+			commonFactorList = commonFactorList && factorList[i]
 			@latexStringList << num.to_s+"="+factorList[i].join("X")
 			i = i+1
 		end
@@ -279,7 +376,7 @@ class NumberSystem
 			primeList.each do |pair|
 				factorList[i].concat(Array.new(pair[1],pair[0]))
 			end
-			commonFactorList = commonFactorList & factorList[i]
+			commonFactorList = commonFactorList && factorList[i]
 			@latexStringList << num.to_s+"="+factorList[i].join("X")
 			i = i+1
 		end
@@ -292,53 +389,238 @@ class NumberSystem
 	end
 	def numSys_rearrangeDigit(*args)
 		#Based on given number, rearrange the digits to get highest and lowest number possible
-	end
-	def numSys_expand(*args)
-		#Expand number in indian system of numeration
+		if args.size==1
+			#We were provided one number and we have to find the highest and lowest number formed by rearranging digits of given number
+			digitArray = args[0].to_s.split('').map(&:to_i)
+			@latexStringList << "Digits present in #{args[0]} are #{digitArray.join(",")}"
+		else
+			#We were provided list of digits and we have to find the highest and lowest number formed by rearranging digits
+			digitArray = args
+		end
+		@latexStringList << "We have to create greatest and smallest number by rearranging #{digitArray.join(",")}"
+		digitArray.sort!
+		@latexStringList << "Above List can be rearranged in increasing order as #{digitArray.join(",")}"
+		@latexStringList << "Hence the smallest number possible will be #{digitArray.join("").to_i.to_s}"
+		digitArray.reverse!
+		@latexStringList << "And the same List can be rearranged in decreasing order as #{digitArray.join(",")}"
+		@latexStringList << "Hence the greatest number possible will be #{digitArray.join("").to_i.to_s}"
 	end
 	def numSys_roundOff(*args)
 		#Rounding number to nearest tenths, hundreds or appropriately
+		num=args[0]; nearest=args[1]
+		answer = ((num.to_f/nearest).round)*nearest
+		ceil = ((num.to_f/nearest).ceil)*nearest
+		floor = ((num.to_f/nearest).floor)*nearest
+		@latexStringList << "#{num} lies between #{ceil} and #{floor}."
+		@latexStringList << "It is nearer to #{answer}, so it is rounded off as #{answer}"
+	end
+	def numSys_roundOffSmall(*args)
+		#Rounding number to nearest tenths, hundreds or appropriately
+		num=args[0] 
+		nearest= 10**((Math.log10(num)).to_i)
+		nearest=args[1] if args.size==2
+		answer = ((num.to_f/nearest).round)*nearest
+		@latexStringList << "Approximating to nearest #{name(nearest)}, #{num} rounds off to #{answer}"
 	end
 	def numSys_sumEstimate(*args)
-		#
+		newArr=[]
+		args.each do |num|
+			numSys_roundOffSmall(num)
+			nearest= 10**((Math.log10(num)).to_i)
+			newArr << ((num.to_f/nearest).round)*nearest
+		end
+		numSys_sum(*newArr)
 	end
 	def numSys_differenceEstimate(*args)
-		#
+		
+		newArr=[]
+		args.each do |num|
+			numSys_roundOffSmall(num)
+			nearest= 10**((Math.log10(num)).to_i)
+			newArr << ((num.to_f/nearest).round)*nearest
+		end
+		numSys_difference(*newArr)
 	end
 	def numSys_productEstimate(*args)
-		#
+		newArr=[]
+		args.each do |num|
+			numSys_roundOffSmall(num)
+			nearest= 10**((Math.log10(num)).to_i)
+			newArr << ((num.to_f/nearest).round)*nearest
+		end
+		numSys_product(*newArr)
 	end
 	def numSys_divideEstimate(*args)
-		#
+		newArr=[]
+		args.each do |num|
+			numSys_roundOffSmall(num)
+			nearest= 10**((Math.log10(num)).to_i)
+			newArr << ((num.to_f/nearest).round)*nearest
+		end
+		numSys_divide(*newArr)
 	end
 	def numSys_operateUsingBracket(*args)
 		#Doing operation by using brackets
 	end
 	def numSys_convertToRoman(*args)
 		#Convert number to roman form
+		romanNumbers = {
+		    1000 => "M",  
+		     900 => "CM",  
+		     500 => "D",  
+		     400 => "CD",
+		     100 => "C",  
+		      90 => "XC",  
+		      50 => "L",  
+		      40 => "XL",  
+		      10 => "X",  
+		        9 => "IX",  
+		        5 => "V",  
+		        4 => "IV",  
+		        1 => "I",  
+		  }
+		n=args[0]
+	    roman = "";digitArr = []; romanArr = []
+	    romanNumbers.each do |value, letter|
+	    	if (n/value) > 0 
+	      		roman << letter*(n / value)
+	      		romanArr << "("+([letter]*(n/value)).join('+').to_s+")"
+	      		digitArr << "("+([value]*(n/value)).join('+').to_s+")"
+	      	end
+	      	n = n % value
+	    end
+	    @latexStringList << "#{args[0]} = #{digitArr.join('+').to_s} "
+	    @latexStringList << "#{args[0]} = #{romanArr.join('+').to_s} "
+		@latexStringList << "Roman form of #{args[0]} is #{roman(args[0])}"
 	end
 	def numSys_nearby(*args)
 		#write predecessor and successor
+		@latexStringList << "To get a successor of any natural number, you can add 1 to that number. Hence Successor of #{args[0]} is #{args[0]+1}"
+		@latexStringList << "To get a predecessor of any natural number, you can subtract 1 from that number. Hence Predecessor of #{args[0]} is #{args[0]-1}"
 	end
 	def numSys_multiple(*args)
-		#Write 3 multiples fo numbers
+		#Write 3 multiples of numbers
+		@latexStringList << "The required multiples are"
+		multipleText=[];multipleArray=[]
+		for i in 1..args[1]
+			multipleText << "#{args[0]}\\times#{i}=#{args[0]*i}"
+			multipleArray << args[0]*i
+		end
+		@latexStringList << multipleText.join(",").to_s
+		@latexStringList << multipleArray.join(",").to_s
 	end
 	def numSys_primeInRange(*args)
 		#Write number if primes in a range of numbers (max and min)
+		args.sort!
+		numArr = []
+		Prime.each(args[1]) do |prime|
+		  numArr << prime  
+		end
+		Prime.each(args[0]) do |prime|
+		  numArr.delete(prime)  
+		end
+		@latexStringList << "Primes between #{args[0]} and #{args[1]} are "+numArr.join(",").to_s
 	end
 	def numSys_divisibilityTest(*args)
 		#Divisiblity test of number based on 6,7,8,etc
+		numArr = args[0].to_s.chars.map(&:to_i)
+		case args[1]
+		when 10
+			@latexStringList << "if a number has 0 in the ones place then it is divisible by 10."
+			ones=numArr[-1]
+			@latexStringList << "Ones digit of #{args[0]} is #{ones}"
+		when 5
+			@latexStringList << "a number which has either 0 or 5 in its ones place is divisible by 5"
+			ones=numArr[-1]
+			@latexStringList << "Ones digit of #{args[0]} is #{ones}"
+		when 2
+			@latexStringList << "a number is divisible by 2 if it has any of the digits 0, 2, 4, 6 or 8 in its ones place."
+			ones=numArr[-1]
+			@latexStringList << "Ones digit of #{args[0]} is #{ones}"
+		when 3
+			@latexStringList << "if the sum of the digits is a multiple of 3, then the number is divisible by 3."
+			sum= numArr.inject(0){|sum,x| sum + x }
+			@latexStringList << "sum of digits of #{args[0]} is #{sum}"
+		when 6
+			@latexStringList << "if a number is divisible by 2 and 3 both then it is divisible by 6 also."
+			numSys_divisibilityTest(args[0],2)
+			numSys_divisibilityTest(args[0],3)
+		when 4
+			@latexStringList << "a number with 3 or more digits is divisible by 4 if the number formed by its last two digits (i.e. ones and tens) is divisible by 4."
+			@latexStringList << "number formed by its last two digits is #{numArr[-2]}#{numArr[-1]}"
+		when 8
+			@latexStringList << "a number with 4 or more digits is divisible by 8, if the number formed by the last three digits is divisible by 8."
+			@latexStringList << "number formed by its last three digits is #{numArr[-3]}#{numArr[-2]}#{numArr[-1]}"
+		when 9
+			@latexStringList << "if the sum of the digits of a number is divisible by 9, then the number itself is divisible by 9."
+			sum= numArr.inject(0){|sum,x| sum + x }
+			@latexStringList << "sum of digits of #{args[0]} is #{sum}"
+		when 11
+			@latexStringList << "find the difference between the sum of the digits at odd places (from the right) and the sum of the digits at even places (from the right) of the number. If the difference is either 0 or divisible by 11, then the number is divisible by 11."
+			oddSum=0;evenSum=0;
+			numArr.each_with_index do |digit,i|
+				oddSum = oddSum+digit if i%2 !=0
+				evenSum = evenSum +digit if 1%2 == 0 
+			end
+			@latexStringList << "sum of the digits at odd places is #{oddSum} and sum of the digits at even places is #{evenSum}" if numArr.size%2==0
+			@latexStringList << "sum of the digits at odd places is #{evenSum} and sum of the digits at even places is #{oddSum}" if numArr.size%2!=0
+		else
+			@latexStringList << "if a number has 0 in the ones place then it is divisible by 10."
+		end
+		answer = (args[0]%args[1] == 0)? "":" not"
+		@latexStringList << "Hence #{args[0]} is#{answer} divisible by #{args[1]}"
 	end
 	def numSys_commonFactorList(*args)
 		#Common factor list of list of numbers
+		factorList = Array.new(args.size)
+		commonFactorList = []
+		lcm=args[0]
+		i=0
+		args.each do |num|
+			primeList = Prime.prime_division(num)
+			lcm = lcm.lcm(num)
+		 	factorList[i]=[]
+			primeList.each do |pair|
+				factorList[i].concat(Array.new(pair[1],pair[0]))
+			end
+			commonFactorList = commonFactorList && factorList[i]
+			@latexStringList << num.to_s+"="+factorList[i].join("X")
+			i = i+1
+		end
+		@latexStringList << "Clearly Common prime factors are "+commonFactorList.join(",")
 	end
 	def numSys_commonMultipleList(*args)
 		#Common factor list of list of numbers
+		factorList = Array.new(args.size)
+		commonFactorList = []; commonMultipleList=[]
+		lcm=args[0]
+		i=0
+		args.each do |num|
+			primeList = Prime.prime_division(num)
+			lcm = lcm.lcm(num)
+		 	factorList[i]=[]
+			primeList.each do |pair|
+				factorList[i].concat(Array.new(pair[1],pair[0]))
+			end
+			commonFactorList = commonFactorList && factorList[i]
+			@latexStringList << num.to_s+"="+factorList[i].join("X")
+			i = i+1
+		end
+		# @latexStringList << "Common prime factors are "+commonFactorList.join(",")
+		@latexStringList << "Common multiples of this list are #{lcm},#{2*lcm} and #{3*lcm}"
 	end
 	def numSys_compare(*args)
 
 	end
 	def numSys_indianSystemExpansion(*args)
+		expand = args[0].to_s.gsub(/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/, "\\1,")
+		@latexStringList << "After adding comma at the right places according to indian numbering system, #{args[0]} = #{expand}"
+		@latexStringList << "Indian form of numeration for #{args[0]} is #{to_words(args[0])}"
+	end
 
+	def numSys_internationalSystemExpansion(*args)
+		expand = args[0].to_s.reverse.scan(/\d{3}|.+/).join(",").reverse
+		@latexStringList << "After adding comma at the right places according to indian numbering system, #{args[0]} = #{expand}"
+		@latexStringList << "Indian form of numeration for #{args[0]} is #{args[0].humanize}"
 	end
 end

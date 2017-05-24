@@ -422,14 +422,75 @@ class RationalNumber
 
 	end
 	
-	def ratNum_convertMixedImproper(*args)
-		#
+	def ratNum_convertMixedImproperLarge(*args)
+		if args.size ==2
+			#Convert improper fraction into mixed fraction
+			num=args[0]; den=args[1];  coeffNum=TermCoefficient.new(num); coeffDen = TermCoefficient.new(den)
+			quotient=num/den; remainder=num-quotient*den; coeffQuotient = TermCoefficient.new(quotient); coeffRemainder= TermCoefficient.new(remainder)
+			@latexStringList << "We can express an improper fraction as a mixed fraction by dividing the numerator by denominator to obtain the quotient and the remainder.Then the mixed fraction will be written as Quotient \\frac{Remainder}{Divisor}"
+			@latexStringList << "For #{num}\\div#{den}, Quotient= #{quotient} and Remainder=#{remainder}"
+			@latexStringList << "\\frac{#{num}}{#{den}} = #{quotient}\\frac{#{remainder}}{#{den}}"
+		elsif args.size ==3
+			#Convert mixed fraction into improper fraction
+			whole=args[0]; num=args[1]; den=args[2]; coeffWhole=TermCoefficient.new(whole); coeffNum=TermCoefficient.new(num); coeffDen = TermCoefficient.new(den)
+			@latexStringList << "we can express a mixed fraction as an improper fraction as \n \\frac{(Whole\\timesDenominator)+Numerator}{Denominator}."
+			numExp = Expression.new(); numExp.expressionItemList = [@bracStart,coeffWhole,@times,coeffDen,@bracEnd,@add,coeffNum]
+			finalFrac = TermFraction.new((whole*den)+num,den)
+			exp=Expression.new(); exp.expressionItemList=[coeffWhole,TermFraction.new(num,den),@eq,TermFraction.new(numExp,den),@eq,finalFrac]
+			@latexStringList << exp.toLatexString()
+		end
+	end
+	def ratNum_convertMixedImproperSmall(*args)
+		if args.size ==2
+			#Convert improper fraction into mixed fraction
+			num=args[0]; den=args[1];  coeffNum=TermCoefficient.new(num); coeffDen = TermCoefficient.new(den)
+			quotient=num/den; remainder=num-quotient*den; coeffQuotient = TermCoefficient.new(quotient); coeffRemainder= TermCoefficient.new(remainder)
+			@latexStringList << "\\frac{#{num}}{#{den}} = \\frac{#{quotient*den}+#{remainder}}{#{den}} = #{quotient}+\\frac{#{remainder}}{#{den}}=#{quotient}\\frac{#{remainder}}{#{den}}"
+		elsif args.size ==3
+			#Convert mixed fraction into improper fraction
+			whole=args[0]; num=args[1]; den=args[2]; coeffWhole=TermCoefficient.new(whole); coeffNum=TermCoefficient.new(num); coeffDen = TermCoefficient.new(den)
+			numExp = Expression.new(); numExp.expressionItemList = [@bracStart,coeffWhole,@times,coeffDen,@bracEnd,@add,coeffNum]
+			finalFrac = TermFraction.new((whole*den)+num,den)
+			exp=Expression.new(); exp.expressionItemList=[coeffWhole,TermFraction.new(num,den),@eq,TermFraction.new(numExp,den),@eq,finalFrac]
+			@latexStringList << exp.toLatexString()
+		end
 	end
 	def ratNum_addMixedFraction(*args)
-		#
+		wholeA=args[0];numA=args[1];denA=args[2];wholeB=args[3];numB=args[4];denB=args[5]
+		fracStringA="\\frac{#{numA}}{#{denA}}"; fracStringB="\\frac{#{numB}}{#{denB}}"
+		@latexStringList << "#{wholeA}#{fracStringA}+#{wholeB}#{fracStringB}=#{wholeA}+#{fracStringA}+#{wholeB}+#{fracStringB}=#{wholeA+wholeB}+#{fracStringA}+#{fracStringB}"
+		ratNum_addFraction(numA,denA,numB,denB)
+		properFrac = TermFraction.new(numA,denA).+@TermFraction.new(numB,denB)
+		properNum = properFrac.baseNumerator.base; properDen = properFrac.baseDenominator.base
+		if properNum > properDen
+			ratNum_convertMixedImproperSmall(properNum,properDen)
+			properWhole = properNum/properDen; properRem = properNum%properDen
+			newFrac = TermFraction.new(properRem,properDen)
+			@latexStringList << "#{wholeA}#{fracStringA}+#{wholeB}#{fracStringB} = #{wholeA+wholeB}+#{properWhole}+#{newFrac.toLatexString()}=#{wholeA+wholeB+properWhole}#{newFrac.toLatexString()}"
+		else
+			@latexStringList << "#{wholeA}#{fracStringA}+#{wholeB}#{fracStringB} = #{wholeA+wholeB}+#{properFrac.toLatexString()} = #{wholeA+wholeB}#{properFrac.toLatexString()}"
+		end
 	end
 	def ratNum_subtractMixedFraction(*args)
-		#
+		wholeA=args[0];numA=args[1];denA=args[2];wholeB=args[3];numB=args[4];denB=args[5];fracA=TermFraction.new(numA,denA);fracB = TermFraction.new(numB,denB)
+		#check if whole numbers and fractional parts can be subtracted seperately.
+		if wholeA>wholeB && fracA>fracB
+			@latexStringList << "As #{wholeA}>#{wholeB} and #{fracA.toLatexString()}>#{fracB.toLatexString()},"
+			@latexStringList << "The whole numbers #{wholeA} and #{wholeB} and the fractional numbers #{fracA.toLatexString()} and #{fracB.toLatexString()} can be subtracted separately."
+			@latexStringList << "#{wholeA}#{fracA.toLatexString()}-#{wholeB}#{fracB.toLatexString()}=(#{wholeA}-#{wholeB})+(#{fracA.toLatexString()}-#{fracB.toLatexString()})=#{wholeA-wholeB}+#{(fracA.-@fracB).toLatexString()}=#{wholeA-wholeB}#{(fracA.-@fracB).toLatexString()}"
+		
+		else 
+			@latexStringList << "As #{wholeA}>#{wholeB} and #{fracA.toLatexString()}<#{fracB.toLatexString()}, we convert both the fractions into improper fractions and subtract them"
+			ratNum_convertMixedImproperSmall(wholeA,numA,denA)
+			ratNum_convertMixedImproperSmall(wholeB,numB,denB)
+			ratNum_subtractFraction((wholeA*denA)+numA,denA,(wholeB*denB)+numB,denB)
+			
+			properFrac = TermFraction.new((wholeA*denA)+numA,denA).-@TermFraction.new((wholeB*denB)+numB,denB)
+			properNum = properFrac.baseNumerator.base; properDen = properFrac.baseDenominator.base
+			if properNum > properDen
+				ratNum_convertMixedImproperSmall(properNum,properDen)
+			end
+		end
 	end
 	def ratNum_additiveInverse(*args)
 		puts "ratNum_additiveInverse"
