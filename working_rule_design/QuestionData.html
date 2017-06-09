@@ -5,7 +5,7 @@
 			<line type='text' locationType='top'> Compare following numbers \n 250105, 2496, 255006 </line>
 		</p>
 		<!-- Q4 -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Write number of digits in each number</line>
 			<line type='post_submit_text'>We know that number with least amount of digits is the smallest</line>
 			<line type='table'>
@@ -29,7 +29,7 @@
 			</line>
 		</p>
 		<!-- S4 -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Drag the smallest number to the first spot on the compairision table</line>
 			<line type='post_submit_text'>Now we have to compare 2 numbers with same number of digits</line>
 			<line type='table'>
@@ -65,10 +65,10 @@
 			</line>
 		</p>
 		<!-- U4 -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>In the remaining 2 numbers, find the largest digit where 2 numbers differ</line>
 			<line type='post_submit_text'>Now we know digit at the thousands place of 255006 is greater than 250105</line>
-			<line type='text' locationType='top'>250105 and 255006</line>
+			<line type='text'>250105 and 255006</line>
 			<line type='table'>
 				<trow>
 					<tcell type='selectable_button' answer='0'>2</tcell>
@@ -89,7 +89,7 @@
 			</line>
 		</p>
 		<!-- V4 -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Arrange the remaining 2 numbers on the compairision table</line>
 			<line type='post_submit_text'>Now you know how to arrange large numbers. Yay!!</line>
 			<line type='table'>
@@ -120,7 +120,7 @@
 			<line type='text' locationType='top'> Use the given digits without repetition and make the largest numbers \n 2, 8, 7 and 4  </line>
 		</p>
 		<!-- Q6 -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>To get the largest number, you should order all the numbers in </line>
 			<line type='post_submit_text'>To make the largest number, put the biggest digit in the leftmost place</line>
 			<line type='table' col='1'>
@@ -133,7 +133,7 @@
 			</line>
 		</p>
 		<!-- S6 -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Arrange all the 4 numbers on the compairision table in decreasing order</line>
 			<line type='post_submit_text'>To make the largest number, put the biggest digit in the leftmost place</line>
 			<line type='table'>
@@ -157,7 +157,7 @@
 			</line>
 		</p>
 		<!-- U6 -->
-		<p type='question_step' correctType='multiple_correct'>
+		<p type='question_step' align='vertical' correctType='multiple_correct'>
 			<line type='text' locationType='top'>Arrange all the given 4 numbers 2, 8, 7 and 4 to get the largest number possible</line>
 			<line type='text'>We know that 8&gt;7&gt;4&gt;2</line>
 			<line type='table'>
@@ -177,7 +177,7 @@
 			<line type='text' locationType='top'> Expand 255126 in indian system of numeration  </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Drop comma at all the correct places</line>
 			<line type='table'>
 				<trow>
@@ -208,7 +208,7 @@
 			</line>
 		</p>
 		<!-- S -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Drop the correct name at the correct position</line>
 			<line type='table' col='4'>
 				<trow>
@@ -282,7 +282,7 @@
 			<line type='text' locationType='top'> Round 242 to the nearest hundred.  </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Select 2 hundreds nearest to 242</line>
 			<line type='table' col='4'>
 				<trow>
@@ -300,7 +300,7 @@
 			</line>
 		</p>
 		<!-- S -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Among 200 and 300 which number is more closest to 242</line>
 			<line type='table'>
 				<trow>
@@ -314,8 +314,7 @@
 			<line type='text' locationType='top'> Find 5 on number line  </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
-			<line type='text' locationType='top'>Find 1 on number line</line>
+		<p type='question_step' align='horizontal' correctType='single_correct'>
 			<line type='number_line_drop' locationType='left' labelCount='14'>
 				<trow>
 					<tcell type='number_line_label' labelIndex='11'>10</tcell>
@@ -323,13 +322,14 @@
 					<tcell type='number_line_label_answer' labelIndex='2'>1</tcell>
 				</trow>
 			</line>
-			<line type='table' locationType='bottom'>
+			<line type='text'>Find 1 on number line</line>
+			<line type='table' locationType='right'>
 				<trow type='drag_source_line' sourceType='integer' start='0' end='9'>
 				</trow>
 			</line>
 		</p>
 		<!-- S -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find 5 on number line</line>
 			<line type='number_line_drop' labelCount='14'>
 				<trow>
@@ -348,7 +348,7 @@
 			<line type='text' locationType='top'> Write all factors of 24  </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Write 12 as product of 2 numbers</line>
 			<line type='table'>
 				<trow>
@@ -376,7 +376,7 @@
 			</line>
 		</p>
 		<!-- S -->
-		<p type='question_step' correctType='multiple_correct'>
+		<p type='question_step' align='vertical' correctType='multiple_correct'>
 			<line type='text' locationType='top'>Looking at the table list down the factors of 12</line>
 			<line type='table'>
 				<trow>
@@ -405,7 +405,7 @@
 			<line type='text' locationType='top'> Find all the primes between 11 and 30  </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Select 2 hundreds nearest to 242</line>
 			<line type='table'>
 				<trow>
@@ -443,7 +443,7 @@
 			<line type='text' locationType='top'> Check if 231 is divisible by 3  </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find the sum of all digits of 2313</line>
 			<line type='table'>
 				<trow>
@@ -457,7 +457,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Is 6 a factor of 3?</line>
 			<line type='table'>
 				<trow>
@@ -475,7 +475,7 @@
 			<line type='text' locationType='top'> Find common factors of 12 and 18  </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='multiple_correct'>
+		<p type='question_step' align='vertical' correctType='multiple_correct'>
 			<line type='table'>
 				<trow>
 					<tcell type='text'>Factors of 12 :</tcell>
@@ -488,7 +488,7 @@
 			</line>
 		</p>
 		<!-- S -->
-		<p type='question_step' correctType='multiple_correct'>
+		<p type='question_step' align='vertical' correctType='multiple_correct'>
 			<line type='table'>
 				<trow>
 					<tcell type='text'>Factors of 18 :</tcell>
@@ -501,7 +501,7 @@
 			</line>
 		</p>
 		<!-- T -->
-		<p type='question_step' correctType='multiple_correct'>
+		<p type='question_step' align='vertical' correctType='multiple_correct'>
 			<line type='table'>
 				<trow>
 					<tcell type='text'>Factors of 12 :1,2,3,4,6,12</tcell>
@@ -530,7 +530,7 @@
 			<line type='text' locationType='top'> Find prime factorization of 24  </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='multiple_correct'>
+		<p type='question_step' align='horizontal' correctType='multiple_correct'>
 			<line type='prime_division' target='24'>
 				<trow>
 					<tcell type='text'>Factors of 12 :</tcell>
@@ -547,7 +547,7 @@
 			<line type='text' locationType='top'> Find hcf of 24 and 18  </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='multiple_correct'>
+		<p type='question_step' align='vertical' correctType='multiple_correct'>
 			<line type='post_submit_text'>24=2\\times2\\times2\\times3</line>
 			<line type='prime_division' target='24'>
 			</line>
@@ -557,7 +557,7 @@
 			</line>
 		</p>
 		<!-- S -->
-		<p type='question_step' correctType='multiple_correct'>
+		<p type='question_step' align='vertical' correctType='multiple_correct'>
 			<line type='post_submit_text'>18=2\\times3\\times3</line>
 			<line type='prime_division' target='18'>
 			</line>
@@ -567,7 +567,7 @@
 			</line>
 		</p>
 		<!-- S -->
-		<p type='question_step' correctType='multiple_correct'>
+		<p type='question_step' align='vertical' correctType='multiple_correct'>
 			<line type='table'>
 				<trow>
 					<tcell type='text'>24=2\\times2\\times2\\times3</tcell>
@@ -586,7 +586,7 @@
 			</line>
 		</p>
 		<!-- S -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='table'>
 				<trow>
 					<tcell type='text'>24=2\\times2\\times2\\times3</tcell>
@@ -611,7 +611,7 @@
 				</trow>
 			</line>
 		</p>
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='table'>
 				<trow>
 					<tcell type='text'>24=2\\times2\\times2\\times3</tcell>
@@ -643,7 +643,7 @@
 			<line type='text' locationType='top'> Find lcm of 8 and 12  </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='multiple_correct'>
+		<p type='question_step' align='vertical' correctType='multiple_correct'>
 			<line type='post_submit_text'>8=2\\times2\\times2</line>
 			<line type='prime_division' target='8'>
 			</line>
@@ -653,7 +653,7 @@
 			</line>
 		</p>
 		<!-- S -->
-		<p type='question_step' correctType='multiple_correct'>
+		<p type='question_step' align='vertical' correctType='multiple_correct'>
 			<line type='post_submit_text'>12=2\\times2\\times3</line>
 			<line type='prime_division' target='12'>
 			</line>
@@ -663,7 +663,7 @@
 			</line>
 		</p>
 		<!-- S -->
-		<p type='question_step' correctType='multiple_correct'>
+		<p type='question_step' align='vertical' correctType='multiple_correct'>
 			<line type='table'>
 				<trow>
 					<tcell type='text'>8=2\\times2\\times2</tcell>
@@ -682,7 +682,7 @@
 			</line>
 		</p>
 		<!-- S -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='table'>
 				<trow>
 					<tcell type='text'>8=2\\times2\\times2</tcell>
@@ -708,7 +708,7 @@
 			</line>
 		</p>
 		<!-- T -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='table'>
 				<trow>
 					<tcell type='text'>8=2\\times2\\times2</tcell>
@@ -742,7 +742,7 @@
 			<line type='text' locationType='top'> Find -5 on number line  </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find 1 on number line</line>
 			<line type='number_line_drop' labelCount='14'>
 				<trow>
@@ -756,7 +756,7 @@
 			</line>
 		</p>
 		<!-- S -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find -1 on number line</line>
 			<line type='number_line_drop' labelCount='14'>
 				<trow>
@@ -771,7 +771,7 @@
 			</line>
 		</p>
 		<!-- S -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find -5 on number line</line>
 			<line type='number_line_drop' labelCount='14'>
 				<trow>
@@ -790,7 +790,7 @@
 			<line type='text' locationType='top'> Write the numbers with correct sign  </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Select correct sign button</line>
 			<line type='table'>
 				<trow>
@@ -818,7 +818,7 @@
 			<line type='text' locationType='top'> Which number will be on the left -5 and 3  </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Where will -5 lie around 0</line>
 			<line type='post_submit_text'>Hence we know -5 &lt; 0</line>
 			<line type='table'>
@@ -829,7 +829,7 @@
 				</trow>
 			</line>
 		</p>
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Where will 3 lie around 0</line>
 			<line type='post_submit_text'>Hence we know 0 &lt; 3</line>
 			<line type='table'>
@@ -840,7 +840,7 @@
 				</trow>
 			</line>
 		</p>
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Where will -5 lie around 3</line>
 			<line type='table'>
 				<trow>
@@ -859,7 +859,7 @@
 			<line type='text' locationType='top'> Compare the -1 and -15 using &gt; or &lt;.  </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Where will -1 lie around -15</line>
 			<line type='table'>
 				<trow>
@@ -869,7 +869,7 @@
 				</trow>
 			</line>
 		</p>
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Where will -1 lie around -15</line>
 			<line type='table'>
 				<trow>
@@ -891,7 +891,7 @@
 			<line type='text' locationType='top'> Order in increasing order -4,5,6,-1,2,-6 </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Select all negative integers</line>
 			<line type='table'>
 				<trow>
@@ -904,7 +904,7 @@
 				</trow>
 			</line>
 		</p>
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Arrange all negative integers in comparision table</line>
 			<line type='table'>
 				<trow>
@@ -923,7 +923,7 @@
 				</trow>
 			</line>
 		</p>
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Arrange all remaining integers in comparision table</line>
 			<line type='table'>
 				<trow>
@@ -942,7 +942,7 @@
 				</trow>
 			</line>
 		</p>
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Arrange all negative integers in comparision table</line>
 			<line type='table'>
 				<trow >
@@ -979,7 +979,7 @@
 			<line type='text' locationType='top'> Add 5 and -3 on number line  </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find 5 on number line</line>
 			<line type='number_line_drop' labelCount='14'>
 				<trow>
@@ -995,7 +995,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>To add negative integer, we should go up or down</line>
 			<line type='table'>
 				<trow>
@@ -1005,7 +1005,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>As -3 is negative intger, count 3 steps down from 5 and select the place on number line.</line>
 			<line type='number_line_select' labelCount='14'>
 				<trow>
@@ -1026,7 +1026,7 @@
 			<line type='text' locationType='top'> Add 3 and -6  </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Do both the integers 5 and -3 have same sign</line>
 			<line type='table'>
 				<trow>
@@ -1036,7 +1036,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>When adding 2 integers of different sign, we have to subtract smaller integer from bigger integer(Ignoring the signs of integers</line>
 			<line type='table'>
 				<trow>
@@ -1069,7 +1069,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Answer takes the sign of bigger integer</line>
 			<line type='table'>
 				<trow>
@@ -1092,7 +1092,7 @@
 			<line type='text' locationType='top'> Find the sum of (– 9) + (+ 4) + (– 6) + (+ 3) </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Select all negative integers</line>
 			<line type='table'>
 				<trow>
@@ -1104,7 +1104,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find sum of negative integers</line>
 			<line type='table'>
 				<trow>
@@ -1119,7 +1119,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find sum of positive integers</line>
 			<line type='table'>
 				<trow>
@@ -1134,7 +1134,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find sum of (-15) and (+7)</line>
 			<line type='table'>
 				<trow>
@@ -1153,7 +1153,7 @@
 			<line type='text' locationType='top'> Find (– 9) - (+ 4) - (– 6) + (+ 3) </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='multiple_correct'>
+		<p type='question_step' align='vertical' correctType='multiple_correct'>
 			<line type='text' locationType='top'>Select all integer whose additive inverse is to be found</line>
 			<line type='text' locationType='top'>(– 9) - (+ 4) - (– 6) + (+ 3)</line>
 			<line type='table'>
@@ -1166,7 +1166,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='multiple_correct'>
+		<p type='question_step' align='vertical' correctType='multiple_correct'>
 			<line type='text' locationType='top'>Find additive inverse of +4 and -6</line>
 			<line type='post_submit_text'>Now find the sum of (– 9) + (- 4) + (+ 6) + (+ 3)</line>
 			<line type='table'>
@@ -1187,7 +1187,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='multiple_correct'>
+		<p type='question_step' align='vertical' correctType='multiple_correct'>
 			<line type='text' locationType='top'>Find sum of negative integers in (– 9) + (- 4) + (+ 6) + (+ 3)</line>
 			<line type='table'>
 				<trow>
@@ -1202,7 +1202,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='multiple_correct'>
+		<p type='question_step' align='vertical' correctType='multiple_correct'>
 			<line type='text' locationType='top'>Find sum of positive integers</line>
 			<line type='table'>
 				<trow>
@@ -1217,7 +1217,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find sum of (-13) and (+9)</line>
 			<line type='table'>
 				<trow>
@@ -1236,7 +1236,7 @@
 			<line type='text' locationType='top'> Convert 3\\frac{1}{2} into improper fraction </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>What are the whole number, numerator and denominator in 3\\frac{1}{2}</line>
 			<line type='post_submit_text'>Numerator of improper fraction will be (Whole Number \\times Denominator) + Numerator</line>
 			<line type='table'>
@@ -1262,7 +1262,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Product of Whole Number and Denominator</line>
 			<line type='table'>
 				<trow>
@@ -1276,7 +1276,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Sum of product and numerator</line>
 			<line type='post_submit_text'>Numerator of improper fraction will be 7</line>
 			<line type='table'>
@@ -1295,7 +1295,7 @@
 			<line type='text' locationType='top'> Put \\frac{2}{3} on number line </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>0 to 1 has to be broken down into how many parts</line>
 			<line type='incorrect_submit_text'>\\frac{2}{3} means 2 parts out of 3 parts. 0 to 1 has to be broken down in 3 parts</line>
 			<line type='table'>
@@ -1309,7 +1309,7 @@
 				</trow>
 			</line>
 		</p>
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>How many jumps are needed from 0</line>
 			<line type='incorrect_submit_text'>0 is same as \\frac{0}{3}. From 0, we need total jumps same as numerator of fraction = 2</line>
 			<line type='table'>
@@ -1331,7 +1331,7 @@
 			<line type='text' locationType='top'> Find equivalent fraction of \\frac{2}{3} with denominator 6 </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find multiplier to multiply with denominator to get 6</line>
 			<line type='incorrect_submit_text'>We know 3 \\times 2 = 6.</line>
 			<line type='post_submit_text'>This means we need to multiply both the numerator and the denominator by 2 to get the equivalent fraction.</line>
@@ -1348,7 +1348,7 @@
 			</line>
 		</p>
 			<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Multiply 2 with both numerator and denominator with 2</line>
 			<line type='post_submit_text'>For equivalent fraction with denominator 6, numerator will be 4.</line>
 			<line type='table'>
@@ -1383,7 +1383,7 @@
 			<line type='text' locationType='top'> Find simplest form of \\frac{18}{24} </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find HCF of 18 and 24</line>
 			<line type='incorrect_submit_text'>In Prime Factorization of 18 and 24, Prime Factor 2 comes up minimum of 1 time and prime Factor 3 comes of minimum of 1 time</line>
 			<line type='post_submit_text'>In order to get an equivalent fraction in which the numerator and the denominator have no common factor except 1, we divide both by HCF.</line>
@@ -1405,7 +1405,7 @@
 			</line>
 		</p>
 			<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Divide both numerator and denominator by their HCF 6</line>
 			<line type='post_submit_text'>\\frac{3}{4} is the simplest form of \\frac{18}{24}</line>
 			<line type='table'>
@@ -1441,7 +1441,7 @@
 			<line type='text' locationType='top'> Compare \\frac{3}{4} and \\frac{2}{6} </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find LCM of 4 and 6</line>
 			<line type='incorrect_submit_text'>In Prime Factorization of 18 and 24, Prime Factor 2 comes up at most of 2 time and prime Factor 3 comes of minimum of 1 time</line>
 			<line type='post_submit_text'>In order to compare unlike fractions, convert both fractions to their equivalent fractions with same denominator.</line>
@@ -1465,7 +1465,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find equivalent Fractions of both fractions with denominator as LCM</line>
 			<line type='post_submit_text'>\\frac{3}{4} is the simplest form of \\frac{18}{24}</line>
 			<line type='table'>
@@ -1533,7 +1533,7 @@
 				</trow>
 			</line>
 		</p>
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Compare \\frac{9}{12} and \\frac{4}{12}</line>
 			<line type='text' locationType='top'>\\frac{3}{4} = \\frac{9}{12} and \\frac{2}{6} = \\frac{4}{12}</line>
 			<line type='table'>
@@ -1561,7 +1561,7 @@
 			<line type='text' locationType='top'> Add \\frac{2}{7} + \\frac{3}{7}  </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>What kind of fractions are \\frac{2}{7} and \\frac{3}{7}</line>
 			<line type='incorrect_submit_text'>As both denominators are same (7), both the fractions are like fractions</line>
 			<line type='post_submit_text'>For adding like fractions, final fraction will have same denominator as each of the like fraction and numerator as sum of both the numerators</line>
@@ -1573,7 +1573,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Add numerators of \\frac{2}{7} and \\frac{3}{7}</line>
 			<line type='table'>
 				<trow>
@@ -1608,7 +1608,7 @@
 			<line type='text' locationType='top'> Add \\frac{1}{3} + \\frac{1}{2}  </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>What kind of fractions are \\frac{1}{3} and \\frac{1}{2}</line>
 			<line type='incorrect_submit_text'>As both denominators are different, both the fractions are unlike fractions</line>
 			<line type='post_submit_text'>For adding unlike fractions, we have to find LCM of both denominators first</line>
@@ -1620,7 +1620,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find LCM of 2 and 3</line>
 			<line type='incorrect_submit_text'>In Prime Factorization of 2 and 3, Prime Factor 2 comes up at most of 1 time and prime Factor 3 comes of minimum of 1 time</line>
 			<line type='post_submit_text'>In order to compare unlike fractions, convert both fractions to their equivalent fractions with same denominator.</line>
@@ -1642,7 +1642,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find equivalent Fractions of both fractions with denominator as LCM</line>
 			<line type='table'>
 				<trow>
@@ -1710,7 +1710,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Add numerators of \\frac{2}{6} and \\frac{3}{6}</line>
 			<line type='table'>
 				<trow>
@@ -1745,7 +1745,7 @@
 			<line type='text' locationType='top'> Add 2\\frac{1}{3} + 3\\frac{1}{2}  </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find sum of whole parts</line>
 			<line type='incorrect_submit_text'>Whole part of 2\\frac{1}{3} is 2. Whole part of 3\\frac{1}{2} is 3. Their sum is 2+3=5.</line>
 			<line type='post_submit_text'>In order to add mixed fractions, add whole parts and fractions separately.</line>
@@ -1767,7 +1767,7 @@
 		</p>
 
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>What kind of fractions are \\frac{1}{3} and \\frac{1}{2}</line>
 			<line type='incorrect_submit_text'>As both denominators are different, both the fractions are unlike fractions</line>
 			<line type='post_submit_text'>For adding unlike fractions, we have to find LCM of both denominators first</line>
@@ -1779,7 +1779,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find LCM of 2 and 3</line>
 			<line type='incorrect_submit_text'>In Prime Factorization of 2 and 3, Prime Factor 2 comes up at most of 1 time and prime Factor 3 comes of minimum of 1 time</line>
 			<line type='post_submit_text'>In order to compare unlike fractions, convert both fractions to their equivalent fractions with same denominator.</line>
@@ -1801,7 +1801,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find equivalent Fractions of both fractions with denominator as LCM</line>
 			<line type='table'>
 				<trow>
@@ -1869,7 +1869,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Add numerators of \\frac{2}{6} and \\frac{3}{6}</line>
 			<line type='table'>
 				<trow>
@@ -1900,7 +1900,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>What kind of fraction is \\frac{5}{6}</line>
 			<line type='incorrect_submit_text'>As 5 &lt; 6, Numerator &lt; Denominator. Hence it is a proper fraction</line>
 			<line type='post_submit_text'>As the sum of fractions is proper fraction, both the sums of whole parts and frctions can be added. </line>
@@ -1935,7 +1935,7 @@
 				</trow>
 			</line>
 		</p>
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>fill all numbers at the correct position</line>
 			
 			<line type='table'>
@@ -1993,7 +1993,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='multiple_correct'>
+		<p type='question_step' align='vertical' correctType='multiple_correct'>
 			<line type='text' locationType='top'>Write the final decimal</line>
 			<line type='table'>
 				<trow>
@@ -2014,7 +2014,7 @@
 			<line type='text' locationType='top'> Convert into decimal \\frac{11}{5}</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Select smallest multiple of 5 from the options </line>
 			<line type='incorrect_submit_text'>10,100,1000 are all multiples of 5. But 10 is the smallest multiple of 5.</line>
 			<line type='post_submit_text'>We have to find a fraction equivalent to \\frac{11}{5} whose denominator is 10.</line>
@@ -2027,7 +2027,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Fidn equivalent fraction of \\frac{11}{5} whose denominator is 10. </line>
 			<line type='incorrect_submit_text'>10,100,1000 are all multiples of 5. But 10 is the smallest multiple of 5.</line>
 			<line type='post_submit_text'>We have to find a fraction equivalent to \\frac{11}{5} whose denominator is 10.</line>
@@ -2049,7 +2049,7 @@
 				<trow type='drag_source_line' sourceType='integer' start='0' end='9'></trow>
 			</line>
 		</p>
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Drop decimal point at all the correct places</line>
 			<line type='table'>
 				<trow>
@@ -2069,7 +2069,7 @@
 			<line type='text' locationType='top'> Convert into fraction 1.2</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Fill the place value table </line>
 			<line type='table'>
 				<trow>
@@ -2099,7 +2099,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Fill the blanks with correct digits </line>
 			
 			<line type='table'>
@@ -2144,7 +2144,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Fidn the sum</line>
 			
 			<line type='table'>
@@ -2169,7 +2169,7 @@
 			<line type='text' locationType='top'> Comparision of decimals</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Fill the place value table </line>
 			<line type='table'>
 				<trow>
@@ -2209,7 +2209,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Select the first digit from left where both decimal differ </line>
 			<line type='table'>
 				<trow>
@@ -2243,7 +2243,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Drop the correct the comparision operator based on highlighted digit</line>
 			<line type='table'>
 				<trow>
@@ -2295,7 +2295,7 @@
 			<line type='text' locationType='top'> Add 0.35 + 0.42</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Fill the place value table </line>
 			<line type='table'>
 				<trow>
@@ -2338,7 +2338,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Select the first digit from left where both decimal differ </line>
 			<line type='table'>
 				<trow>
@@ -2386,7 +2386,7 @@
 			<line type='text' locationType='top'> Convert into expression "5 added to y"</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Select the operation in "5 added to y"</line>
 			<line type='table'>
 				<trow>
@@ -2398,7 +2398,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Fill the blanks</line>
 			<line type='table'>
 				<trow>
@@ -2427,7 +2427,7 @@
 			<line type='text' locationType='top'> Select variable in "y + 3"</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Select the variable</line>
 			<line type='table'>
 				<trow>
@@ -2442,7 +2442,7 @@
 			<line type='text' locationType='top'> Is this expression a equation "y + 3 = 7"</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Does it has "=" sign</line>
 			<line type='table'>
 				<trow>
@@ -2459,7 +2459,7 @@
 			<line type='text' locationType='top'> Find the simplest form of 4:6 "y + 3 = 7"</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find prime factors of 4 and 6</line>
 			<line type='table'>
 				<trow>
@@ -2484,7 +2484,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Divide both parts of ratio by HCF of both parts</line>
 			<line type='table'>
 				<trow>
@@ -2508,7 +2508,7 @@
 			<line type='text' locationType='top'> Are 6,8,18 and 24 in proportion</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find simplest form of 6 : 8</line>
 			<line type='text' locationType='top'>6=2\\times3</line>
 			<line type='text' locationType='top'>8=2\\times2\\times2</line>
@@ -2529,7 +2529,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find simplest form of 18 : 24</line>
 			<line type='text' locationType='top'>18=2\\times3\\times3</line>
 			<line type='text' locationType='top'>8=2\\times2\\times2\\times3\\</line>
@@ -2550,7 +2550,7 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Are both the ratios same</line>
 			<line type='text' locationType='top'>6:8 = 3:4</line>
 			<line type='text' locationType='top'>18:24 = 3:4</line>
@@ -2566,7 +2566,7 @@
 			<line type='text' locationType='top'> If the cost of 6 cans of juice is INR 210, then what will be the cost of 4 cans of juice?</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find for single unit</line>
 			<line type='table'>
 				<trow>
@@ -2590,7 +2590,7 @@
 				<trow type='drag_source_line' sourceType='integer' start='0' end='9'></trow>
 			</line>
 		</p>
-		<p type='question_step' correctType='single_correct'>
+		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find for required number of units</line>
 			<line type='table'>
 				<trow>
