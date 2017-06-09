@@ -60,4 +60,66 @@ class AlgebraBasic
 		exp.expressionItemList = [decimal,@eq]
 		answer = (b-c).to_f/a
 	end
+	def algBas_parseTerm(*args)
+		input = args[0]
+
+		#Check for exponent_sign
+		exponent_hash = []
+		# exponent_hash.add({:base => '',:exponent=> '', :base_positive => true})
+		#exponentSignIndexArray = Array of indices of exponent signs in input 
+		for index in 0 ... exponentSignIndexArray.size
+		  expo_args = args; expo_args.add(exponentSignIndexArray[index])
+		  base = getBaseOfExponentIndex(*expo_args)
+		  exponent = getExponentOfExponentIndex(*expo_args)
+		end
+		#Check for alphabetical character
+		variableArray = algBas_getVariableList(*args)
+		#List alphabetical characters and their index in input text
+		for index in 0 ... variableArray.size
+		  
+		end
+		#For each character, 
+		return MathElement
+	end
+	def getExponentOfExponentIndex(*args)
+		input = args[0]; exponent_sign_index = args[1]
+		exponent_first_index = exponent_sign_index+1; exponent_last_index = 0
+		#switch(input[exponent_sign_index+1])
+			#case "{":
+			#go back from exponent_sign_index and find first "}" [=exponent_last_index+1]
+			exponent_first_index = exponent_sign_index+2;
+			#case "(":
+			#go back from exponent_sign_index and find first ")" [=exponent_last_index+1]
+			exponent_first_index = exponent_sign_index+2;
+			#case alphabetic character:
+			#exponent_last_index = exponent_sign_index+1
+			#case numeric:
+			#go back from exponent_sign_index and find first non-numeric [=exponent_sign_index+!]
+		#end
+	end
+	def getBaseOfExponentIndex(*args)
+		input = args[0]; exponent_sign_index = args[1]
+		base_first_index = 0; base_last_index = exponent_sign_index-1
+		#switch(input[exponent_sign_index-1])
+			#case "}":
+			#go back from exponent_sign_index and find first "{" [=base_first_index]
+			#case ")":
+			#go back from exponent_sign_index and find first "(" [=base_first_index]
+			#case alphabetic character:
+			#base_first_index = exponent_sign_index-2
+			#case numeric:
+			#go back from exponent_sign_index and find first non-numeric [=base_first_index-1]
+		#end
+		return input.substring(base_first_index,base_last_index)
+	end
+	def algBas_getVariableList(*args)
+		input = args[0]
+		variableArray = []
+
+	end
+	def algBas_getExponentOfBase(*args)
+		input = args[0]; base = args[1]
+		#Get index of base in string of input
+
+	end
 end
