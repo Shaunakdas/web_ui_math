@@ -22,6 +22,8 @@ class AlgebraBasic
 		@and = Operator.new("&")
 		@sqrt = Operator.new("\\sqrt")
 		@cbrt = Operator.new("\\cbrt")
+		@frac = "\\frac"
+		@expo = "^"
 	end
 	def validateAlpha str
 		chars = ('a'..'z').to_a + ('A'..'Z').to_a 
@@ -65,13 +67,32 @@ class AlgebraBasic
 
 		#Check for exponent_sign
 		exponent_hash = []
-		# exponent_hash.add({:base => '',:exponent=> '', :base_positive => true})
 		#exponentSignIndexArray = Array of indices of exponent signs in input 
+		exponentSignIndexArray = (0 ... input.length).find_all { |i| input[i,1] == '^' }
 		for index in 0 ... exponentSignIndexArray.size
-		  expo_args = args; expo_args.add(exponentSignIndexArray[index])
-		  base = getBaseOfExponentIndex(*expo_args)
-		  exponent = getExponentOfExponentIndex(*expo_args)
+	    	expo_args = []; expo_args << args[0]; expo_args << (exponentSignIndexArray[index])
+		  	p getExponentOfExponentIndex(*expo_args)
+		  	p getBaseOfExponentIndex(*expo_args)
+			# exponent_hash.add({:base => '',:exponent=> '', :base_positive => true})
+		  	exponent_hash << ({:base => getBaseOfExponentIndex(*expo_args),:exponent=> getExponentOfExponentIndex(*expo_args), :base_positive => true})
 		end
+
+		#Check for fraction sign
+		fraction_hash = []
+		@frac = "\\frac" if(!@frac); fracCount=@frac.length
+		#fractionIndexArray = Array of indices of fraction in input 
+		fractionIndexArray = (0 ... input.length).find_all { |i| input[i,fracCount] == "\\frac" }
+		for index in 0 ... fractionIndexArray.size
+	    	num_args = []; num_args << args[0]
+	    	num_args << (fractionIndexArray[index]+fracCount)
+		  	p getNumOfFractionIndex(*num_args)
+		  	den_args = []; den_args << args[0]
+		  	den_args << (fractionIndexArray[index]+fracCount)+input[(fractionIndexArray[index]+fracCount)..-1].index('}')+1
+		  	p getDenOfFractionIndex(*den_args)
+		  	fraction_hash << ({:num => getNumOfFractionIndex(*num_args),:den=> getDenOfFractionIndex(*den_args)})
+		end
+		# Check for +,-,\\div,\\times. Divide expression into arrays of terms
+		# Check for ({[ and make a nested list.
 		#Check for alphabetical character
 		variableArray = algBas_getVariableList(*args)
 		#List alphabetical characters and their index in input text
@@ -81,36 +102,75 @@ class AlgebraBasic
 		#For each character, 
 		return MathElement
 	end
+	def getNumOfFractionIndex(*args)
+		input = args[0]; num_start_index = args[1]
+		subExp = input[(num_start_index)..-1]
+		p subExp
+		num_first_index = 1
+		num_last_index = subExp.index('}')-1	 
+		return subExp[num_first_index..num_last_index]
+	end
+	def getDenOfFractionIndex(*args)
+		input = args[0]; den_start_index = args[1]
+		subExp = input[(den_start_index)..-1]
+		p subExp
+		den_first_index = 1
+		den_last_index = subExp.index('}')-1	 
+		return subExp[den_first_index..den_last_index]
+	end
 	def getExponentOfExponentIndex(*args)
 		input = args[0]; exponent_sign_index = args[1]
-		exponent_first_index = exponent_sign_index+1; exponent_last_index = 0
+		subExp = input[(exponent_sign_index+1)..-1]
+		exponent_first_index = 0; exponent_last_index = -1
 		#switch(input[exponent_sign_index+1])
+		case input[exponent_sign_index+1]
 			#case "{":
-			#go back from exponent_sign_index and find first "}" [=exponent_last_index+1]
-			exponent_first_index = exponent_sign_index+2;
+			when "{"
+			  #go from exponent_sign_index and find first "}" [=exponent_last_index+1]
+			  exponent_last_index = subExp.index('}')-1
+			  exponent_first_index = 1
 			#case "(":
-			#go back from exponent_sign_index and find first ")" [=exponent_last_index+1]
-			exponent_first_index = exponent_sign_index+2;
+			when "("
+  			#go from exponent_sign_index and find first ")" [=exponent_last_index+1]
+  			exponent_last_index = subExp.index(')')-1
+  			exponent_first_index = 1
 			#case alphabetic character:
-			#exponent_last_index = exponent_sign_index+1
+			when 'a'..'z'
+			  exponent_last_index = exponent_first_index
 			#case numeric:
-			#go back from exponent_sign_index and find first non-numeric [=exponent_sign_index+!]
-		#end
+			when '0'..'9'
+			  #go from exponent_sign_index and find first non-numeric [=exponent_last_index+1]
+			  exponent_last_index = subExp.index(/\D/)-1
+			else
+		end
+		return subExp[exponent_first_index..exponent_last_index]
 	end
 	def getBaseOfExponentIndex(*args)
 		input = args[0]; exponent_sign_index = args[1]
-		base_first_index = 0; base_last_index = exponent_sign_index-1
-		#switch(input[exponent_sign_index-1])
+		subExp = input[0..(exponent_sign_index-1)]
+		base_first_index = 0; base_last_index = -1
+		#switch(input[exponent_sign_index+1])
+		case input[exponent_sign_index-1]
 			#case "}":
-			#go back from exponent_sign_index and find first "{" [=base_first_index]
+			when "}"
+			  #go back from exponent_sign_index and find first "{" [=base_first_index]
+			  base_first_index = subExp.rindex('{')+1
+			  base_last_index = -2
 			#case ")":
-			#go back from exponent_sign_index and find first "(" [=base_first_index]
+			when ")"
+  			#go back from exponent_sign_index and find first "(" [=base_first_index]
+  			base_first_index = subExp.rindex('(')+1
+  			base_last_index = -2
 			#case alphabetic character:
-			#base_first_index = exponent_sign_index-2
+			when 'a'..'z'
+			  base_first_index = base_last_index
 			#case numeric:
-			#go back from exponent_sign_index and find first non-numeric [=base_first_index-1]
-		#end
-		return input.substring(base_first_index,base_last_index)
+			when '0'..'9'
+			  #go back from exponent_sign_index and find first non-numeric [=base_first_index-1]
+			  base_first_index = subExp.rindex(/\D/)+1
+			else
+		end
+		return subExp[base_first_index..base_last_index]
 	end
 	def algBas_getVariableList(*args)
 		input = args[0]
