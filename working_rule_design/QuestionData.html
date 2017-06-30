@@ -304,7 +304,7 @@
 			<line type='text' locationType='top'>Among 200 and 300 which number is more closest to 242</line>
 			<line type='table'>
 				<trow>
-					<tcell type='selectable_button' answer='0'>200</tcell>
+					<tcell type='selectable_button' answer='1'>200</tcell>
 					<tcell type='selectable_button' answer='0'>300</tcell>
 				</trow>
 			</line>
@@ -315,7 +315,7 @@
 		</p>
 		<!-- Q -->
 		<p type='question_step' align='horizontal' correctType='single_correct'>
-			<line type='number_line_drop' locationType='left' labelCount='14'>
+			<line type='number_line_drop' locationType='left' labelCount='12'>
 				<trow>
 					<tcell type='number_line_label' labelIndex='11'>10</tcell>
 					<tcell type='number_line_label' labelIndex='1'>0</tcell>
@@ -329,16 +329,16 @@
 			</line>
 		</p>
 		<!-- S -->
-		<p type='question_step' align='vertical' correctType='single_correct'>
-			<line type='text' locationType='top'>Find 5 on number line</line>
-			<line type='number_line_drop' labelCount='14'>
+		<p type='question_step' align='horizontal' correctType='single_correct'>
+			<line type='number_line_drop' locationType='left' labelCount='12'>
 				<trow>
 					<tcell type='number_line_label' labelIndex='11'>10</tcell>
 					<tcell type='number_line_label' labelIndex='1'>0</tcell>
 					<tcell type='number_line_label_answer' labelIndex='6'>5</tcell>
 				</trow>
 			</line>
-			<line type='table' locationType='bottom'>
+			<line type='text'>Find 5 on number line</line>
+			<line type='table' locationType='right'>
 				<trow type='drag_source_line' sourceType='integer' start='0' end='9'>
 				</trow>
 			</line>
@@ -406,7 +406,7 @@
 		</p>
 		<!-- Q -->
 		<p type='question_step' align='vertical' correctType='single_correct'>
-			<line type='text' locationType='top'>Select 2 hundreds nearest to 242</line>
+			<line type='text' locationType='top'>Select primes between 11 and 30</line>
 			<line type='table'>
 				<trow>
 					<tcell type='text'>11</tcell>
@@ -547,21 +547,22 @@
 			<line type='text' locationType='top'> Find hcf of 24 and 18  </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' align='vertical' correctType='multiple_correct'>
-			<line type='post_submit_text'>24=2\\times2\\times2\\times3</line>
-			<line type='prime_division' target='24'>
+		<p type='question_step' align='horizontal' correctType='multiple_correct'>
+			<line type='prime_division' target='24' locationType='left'>
 			</line>
-			<line type='table'>
+			<line type='post_submit_text'>24=2\\times2\\times2\\times3</line>
+			<line type='table'  locationType='right'>
 				<trow type='drag_source_line' sourceType='prime' start='1' end='18'>
 				</trow>
 			</line>
 		</p>
 		<!-- S -->
-		<p type='question_step' align='vertical' correctType='multiple_correct'>
-			<line type='post_submit_text'>18=2\\times3\\times3</line>
-			<line type='prime_division' target='18'>
+		<p type='question_step' align='horizontal' correctType='multiple_correct'>
+			
+			<line type='prime_division' target='18' locationType='left'>
 			</line>
-			<line type='table' locationType='bottom'>
+			<line type='post_submit_text'>18=2\\times3\\times3</line>
+			<line type='table' locationType='right'>
 				<trow type='drag_source_line' sourceType='prime' start='1' end='18'>
 				</trow>
 			</line>
@@ -742,45 +743,45 @@
 			<line type='text' locationType='top'> Find -5 on number line  </line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' align='vertical' correctType='single_correct'>
-			<line type='text' locationType='top'>Find 1 on number line</line>
-			<line type='number_line_drop' labelCount='14'>
+		<p type='question_step' align='horizontal' correctType='single_correct'>
+			<line type='number_line_drop'  locationType='left' labelCount='12'>
 				<trow>
 					<tcell type='number_line_label' labelIndex='7'>0</tcell>
 					<tcell type='number_line_label_answer' labelIndex='8'>1</tcell>
 				</trow>
 			</line>
-			<line type='table' locationType='bottom'>
+			<line type='text'>Find 1 on number line</line>
+			<line type='table' locationType='right'>
 				<trow type='drag_source_line' sourceType='integer' start='-7' end='7'>
 				</trow>
 			</line>
 		</p>
 		<!-- S -->
-		<p type='question_step' align='vertical' correctType='single_correct'>
-			<line type='text' locationType='top'>Find -1 on number line</line>
-			<line type='number_line_drop' labelCount='14'>
+		<p type='question_step' align='horizontal' correctType='single_correct'>
+			<line type='number_line_drop'  locationType='left' labelCount='12'>
 				<trow>
 					<tcell type='number_line_label' labelIndex='7'>0</tcell>
 					<tcell type='number_line_label' labelIndex='8'>1</tcell>
 					<tcell type='number_line_label_answer' labelIndex='6'>-1</tcell>
 				</trow>
 			</line>
-			<line type='table' locationType='bottom'>
+			<line type='text'>Find -1 on number line</line>
+			<line type='table' locationType='right'>
 				<trow type='drag_source_line' sourceType='integer' start='-7' end='7'>
 				</trow>
 			</line>
 		</p>
 		<!-- S -->
-		<p type='question_step' align='vertical' correctType='single_correct'>
-			<line type='text' locationType='top'>Find -5 on number line</line>
-			<line type='number_line_drop' labelCount='14'>
+		<p type='question_step' align='horizontal' correctType='single_correct'>
+			<line type='number_line_drop'  locationType='left' labelCount='12'>
 				<trow>
 					<tcell type='number_line_label' labelIndex='11'>10</tcell>
 					<tcell type='number_line_label' labelIndex='1'>0</tcell>
 					<tcell type='number_line_label_answer' labelIndex='2'>-5</tcell>
 				</trow>
 			</line>
-			<line type='table' locationType='bottom'>
+			<line type='text'>Find -5 on number line</line>
+			<line type='table' locationType='right'>
 				<trow type='drag_source_line' sourceType='integer' start='-7' end='7'>
 				</trow>
 			</line>
@@ -981,7 +982,7 @@
 		<!-- Q -->
 		<p type='question_step' align='vertical' correctType='single_correct'>
 			<line type='text' locationType='top'>Find 5 on number line</line>
-			<line type='number_line_drop' labelCount='14'>
+			<line type='number_line_drop' labelCount='12'>
 				<trow>
 					<tcell type='number_line_label' labelIndex='7'>0</tcell>
 					<tcell type='number_line_label' labelIndex='8'>1</tcell>
@@ -1005,18 +1006,18 @@
 			</line>
 		</p>
 		<!-- Q -->
-		<p type='question_step' align='vertical' correctType='single_correct'>
-			<line type='text' locationType='top'>As -3 is negative intger, count 3 steps down from 5 and select the place on number line.</line>
-			<line type='number_line_select' labelCount='14'>
+		<p type='question_step' align='horizontal' correctType='single_correct'>
+			<line type='number_line_select' labelCount='12'  locationType='left'>
 				<trow>
-					<tcell type='number_line_label' labelIndex='7'>0</tcell>
-					<tcell type='number_line_label' labelIndex='8'>1</tcell>
-					<tcell type='number_line_label' labelIndex='6'>-1</tcell>
-					<tcell type='number_line_label' labelIndex='12'>5</tcell>
+					<tcell type='number_line_label' labelIndex='6'>0</tcell>
+					<tcell type='number_line_label' labelIndex='7'>1</tcell>
+					<tcell type='number_line_label' labelIndex='5'>-1</tcell>
+					<tcell type='number_line_label' labelIndex='11'>5</tcell>
 					<tcell type='number_line_label_answer' labelIndex='8'>true</tcell>
 				</trow>
 			</line>
-			<line type='table' locationType='bottom'>
+			<line type='text'>As -3 is negative intger, count 3 steps down from 5 and select the place on number line.</line>
+			<line type='table' locationType='right'>
 				<trow type='drag_source_line' sourceType='integer' start='-7' end='7'>
 				</trow>
 			</line>
