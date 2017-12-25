@@ -1,0 +1,594 @@
+<html> 
+  <body code='working-rule-for-express-as-exponent'>
+    <!-- O express-as-exponent-->
+    <p type='comprehension'>
+      <line type='text'> Express 256 as power of 2 </line>
+    </p>
+    
+    <!-- Q -->
+    <p type='question_step' correctType='single_correct'>
+      <line type='text'>Tap of 2 to reach to 256</line>
+      <line type='combination_product' outputVisible='1' answer='256'>
+        <trow>
+          <tcell type='text'>2</tcell>
+        </trow>
+      </line>
+    </p>
+    <!-- Q -->
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'>Calculate the exponent</line>
+      <line type='text'>256 = 2\\times2\\times2\\times2\\times2\\times2\\times2\\times2</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>Number of 2 in above product</tcell>
+          <tcell type='drop_zone_row' answer='8' size='12'></tcell>
+        </trow>
+      </line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>256 =</tcell>
+          <tcell type='text'> 2</tcell>
+          <tcell type='exponent_table'>
+            <trow>
+              <tcell type='drop_zone' answer='8' size='12'></tcell>
+            </trow>
+          </tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line' sourceType='integer' start='0' end='9'>
+        </trow>
+      </line>
+    </p>
+  </body>
+  <body code='working-rule-for-compute-power'>
+    <!-- O compute-power-->
+    <p type='comprehension'>
+      <line type='text'> Simplify (-4)^{3} </line>
+    </p>
+    
+    <!-- Q -->
+    <p type='question_step' correctType='single_correct'>
+      <line type='text'>Simplify the product</line>
+      <line type='text'>(-4)^{3} = (-4)\\times(-4)\\times(-4)</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>-4</tcell>
+          <tcell type='text'>\\times</tcell>
+          <tcell type='text'>-4</tcell>
+          <tcell type='text'>\\times</tcell>
+          <tcell type='text'>-4</tcell>
+        </trow>
+      </line>
+      <line type='table'>
+        <trow>
+          <tcell type='drop_zone' answer='+16' size='12'></tcell>
+          <tcell type='text'>\\times</tcell>
+          <tcell type='text'>-4</tcell>
+        </trow>
+      </line>
+      <line type='table'>
+        <trow>
+          <tcell type='drop_zone_row' answer='-64' size='12'></tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line' sourceType='integer' start='0' end='9'>
+        </trow>
+      </line>
+    </p>
+  </body>
+  <body code='working-rule-for-multiplying/dividing-powers-with-same-base'>
+    <!-- O multiplying/dividing-powers-with-same-base-->
+    <p type='comprehension'>
+      <line type='text'> Simplify 3^{2} \\times 3^{4} \\times 3^{8} </line>
+    </p>
+    
+    <!-- Q -->
+    <p type='question_step' correctType='single_correct'>
+      <line type='text'>FIn the product, are base or exponent same?</line>
+      <line type='post_submit_text'>For product of powers with same exponent, a^{m}\\timesa^{n} = a^{m+n}</line>
+      <line type='text'>For 3^{2} \\times 3^{4} \\times 3^{8}</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>Are base same? </tcell>
+          <tcell type='selectable_button' answer='1'>Yes</tcell>
+          <tcell type='selectable_button' answer='0'>No</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>Are exponent same? </tcell>
+          <tcell type='selectable_button' answer='0'>Yes</tcell>
+          <tcell type='selectable_button' answer='1'>No</tcell>
+        </trow>
+      </line>
+    </p>
+    <!-- Q -->
+    <p type='question_step' correctType='single_correct'>
+      <line type='text'>Simplify the product of first pair</line>
+      <line type='text'>For same base, we know a^{m}\\timesa^{n} = a^{m+n}</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>3^{2} \\times 3^{4} = </tcell>
+          <tcell type='text'>3</tcell>
+          <tcell type='exponent_table'>
+            <trow>
+              <tcell type='drop_zone' answer='2' size='12'></tcell>
+              <tcell type='text'> + </tcell>
+              <tcell type='drop_zone' answer='4' size='12'></tcell>
+            </trow>
+          </tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>3^{2} \\times 3^{4} = </tcell>
+          <tcell type='text'>3</tcell>
+          <tcell type='exponent_table'>
+            <trow>
+              <tcell type='drop_zone' answer='6' size='12'></tcell>
+            </trow>
+          </tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line' sourceType='integer' start='0' end='9'>
+        </trow>
+      </line>
+    </p>
+    <!-- Q -->
+    <p type='question_step' correctType='single_correct'>
+      <line type='text'>Simplify the product of final pair</line>
+      <line type='text'>For same base, we know a^{m}\\timesa^{n} = a^{m+n}</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>3^{2} \\times 3^{4} \\times 3^{8} </tcell>
+          <tcell type='text'> = </tcell>
+          <tcell type='text'>3^{6} \\times 3 ^{8}</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>3^{2} \\times 3^{4} \\times 3^{8} </tcell>
+          <tcell type='text'> =3</tcell>
+          <tcell type='exponent_table'>
+            <trow>
+              <tcell type='drop_zone' answer='6' size='12'></tcell>
+              <tcell type='text'> + </tcell>
+              <tcell type='drop_zone' answer='8' size='12'></tcell>
+            </trow>
+          </tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>3^{2} \\times 3^{4} \\times 3^{8} </tcell>
+          <tcell type='text'>3</tcell>
+          <tcell type='exponent_table'>
+            <trow>
+              <tcell type='drop_zone' answer='14' size='12'></tcell>
+            </trow>
+          </tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line' sourceType='integer' start='0' end='9'>
+        </trow>
+      </line>
+    </p>
+  </body>
+  <body code='working-rule-for-multiplying/dividing-powers-with-same-exponent'>
+    <!-- O multiplying/dividing-powers-with-same-exponent-->
+    <p type='comprehension'>
+      <line type='text'> Simplify 2^{4} \\times 5^{4} </line>
+    </p>
+    
+    <!-- Q -->
+    <p type='question_step' correctType='single_correct'>
+      <line type='text'>FIn the product, are base or exponent same</line>
+      <line type='post_submit_text'>For product of powers with same exponent, a^{m}\\timesb^{m} = (ab)^{m}</line>
+      <line type='text'>For 2^{4} \\times 5^{4}</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>Are base same? </tcell>
+          <tcell type='selectable_button' answer='0'>Yes</tcell>
+          <tcell type='selectable_button' answer='1'>No</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>Are exponent same? </tcell>
+          <tcell type='selectable_button' answer='1'>Yes</tcell>
+          <tcell type='selectable_button' answer='0'>No</tcell>
+        </trow>
+      </line>
+    </p>
+    <!-- Q -->
+    <p type='question_step' correctType='single_correct'>
+      <line type='text'>Find the new base</line>
+      <line type='text'>For same exponent, we know a^{m}\\timesb^{m} = (ab)^{m}</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>2^{4} \\times 5^{4} = </tcell>
+          <tcell type='text'>(</tcell>
+          <tcell type='drop_zone' answer='2' size='12'></tcell>
+          <tcell type='text'>\\times</tcell>
+          <tcell type='drop_zone' answer='5' size='12'></tcell>
+          <tcell type='text'>)</tcell>
+          <tcell type='exponent_table'>
+            <trow>
+              <tcell type='drop_zone' answer='4' size='12'></tcell>
+            </trow>
+          </tcell>
+        </trow>
+      </line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>2^{4} \\times 5^{4} = </tcell>
+          <tcell type='drop_zone_row' answer='10' size='12'></tcell>
+          <tcell type='exponent_table'>
+            <trow>
+              <tcell type='drop_zone' answer='4' size='12'></tcell>
+            </trow>
+          </tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line' sourceType='integer' start='0' end='9'>
+        </trow>
+      </line>
+    </p>
+  </body>
+  <body code='working-rule-for-power-of-power'>
+    <!-- O power-of-power-->
+    <p type='comprehension'>
+      <line type='text'> Simplify (2^{4})^{2} </line>
+    </p>
+    
+    <!-- Q -->
+    <p type='question_step' correctType='single_correct'>
+      <line type='text'>Find the new exponent</line>
+      <line type='text'>For power of power, we know (a^{m})^{n} = (a)^{mn}</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>(2^{4})^{2} = </tcell>
+          <tcell type='text'>2</tcell>
+          <tcell type='exponent_table'>
+            <trow>
+              <tcell type='drop_zone' answer='4' size='12'></tcell>
+              <tcell type='text'> \\times </tcell>
+              <tcell type='drop_zone' answer='2' size='12'></tcell>
+            </trow>
+          </tcell>
+        </trow>
+      </line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>(2^{4})^{2} = </tcell>
+          <tcell type='text'>2</tcell>
+          <tcell type='exponent_table'>
+            <trow>
+              <tcell type='drop_zone' answer='8' size='12'></tcell>
+            </trow>
+          </tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line' sourceType='integer' start='0' end='9'>
+        </trow>
+      </line>
+    </p>
+  </body>
+  <body code='working-rule-for-expressing-large-numbers-in-exponential-form'>
+    <!-- O write-number-in-expanded-form-->
+    <p type='comprehension'>
+      <line type='text'> Write 4761 in expanded form </line>
+    </p>
+    
+    <!-- Q -->
+    <p type='question_step' correctType='single_correct'>
+      <line type='text'>Tap on each option to reach to 4761</line>
+      <line type='combination_product_sum' outputVisible='1' answer='256'>
+        <trow>
+          <tcell type='text'>1000</tcell>
+          <tcell type='text'>100</tcell>
+          <tcell type='text'>10</tcell>
+          <tcell type='text'>1</tcell>
+        </trow>
+      </line>
+    </p>
+    <!-- Q -->
+    <p type='question_step' correctType='single_correct'>
+      <line type='text'>Tap on each option to reach to 4761</line>
+      <line type='combination_product_sum' outputVisible='1' answer='4761'>
+        <trow>
+          <tcell type='text'>10^{3}</tcell>
+          <tcell type='text'>10^{2}</tcell>
+          <tcell type='text'>10^{1}</tcell>
+          <tcell type='text'>10^{0}</tcell>
+        </trow>
+      </line>
+    </p>
+    <!-- Q -->
+    <p type='question_step' correctType='single_correct'>
+      <line type='text'>Fill the correct multiplier</line>
+      <line type='text'>4761 = 4000 + 700 + 60 + 1</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>10^{3}</tcell>
+          <tcell type='text'>\\times</tcell>
+          <tcell type='drop_zone' answer='4' size='12'></tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>10^{2}</tcell>
+          <tcell type='text'>\\times</tcell>
+          <tcell type='drop_zone' answer='7' size='12'></tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>10^{1}</tcell>
+          <tcell type='text'>\\times</tcell>
+          <tcell type='drop_zone' answer='6' size='12'></tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>10^{0}</tcell>
+          <tcell type='text'>\\times</tcell>
+          <tcell type='drop_zone' answer='1' size='12'></tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line' sourceType='integer' start='0' end='9'>
+        </trow>
+      </line>
+    </p>
+
+  </body>
+  <body code='working-rule-for-expressing-large-numbers-in-exponential-form'>
+    <!-- O expressing-large-numbers-in-exponential-form-->
+    <p type='comprehension'>
+      <line type='text'> Express the following numbers in standard form 3087.8 </line>
+    </p>
+    <!-- Q -->
+    <p type='question_step' correctType='single_correct'>
+      <line type='text'>Drop decimal at the correct place</line>
+      <line type='table'>
+        <trow>
+          <tcell type='drop_zone' answer=''  size='3'></tcell>
+          <tcell type='text'>3 </tcell>
+          <tcell type='drop_zone' answer='.' size='3'></tcell>
+          <tcell type='text'>0 </tcell>
+          <tcell type='drop_zone' answer='' size='3'></tcell>
+          <tcell type='text'>8 </tcell>
+          <tcell type='drop_zone' answer='' size='3'></tcell>
+          <tcell type='text'>7 </tcell>
+          <tcell type='drop_zone' answer=''  size='3'></tcell>
+          <tcell type='text'>8 </tcell>
+          <tcell type='drop_zone' answer=''  size='3'></tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow>
+          <tcell type='drag_source' id='1'>.</tcell>
+        </trow>
+      </line>
+    </p>
+    <!-- Q -->
+    <p type='question_step' correctType='single_correct'>
+      <line type='text'>Find correct multiplier</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>3087.8 = 3.0878 \\times </tcell>
+          <tcell type='drop_zone_row' answer='1000'  size='3'></tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>3087.8 = 3.0878 \\times </tcell>
+          <tcell type='text'>10</tcell>
+          <tcell type='exponent_table'>
+            <trow>
+              <tcell type='drop_zone' answer='3' size='12'></tcell>
+            </trow>
+          </tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow>
+          <tcell type='drag_source' id='1'>.</tcell>
+        </trow>
+      </line>
+    </p>
+  </body>
+  <body code='working-rule-for-inverse'>
+    <!-- O additive-inverse-of-rational-number-->
+    <p type='comprehension'>
+      <line type='text'> Find additive inverse of \\frac{-6}{-5} </line>
+    </p>
+    <!-- Q -->
+    <p type='question_step' correctType='single_correct'>
+      <line type='text'>Find the sign of rational number</line>
+      <line type='text'>In order to find additive inverse of rational number, we have to bring it in the form of \\frac{a}{b} or -\\frac{a}{b}</line>
+      <line type='post_submit_text'>Additive inverse of \\frac{a}{b} is -\\frac{a}{b}</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>Fractional part of \\frac{-6}{-5} = </tcell>
+          <tcell type='fraction_table'>
+            <trow>
+              <tcell type='drop_zone_row' answer='6'></tcell>
+            </trow>
+            <trow>
+              <tcell type='drop_zone_row' answer='5'></tcell>
+            </trow>
+          </tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>\\frac{-6}{-5} = </tcell>
+          <tcell type='selectable_sign' answer='1'></tcell>
+          <tcell type='text'>\\frac{6}{5} = </tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line' sourceType='integer' start='0' end='9'>
+        </trow>
+      </line>
+    </p>
+    <!-- Q -->
+    <p type='question_step' correctType='single_correct'>
+      <line type='text'>Find the additive inverse of \\frac{6}{5}</line>
+      <line type='text'>Additive inverse of \\frac{a}{b} is -\\frac{a}{b}</line>
+      <line type='post_submit_text'>For equivalent fraction with denominator 6, numerator will be 4.</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>Additive inverse of \\frac{6}{5} = </tcell>
+          <tcell type='selectable_sign' answer='0'></tcell>
+          <tcell type='fraction_table'>
+            <trow>
+              <tcell type='drop_zone_row' answer='6'></tcell>
+            </trow>
+            <trow>
+              <tcell type='drop_zone_row' answer='5'></tcell>
+            </trow>
+          </tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line' sourceType='integer' start='0' end='9'>
+        </trow>
+      </line>
+    </p>
+  </body>
+  <body code='working-rule-for-reciprocal-of-rational-number'>
+    <!-- O reciprocal-of-rational-number-->
+    <p type='comprehension'>
+      <line type='text'> Find multiplicative inverse of \\frac{4}{-5} </line>
+    </p>
+    <!-- Q -->
+    <p type='question_step' correctType='single_correct'>
+      <line type='text'>Find the sign of rational number</line>
+      <line type='text'>In order to find multiplicative inverse of rational number, we have to bring it in the form of \\frac{a}{b} or -\\frac{a}{b}</line>
+      <line type='post_submit_text'>multiplicative inverse of -\\frac{a}{b} is -\\frac{b}{a}</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>Fractional part of \\frac{4}{-5} = </tcell>
+          <tcell type='fraction_table'>
+            <trow>
+              <tcell type='drop_zone_row' answer='4'></tcell>
+            </trow>
+            <trow>
+              <tcell type='drop_zone_row' answer='5'></tcell>
+            </trow>
+          </tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>\\frac{4}{-5} = </tcell>
+          <tcell type='selectable_sign' answer='0'></tcell>
+          <tcell type='text'>\\frac{4}{5} = </tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line' sourceType='integer' start='0' end='9'>
+        </trow>
+      </line>
+    </p>
+    <!-- Q -->
+    <p type='question_step' correctType='single_correct'>
+      <line type='text'>Find the multiplicative inverse of \\frac{6}{5}</line>
+      <line type='text'>multiplicative inverse of -\\frac{a}{b} is -\\frac{b}{a}</line>
+      <line type='post_submit_text'>For equivalent fraction with denominator 6, numerator will be 4.</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>multiplicative inverse of -\\frac{4}{5} = </tcell>
+          <tcell type='selectable_sign' answer='0'></tcell>
+          <tcell type='fraction_table'>
+            <trow>
+              <tcell type='drop_zone_row' answer='5'></tcell>
+            </trow>
+            <trow>
+              <tcell type='drop_zone_row' answer='4'></tcell>
+            </trow>
+          </tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line' sourceType='integer' start='0' end='9'>
+        </trow>
+      </line>
+    </p>
+  </body>
+  <body code='working-rule-for-finding-square-of-number'>
+    <!-- O finding-square-of-number-->
+    <p type='comprehension'>
+      <line type='text'> Find the square of 23 </line>
+    </p>
+    <!-- Q -->
+    
+    <!-- Q -->
+    <p type='question_step' correctType='single_correct'>
+      <line type='text'>Tap on given options to reach to 23</line>
+      <line type='combination_sum' outputVisible='1' answer='23'>
+        <trow>
+          <tcell type='text'>100</tcell>
+          <tcell type='text'>10</tcell>
+          <tcell type='text'>1</tcell>
+        </trow>
+      </line>
+    </p>
+
+    <!-- Q -->
+    <p type='question_step' correctType='single_correct'>
+      <line type='text'>Find the parts of 23 as caclulated before</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>23 = </tcell>
+          <tcell type='drop_zone_row' answer='2'></tcell>
+          <tcell type='text'>0 + </tcell>
+          <tcell type='drop_zone_row' answer='3'></tcell>
+        </trow>
+      </line>
+      <line type='table'>
+        <trow type='drag_source_line' sourceType='integer' start='0' end='9'>
+        </trow>
+      </line>
+    </p>
+    <!-- Q -->
+    <p type='question_step' correctType='single_correct'>
+      <line type='text'>Find the (a + b)^{2}</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>23 </tcell>
+          <tcell type='text'>= a + b</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>23^{2}</tcell>
+          <tcell type='text'>= (a + b)^{2}</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'></tcell>
+          <tcell type='text'>= a(a + b) + b(a + b)</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'></tcell>
+          <tcell type='text'>= a^{2} + ab + ba + b^{2}</tcell>
+        </trow>
+      </line>
+      <line type='table'>
+        <trow>
+          <tcell type='drop_zone_row' id='1' size='12'></tcell>
+          <tcell type='text'>^{2}+2</tcell>
+          <tcell type='drop_zone_row' answer='1;2' size='12'></tcell>
+          <tcell type='text'>+</tcell>
+          <tcell type='drop_zone_row' id='2' size='12'></tcell>
+          <tcell type='text'>^{2} </tcell>
+        </trow>
+      </line>
+      <line type='table'>
+        <trow>
+          <tcell type='drop_zone_row' answer='400' size='12'></tcell>
+          <tcell type='text'>+</tcell>
+          <tcell type='drop_zone_row' answer='120' size='12'></tcell>
+          <tcell type='text'> + </tcell>
+          <tcell type='drop_zone_row' answer='9' size='12'></tcell>
+          <tcell type='text'>^{2} </tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow>
+          <tcell type='text'>a = </tcell>
+          <tcell type='drag_source' id='1'>20</tcell>
+          <tcell type='text'>b = </tcell>
+          <tcell type='drag_source' id='2'>3</tcell>
+        </trow>
+        <trow type='drag_source_line' sourceType='integer' start='0' end='9'>
+        </trow>
+      </line>
+    </p>
+  </body>
+</html>
