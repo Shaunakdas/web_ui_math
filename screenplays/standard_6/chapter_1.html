@@ -1,0 +1,866 @@
+<html>
+  <body code='working-rule-for-comparing-multiple-numbers'>
+    <!-- 04 comparing-numbers -->
+    <p type='comprehension' align='vertical'>
+      <line type='text' locationType='top'> Compare following numbers \n 250105, 2496, 255006 </line>
+    </p>
+    <!-- Q4 -->
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'>Write number of digits in each number</line>
+      <line type='post_submit_text'>We know that number with least amount of digits is the smallest</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>250105</tcell>
+          <tcell type='drop_zone' answer='6'></tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>1056</tcell>
+          <tcell type='drop_zone' answer='4'></tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>255006</tcell>
+          <tcell type='drop_zone' answer='6'></tcell>
+        </trow>
+      </line>
+
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line' sourceType='integer' start='0' end='9'>
+        </trow>
+      </line>
+    </p>
+    <!-- S4 -->
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'>Drag the smallest number to the first spot on the compairision table</line>
+      <line type='post_submit_text'>Now we have to compare 2 numbers with same number of digits</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>250105</tcell>
+          <tcell type='text'>6</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>1056</tcell>
+          <tcell type='text'>4</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>255006</tcell>
+          <tcell type='text'>6</tcell>
+        </trow>
+      </line>
+      <line type='table'>
+        <trow>
+          <tcell type='drop_zone' id='1' size='5'></tcell>
+          <tcell type='text'>&lt;</tcell>
+          <tcell type='text'>     </tcell>
+          <tcell type='text'>&lt;</tcell>
+          <tcell type='text'>     </tcell>
+        </trow>
+      </line>
+
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line' >
+          <tcell type='text'>250105</tcell>
+          <tcell type='text' id='1'>1056</tcell>
+          <tcell type='text'>255006</tcell>
+        </trow>
+      </line>
+    </p>
+    <!-- U4 -->
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'>In the remaining 2 numbers, find the largest digit where 2 numbers differ</line>
+      <line type='post_submit_text'>Now we know digit at the thousands place of 255006 is greater than 250105</line>
+      <line type='text'>250105 and 255006</line>
+      <line type='table'>
+        <trow>
+          <tcell type='selectable_button' answer='0'>2</tcell>
+          <tcell type='selectable_button' answer='0'>5</tcell>
+          <tcell type='selectable_button' answer='0'>0</tcell>
+          <tcell type='selectable_button' answer='0'>1</tcell>
+          <tcell type='selectable_button' answer='0'>0</tcell>
+          <tcell type='selectable_button' answer='0'>5</tcell>
+        </trow>
+        <trow>
+          <tcell type='selectable_button' answer='0'>2</tcell>
+          <tcell type='selectable_button' answer='0'>5</tcell>
+          <tcell type='selectable_button' answer='1'>5</tcell>
+          <tcell type='selectable_button' answer='0'>0</tcell>
+          <tcell type='selectable_button' answer='0'>0</tcell>
+          <tcell type='selectable_button' answer='0'>6</tcell>
+        </trow>
+      </line>
+    </p>
+    <!-- V4 -->
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'>Arrange the remaining 2 numbers on the compairision table</line>
+      <line type='post_submit_text'>Now you know how to arrange large numbers. Yay!!</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'> 25{\bg[yellow]\color[black]0}106</tcell>
+          <tcell type='text'> 25{\bg[yellow]\color[black]5}006</tcell>
+        </trow>
+      </line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>1056</tcell>
+          <tcell type='text'>&lt;</tcell>
+          <tcell type='drop_zone' id='2' size='8'></tcell>
+          <tcell type='text'>&lt;</tcell>
+          <tcell type='drop_zone' id='1' size='8'></tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line' >
+          <tcell type='text' id='1'>250105</tcell>
+          <tcell type='text' id='2'>255006</tcell>
+        </trow>
+      </line>
+    </p>
+  </body>
+  <body code='working-rule-for-making-largest-or-smallest-numbers-without-repeatition'>
+    <!-- O6 making-number-by-rearranging-digits-->
+    <p type='comprehension' align='vertical'>
+      <line type='text' locationType='top'> Use the given digits without repetition and make the largest numbers \n 2, 8, 7 and 4  </line>
+    </p>
+    <!-- Q6 -->
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'>To get the largest number, you should order all the numbers in </line>
+      <line type='post_submit_text'>To make the largest number, put the biggest digit in the leftmost place</line>
+      <line type='table' col='1'>
+        <trow>
+          <tcell type='selectable_button' answer='0'>increasing order</tcell>
+          <tcell type='text'>or</tcell>
+          <tcell type='selectable_button' answer='1'>decreasing order</tcell>
+          <tcell type='text'>?</tcell>
+        </trow>
+      </line>
+    </p>
+    <!-- S6 -->
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'>Arrange all the 4 numbers on the compairision table in decreasing order</line>
+      <line type='post_submit_text'>To make the largest number, put the biggest digit in the leftmost place</line>
+      <line type='table'>
+        <trow>
+          <tcell type='drop_zone' id='2' size='3'></tcell>
+          <tcell type='text'>&gt;</tcell>
+          <tcell type='drop_zone' id='3' size='3'></tcell>
+          <tcell type='text'>&gt;</tcell>
+          <tcell type='drop_zone' id='4' size='3'></tcell>
+          <tcell type='text'>&gt;</tcell>
+          <tcell type='drop_zone' id='1' size='3'></tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line'>
+          <tcell type='text' id='1'>2</tcell>
+          <tcell type='text' id='2'>8</tcell>
+          <tcell type='text' id='3'>7</tcell>
+          <tcell type='text' id='4'>4</tcell>
+        </trow>
+      </line>
+    </p>
+    <!-- U6 -->
+    <p type='question_step' align='vertical' correctType='multiple_correct'>
+      <line type='text' locationType='top'>Arrange all the given 4 numbers 2, 8, 7 and 4 to get the largest number possible</line>
+      <line type='text'>We know that 8&gt;7&gt;4&gt;2</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>Largest number:</tcell>
+          <tcell type='drop_zone_row' answer='8742' size='12'></tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line' sourceType='integer' start='0' end='9'>
+        </trow>
+      </line>
+    </p>
+
+  </body>
+  <body code='working-rule-for-expanding-in-indian-system'>
+    <!-- O number-expansion-->
+    <p type='comprehension' align='vertical'>
+      <line type='text' locationType='top'> Expand 255126 in indian system of numeration  </line>
+    </p>
+    <!-- Q -->
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'>Drop comma at all the correct places</line>
+      <line type='table'>
+        <trow>
+          <tcell type='drop_zone' answer=''  size='3'></tcell>
+          <tcell type='text'>2</tcell>
+          <tcell type='drop_zone' answer=',' id='2' size='3'></tcell>
+          <tcell type='text'>5</tcell>
+          <tcell type='drop_zone' answer='' size='3'></tcell>
+          <tcell type='text'>5</tcell>
+          <tcell type='drop_zone' answer=',' id='1' size='3'></tcell>
+          <tcell type='text'>1</tcell>
+          <tcell type='drop_zone' answer=''  size='3'></tcell>
+          <tcell type='text'>2</tcell>
+          <tcell type='drop_zone' answer=''  size='3'></tcell>
+          <tcell type='text'>6</tcell>
+          <tcell type='drop_zone' answer=''  size='3'></tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow>
+          <tcell type='text'>First "," 3 digits from right</tcell>
+          <tcell type='drag_source' id='1'>,</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>Second "," 5 digits from right</tcell>
+          <tcell type='drag_source' id='2'>,</tcell>
+        </trow>
+      </line>
+    </p>
+    <!-- S -->
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'>Drop the correct name at the correct position</line>
+      <line type='table' col='4'>
+        <trow>
+          <tcell type='text'>2</tcell>
+          <tcell type='drop_zone' size='5' tag='1'></tcell>
+          <tcell type='drop_zone' id='2_2' size='5' tag='2'></tcell>
+          <tcell type='drop_zone' id='3_3' size='5' tag='3'></tcell>
+          <tcell type='text'>55</tcell>
+          <tcell type='drop_zone'  id='1_4' size='5' tag='1'></tcell>
+          <tcell type='drop_zone'  id='2_6' size='5' tag='2'></tcell>
+          <tcell type='drop_zone'  id='3_2' size='5' tag='3'></tcell>
+          <tcell type='text'>1</tcell>
+          <tcell type='drop_zone' size='5' tag='1'></tcell>
+          <tcell type='drop_zone' id='2_1' size='5' tag='2'></tcell>
+          <tcell type='drop_zone' id='3_1' size='5' tag='3'></tcell>
+          <tcell type='text'>26</tcell>
+          <tcell type='drop_zone' id='1_1' size='5' tag='1'></tcell>
+          <tcell type='drop_zone' id='2_7' size='5' tag='2'></tcell>
+          <tcell type='drop_zone' size='5' tag='3'></tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line'>
+          <tcell type='text' id='1_1' tag='1'>twenty</tcell>
+          <tcell type='text' id='1_2' tag='1'>thirty</tcell>
+          <tcell type='text' id='1_3' tag='1'>fourty</tcell>
+          <tcell type='text' id='1_4' tag='1'>fifty</tcell>
+          <tcell type='text' id='1_5' tag='1'>sixty</tcell>
+          <tcell type='text' id='1_6' tag='1'>seventy</tcell>
+          <tcell type='text' id='1_7' tag='1'>eighty</tcell>
+          <tcell type='text' id='1_8' tag='1'>ninty</tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line'>
+          <tcell type='text' id='2_1' tag='2'>one</tcell>
+          <tcell type='text' id='2_2' tag='2'>two</tcell>
+          <tcell type='text' id='2_4' tag='2'>three</tcell>
+          <tcell type='text' id='2_5' tag='2'>four</tcell>
+          <tcell type='text' id='2_6' tag='2'>five</tcell>
+          <tcell type='text' id='2_7' tag='2'>six</tcell>
+          <tcell type='text' id='2_8' tag='2'>seven</tcell>
+          <tcell type='text' id='2_9' tag='2'>eight</tcell>
+          <tcell type='text' id='2_10' tag='2'>nine</tcell>
+          <tcell type='text' id='2_11' tag='2'>ten</tcell>
+        </trow>
+        <trow type='drag_source_line'>
+          <tcell type='text' id='2_12' tag='2'>eleven</tcell>
+          <tcell type='text' id='2_13' tag='2'>twelve</tcell>
+          <tcell type='text' id='2_14' tag='2'>thirteen</tcell>
+          <tcell type='text' id='2_15' tag='2'>fourteen</tcell>
+          <tcell type='text' id='2_16' tag='2'>fifteen</tcell>
+          <tcell type='text' id='2_17' tag='2'>sixteen</tcell>
+          <tcell type='text' id='2_18' tag='2'>seventeen</tcell>
+          <tcell type='text' id='2_19' tag='2'>eightteen</tcell>
+          <tcell type='text' id='2_20' tag='2'>nineteen</tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line'>
+          <tcell type='text' id='3_1' tag='3'>hundred</tcell>
+          <tcell type='text' id='3_2' tag='3'>thousand</tcell>
+          <tcell type='text' id='3_3' tag='3'>lakh</tcell>
+          <tcell type='text' id='3_4' tag='3'>crore</tcell>
+        </trow>
+      </line>
+    </p>
+
+  </body>
+  <body code='working-rule-for-finding-place-value-in-indian-system-of-numeration'>
+    <p type='comprehension' align='vertical'>
+      <line type='text' locationType='top'> Find the place value of 2 in given numbers.</line>
+    </p>
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'> Look at the table and find the place value of 2</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>Hundred</tcell>
+          <tcell type='text'> = </tcell>
+          <tcell type='text'>100</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>Ten</tcell>
+          <tcell type='text'> = </tcell>
+          <tcell type='text'>10</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>One</tcell>
+          <tcell type='text'> = </tcell>
+          <tcell type='text'>1</tcell>
+        </trow>
+      </line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>2</tcell>
+          <tcell type='drop_zone' id='1'></tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>21</tcell>
+          <tcell type='drop_zone' id='2'></tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>238</tcell>
+          <tcell type='drop_zone' id='3'></tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line'>
+          <tcell type='text' id='3' >Hundred</tcell>
+          <tcell type='text' id='2' >Ten</tcell>
+          <tcell type='text' id='1' >One</tcell>
+        </trow>
+      </line>
+    </p>
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'> Look at the table and find the place value of 2</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>Lakh</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>100000</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>Ten Thousand</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>10000</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>Thousand</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>1000</tcell>
+        </trow>
+      </line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>2104</tcell>
+          <tcell type='drop_zone' id='1'></tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>29186</tcell>
+          <tcell type='drop_zone' id='2'></tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>287156</tcell>
+          <tcell type='drop_zone' id='3'></tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line'>
+          <tcell type='text' id='1' >Thousands</tcell>
+          <tcell type='text' id='2' >Ten Th</tcell>
+          <tcell type='text' id='3' >Lakhs</tcell>
+        </trow>
+      </line>
+    </p>
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'> Look at the table and find the place value of 2</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>Ten Crore</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>100000000</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>Crore</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>10000000</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>Ten Lakh</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>1000000</tcell>
+        </trow>
+      </line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>2198989</tcell>
+          <tcell type='drop_zone' id='1'></tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>21345679</tcell>
+          <tcell type='drop_zone' id='2'></tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>223456789</tcell>
+          <tcell type='drop_zone' id='3'></tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line'>
+          <tcell type='text' id='1' >Ten Lakhs</tcell>
+          <tcell type='text' id='2' >Crores</tcell>
+          <tcell type='text' id='3' >Ten Crores</tcell>
+        </trow>
+      </line>
+    </p>
+  </body>
+  <body code='working-rule-for-finding-place-value-in-international-system-of-numeration'>
+    <p type='comprehension' align='vertical'>
+      <line type='text' locationType='top'>  </line>
+    </p>
+    <p type='question_step' align='vertical'>
+    </p>
+    <p type='question_step' align='vertical'>
+    </p>
+    <p type='question_step' align='vertical'>
+    </p>
+  </body>
+  <body code='working-rule-for-writing-and-reading-numbers-using-placement-boxes'>
+    <p type='comprehension' align='vertical'>
+      <line type='text' locationType='top'> Write 2,73,87,654 in expanded form </line>
+    </p>
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'> Put each digit in correspondning placement boxes </line>
+      <line type='text'> 2,73,87,654</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>Cr</tcell>
+          <tcell type='text'>TLakh</tcell>
+          <tcell type='text'>Lakh</tcell>
+          <tcell type='text'>TTh</tcell>
+        </trow>
+        <trow>
+          <tcell type='drop_zone' id='1'></tcell>
+          <tcell type='drop_zone' id='2'></tcell>
+          <tcell type='drop_zone' id='3'></tcell>
+          <tcell type='drop_zone' id='4'></tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>Th</tcell>
+          <tcell type='text'>H</tcell>
+          <tcell type='text'>T</tcell>
+          <tcell type='text'>O</tcell>
+        </trow>
+        <trow>
+          <tcell type='drop_zone' id='5'></tcell>
+          <tcell type='drop_zone' id='6'></tcell>
+          <tcell type='drop_zone' id='7'></tcell>
+          <tcell type='drop_zone' id='8'></tcell>
+        </trow>
+      </line>
+
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line'>
+          <tcell type='text' id='1' >2</tcell>
+          <tcell type='text' id='2' >7</tcell>
+          <tcell type='text' id='3' >3</tcell>
+          <tcell type='text' id='4' >8</tcell>
+          <tcell type='text' id='5' >7</tcell>
+          <tcell type='text' id='6' >6</tcell>
+          <tcell type='text' id='7' >5</tcell>
+          <tcell type='text' id='8' >4</tcell>
+        </trow>
+      </line>
+    </p>
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'> Listen to expanded form of  </line>
+      <line type='text'> 2,73,87,654</line>
+    </p>
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'> Put each digit in correspondning placement boxes </line>
+      <line type='text'> 27,387,654</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>TM</tcell>
+          <tcell type='text'>M</tcell>
+          <tcell type='text'>HT</tcell>
+        </trow>
+        <trow>
+          <tcell type='drop_zone' id='1'></tcell>
+          <tcell type='drop_zone' id='2'></tcell>
+          <tcell type='drop_zone' id='3'></tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>TTh</tcell>
+          <tcell type='text'>Th</tcell>
+          <tcell type='text'>H</tcell>
+          <tcell type='text'>T</tcell>
+          <tcell type='text'>O</tcell>
+        </trow>
+        <trow>
+          <tcell type='drop_zone' id='4'></tcell>
+          <tcell type='drop_zone' id='5'></tcell>
+          <tcell type='drop_zone' id='6'></tcell>
+          <tcell type='drop_zone' id='7'></tcell>
+          <tcell type='drop_zone' id='8'></tcell>
+        </trow>
+      </line>
+
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line'>
+          <tcell type='text' id='1' >2</tcell>
+          <tcell type='text' id='2' >7</tcell>
+          <tcell type='text' id='3' >3</tcell>
+          <tcell type='text' id='4' >8</tcell>
+          <tcell type='text' id='5' >7</tcell>
+          <tcell type='text' id='6' >6</tcell>
+          <tcell type='text' id='7' >5</tcell>
+          <tcell type='text' id='8' >4</tcell>
+        </trow>
+      </line>
+    </p>
+  </body>
+  <body code='working-rule-for-changing-physical-quantity-from-one-unit-to-other'>
+    <p type='comprehension' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'> Express same quantity in different units </line>
+    </p>
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'> Express quantities of distance in different units. </line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>1 km</tcell>
+          <tcell type='text'> = </tcell>
+          <tcell type='text'>1000 m</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>1 m</tcell>
+          <tcell type='text'> = </tcell>
+          <tcell type='text'>100 cm</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>1 cm</tcell>
+          <tcell type='text'> = </tcell>
+          <tcell type='text'>10 mm</tcell>
+        </trow>
+      </line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>2 km</tcell>
+          <tcell type='text'> = </tcell>
+          <tcell type='drop_zone' id='1'></tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>3 m</tcell>
+          <tcell type='text'> = </tcell>
+          <tcell type='drop_zone' id='2'></tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>5 cm</tcell>
+          <tcell type='text'> = </tcell>
+          <tcell type='drop_zone' id='3'></tcell>
+        </trow>
+      </line>
+
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line'>
+          <tcell type='text' id='1' >2000 m</tcell>
+          <tcell type='text' id='2' >300 cm</tcell>
+          <tcell type='text' id='3' >50 mm</tcell>
+        </trow>
+      </line>
+    </p>
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'> Express quantities of volume in different units. </line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>1 kl</tcell>
+          <tcell type='text'> = </tcell>
+          <tcell type='text'>1000 l</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>1 l</tcell>
+          <tcell type='text'> = </tcell>
+          <tcell type='text'>1000 ml</tcell>
+        </trow>
+      </line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>5 kl</tcell>
+          <tcell type='text'> = </tcell>
+          <tcell type='drop_zone' id='1'></tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>6 l</tcell>
+          <tcell type='text'> = </tcell>
+          <tcell type='drop_zone' id='2'></tcell>
+        </trow>
+      </line>
+
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line'>
+          <tcell type='text' id='1' >5000 l</tcell>
+          <tcell type='text' id='2' >6000 ml</tcell>
+        </trow>
+      </line>
+    </p>
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'> Express quantities of weight in different units. </line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>1 kg</tcell>
+          <tcell type='text'> = </tcell>
+          <tcell type='text'>1000 gm</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>1 gm</tcell>
+          <tcell type='text'> = </tcell>
+          <tcell type='text'>1000 mg</tcell>
+        </trow>
+      </line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>8 kg</tcell>
+          <tcell type='text'> = </tcell>
+          <tcell type='drop_zone' id='1'></tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>3 gm</tcell>
+          <tcell type='text'> = </tcell>
+          <tcell type='drop_zone' id='2'></tcell>
+        </trow>
+      </line>
+
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line'>
+          <tcell type='text' id='1' >8000 gm</tcell>
+          <tcell type='text' id='2' >3000 mg</tcell>
+        </trow>
+      </line>
+    </p>
+  </body>
+
+  <body code='working-rule-for-rounding-to-nearest-hundreds/thousands'>
+    <!-- O rounding-numbers-->
+    <p type='comprehension' align='vertical'>
+      <line type='text' locationType='top'> Round 242 to the nearest hundred.  </line>
+    </p>
+    <!-- Q -->
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'>Select 2 hundreds nearest to 242</line>
+      <line type='table' col='4'>
+        <trow>
+          <tcell type='selectable_button' answer='0'>0</tcell>
+          <tcell type='selectable_button' answer='0'>100</tcell>
+          <tcell type='selectable_button' answer='1'>200</tcell>
+          <tcell type='selectable_button' answer='1'>300</tcell>
+          <tcell type='selectable_button' answer='0'>400</tcell>
+          <tcell type='selectable_button' answer='0'>500</tcell>
+          <tcell type='selectable_button' answer='0'>600</tcell>
+          <tcell type='selectable_button' answer='0'>700</tcell>
+          <tcell type='selectable_button' answer='0'>800</tcell>
+          <tcell type='selectable_button' answer='0'>900</tcell>
+        </trow>
+      </line>
+    </p>
+    <!-- S -->
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'>Among 200 and 300 which number is more closest to 242</line>
+      <line type='table'>
+        <trow>
+          <tcell type='selectable_button' answer='1'>200</tcell>
+          <tcell type='selectable_button' answer='0'>300</tcell>
+        </trow>
+      </line>
+    </p>
+  </body>
+
+  <body code='working-rule-for-simplifying-bracket-and-solving'>
+    <p type='comprehension' align='vertical'>
+      <line type='text' locationType='top'> Simplify </line>
+      <line type='text' locationType='top'> 7 - (6 + 3) + (7 - 1) </line>
+    </p>
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'> Solve the expression in first bracket </line>
+      <line type='text'> 7 - (6 + 3) + (7 - 1) </line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>7 -</tcell>
+          <tcell type='selectable_button' answer='1'>(6 + 3)</tcell>
+          <tcell type='text'> + </tcell>
+          <tcell type='selectable_button' answer='0'>(7 - 1)</tcell>
+        </trow>
+      </line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>6 + 3 = </tcell>
+          <tcell type='drop_zone' answer='9'></tcell>
+        </trow>
+      </line>
+
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line' sourceType='integer' start='0' end='9'>
+        </trow>
+      </line>
+    </p>
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'> Solve the expression in second bracket </line>
+      <line type='text'> 7 - (6 + 3) + (7 - 1) </line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>7 -</tcell>
+          <tcell type='selectable_button' answer='1'>(6 + 3)</tcell>
+          <tcell type='text'> + </tcell>
+          <tcell type='selectable_button' answer='0'>(7 - 1)</tcell>
+        </trow>
+      </line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>7 - 1 = </tcell>
+          <tcell type='drop_zone' answer='8'></tcell>
+        </trow>
+      </line>
+
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line' sourceType='integer' start='0' end='9'>
+        </trow>
+      </line>
+    </p>
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'> Solve the final expression </line>
+      <line type='text'> 7 - (6 + 3) + (7 - 1) </line>
+      <line type='text'> 6 + 3 = 9 </line>
+      <line type='text'> 7 - 1 = 8 </line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>7 - 9 + 8 = </tcell>
+          <tcell type='drop_zone' answer='6'></tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line' sourceType='integer' start='0' end='9'>
+        </trow>
+      </line>
+    </p>
+  </body>
+  <body code='working-rule-for-remembering-different-notations'>
+    <p type='comprehension' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'> Write numbers in Roman numerals </line>
+    </p>
+    <p type='question_step' align='vertical' correctType='single_correct'>
+      <line type='text' locationType='top'> Go through the table and write numbers in Roman numeral form </line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>1</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>I</tcell>
+          <tcell type='text'>10</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>X</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>2</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>II</tcell>
+          <tcell type='text'>20</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>XX</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>3</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>III</tcell>
+          <tcell type='text'>30</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>XXX</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>4</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>IV</tcell>
+          <tcell type='text'>40</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>XL</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>5</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>V</tcell>
+          <tcell type='text'>50</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>L</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>6</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>VI</tcell>
+          <tcell type='text'>60</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>LX</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>7</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>VII</tcell>
+          <tcell type='text'>70</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>LXX</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>8</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>VIII</tcell>
+          <tcell type='text'>80</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>LXXX</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>9</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>IX</tcell>
+          <tcell type='text'>90</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>XC</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>100</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>C</tcell>
+        </trow>
+      </line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>3</tcell>
+          <tcell type='text'> = </tcell>
+          <tcell type='drop_zone' answer='III'></tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>6</tcell>
+          <tcell type='text'> = </tcell>
+          <tcell type='drop_zone' answer='VI'></tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>9</tcell>
+          <tcell type='text'> = </tcell>
+          <tcell type='drop_zone' answer='IX'></tcell>
+        </trow>
+      </line>
+      <line type='table' locationType='bottom'>
+        <trow type='drag_source_line'>
+          <tcell type='text'>I</tcell>
+          <tcell type='text'>X</tcell>
+          <tcell type='text'>V</tcell>
+        </trow>
+      </line>
+    </p>
+    <p type='question_step' align='vertical' correctType='single_correct'>
+    </p>
+    <p type='question_step' align='vertical' correctType='single_correct'>
+    </p>
+  </body>
+  <body code='working-rule-for-changing-two-digit-numbers-into-roman-numerals'>
+    <p type='comprehension' align='vertical'>
+      <line type='text' locationType='top'>  </line>
+    </p>
+    <p type='question_step' align='vertical'>
+    </p>
+    <p type='question_step' align='vertical'>
+    </p>
+    <p type='question_step' align='vertical'>
+    </p>
+  </body>
+</html>
