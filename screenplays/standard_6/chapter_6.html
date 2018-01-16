@@ -268,7 +268,7 @@
     <!-- Q -->
     <p type='question_step' align='vertical' correctType='single_correct'>
       <line type='text' locationType='top'>Find 5 on number line</line>
-      <line type='number_line_drop' labelCount='12'>
+      <line type='number_line_drop' labelCount='12' locationType='bottom'>
         <trow>
           <tcell type='number_line_label' labelIndex='7'>0</tcell>
           <tcell type='number_line_label' labelIndex='8'>1</tcell>
@@ -397,8 +397,9 @@
       <line type='table'>
         <trow>
           <tcell type='text'>(- 9) + (-6) =</tcell>
-          <tcell type='selectable_sign' answer='0'></tcell>
-          <tcell type='drop_zone_row' answer = '15' tag='2'></tcell>
+          <!-- <tcell type='selectable_sign' answer='0'></tcell> -->
+          <tcell type='drop_zone_row' answer='+15' tag='2'></tcell>
+
         </trow>
       </line>
       <line type='table' locationType='bottom'>
@@ -411,8 +412,7 @@
       <line type='table'>
         <trow>
           <tcell type='text'>(+4) + (+3) =</tcell>
-          <tcell type='selectable_sign' answer='1'></tcell>
-          <tcell type='drop_zone_row' answer='7' size='12'></tcell>
+          <tcell type='drop_zone_row' answer='+7' size='12'></tcell>
         </trow>
       </line>
       <line type='table' locationType='bottom'>
@@ -425,8 +425,7 @@
       <line type='table'>
         <trow>
           <tcell type='text'>(-15) + (+7) =</tcell>
-          <tcell type='selectable_sign' answer='0'></tcell>
-          <tcell type='drop_zone_row' answer='8' size='12'></tcell>
+          <tcell type='drop_zone_row' answer='+8' size='12'></tcell>
         </trow>
       </line>
       <line type='table' locationType='bottom'>
@@ -460,13 +459,15 @@
       <line type='table'>
         <trow>
           <tcell type='text'>Additive Inverse of +4 =</tcell>
-          <tcell type='selectable_sign' answer='0'></tcell>
-          <tcell type='drop_zone_row' answer = '4' tag='2'></tcell>
+        </trow>
+        <trow>
+          <tcell type='drop_zone_row' answer = '-4' tag='2'></tcell>
         </trow>
         <trow>
           <tcell type='text'>Additive Inverse of -6 =</tcell>
-          <tcell type='selectable_sign' answer='1'></tcell>
-          <tcell type='drop_zone_row' answer = '6' tag='2'></tcell>
+        </trow>
+        <trow>
+          <tcell type='drop_zone_row' answer = '+6' tag='2'></tcell>
         </trow>
       </line>
       <line type='table' locationType='bottom'>
@@ -480,8 +481,7 @@
       <line type='table'>
         <trow>
           <tcell type='text'>(- 9) + (-4) =</tcell>
-          <tcell type='selectable_sign' answer='0'></tcell>
-          <tcell type='drop_zone_row' answer = '13' tag='2'></tcell>
+          <tcell type='drop_zone_row' answer = '-13' tag='2'></tcell>
         </trow>
       </line>
       <line type='table' locationType='bottom'>
@@ -495,8 +495,7 @@
       <line type='table'>
         <trow>
           <tcell type='text'>(+6) + (+3) =</tcell>
-          <tcell type='selectable_sign' answer='1'></tcell>
-          <tcell type='drop_zone_row' answer='9' size='12'></tcell>
+          <tcell type='drop_zone_row' answer='+9' size='12'></tcell>
         </trow>
       </line>
       <line type='table' locationType='bottom'>
@@ -510,8 +509,7 @@
       <line type='table'>
         <trow>
           <tcell type='text'>(-13) + (+9) =</tcell>
-          <tcell type='selectable_sign' answer='1'></tcell>
-          <tcell type='drop_zone_row' answer='4' size='12'></tcell>
+          <tcell type='drop_zone_row' answer='-4' size='12'></tcell>
         </trow>
       </line>
       <line type='table' locationType='bottom'>
