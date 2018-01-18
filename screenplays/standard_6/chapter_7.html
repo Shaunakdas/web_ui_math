@@ -445,10 +445,17 @@
     </p>
     <!-- Q -->
     <p type='question_step' align='vertical' correctType='single_correct'>
-      <line type='text' locationType='top'>What kind of fractions are \\frac{1}{3} and \\frac{1}{2}</line>
-      <line type='incorrect_submit_text'>As both denominators are different, both the fractions are unlike fractions</line>
+      <line type='text' locationType='top'>What kind of fractions are these?</line>
+      <!-- <line type='incorrect_submit_text'>As both denominators are different, both the fractions are unlike fractions</line> -->
       <line type='post_submit_text'>For adding unlike fractions, we have to find LCM of both denominators first</line>
-      <line type='table'>
+      <line type='table' col='3'>
+        <trow>
+          <tcell type='text'>\\frac{1}{3}</tcell>
+          <tcell type='text'> and</tcell>
+          <tcell type='text'>\\frac{1}{2}</tcell>
+        </trow>
+      </line>
+      <line type='table' col='1'>
         <trow>
           <tcell type='selectable_button' answer='0'>Like Fractions</tcell>
           <tcell type='selectable_button' answer='1'>Unlike Fractions</tcell>
@@ -458,13 +465,22 @@
     <!-- Q -->
     <p type='question_step' align='vertical' correctType='single_correct'>
       <line type='text' locationType='top'>Find LCM of 2 and 3</line>
-      <line type='incorrect_submit_text'>In Prime Factorization of 2 and 3, Prime Factor 2 comes up at most of 1 time and prime Factor 3 comes of minimum of 1 time</line>
+     <!--  <line type='incorrect_submit_text'>In Prime Factorization of 2 and 3, Prime Factor 2 comes up at most of 1 time and prime Factor 3 comes of minimum of 1 time</line> -->
       <line type='post_submit_text'>In order to compare unlike fractions, convert both fractions to their equivalent fractions with same denominator.</line>
-      <line type='text' locationType='top'>2=2</line>
-      <line type='text' locationType='top'>3=3</line>
-      <line type='table'>
+      <line type='table' col='7'>
         <trow>
-          <tcell type='text'>LCM =</tcell>
+          <tcell type='text'>3 </tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>3 </tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>2 </tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>2 </tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>LCM </tcell>
+          <tcell type='text'>=</tcell>
           <tcell type='drop_zone_row' answer='2' size='6'></tcell>
           <tcell type='text'> \\times</tcell>
           <tcell type='drop_zone_row' answer='3' size='6'></tcell>
@@ -500,6 +516,7 @@
               <tcell type='drop_zone_row' answer='2'></tcell>
             </trow>
           </tcell>
+          <tcell type='text'> = </tcell>
           <tcell type='fraction_table'>
             <trow>
               <tcell type='drop_zone_row' answer='2'></tcell>
@@ -530,6 +547,7 @@
               <tcell type='drop_zone_row' answer='3'></tcell>
             </trow>
           </tcell>
+          <tcell type='text'> = </tcell>
           <tcell type='fraction_table'>
             <trow>
               <tcell type='drop_zone_row' answer='3'></tcell>
@@ -561,6 +579,11 @@
               <tcell type='drop_zone_row' answer='6'></tcell>
             </trow>
           </tcell>
+        </trow>
+      </line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>\\frac{2}{6} + \\frac{3}{6} =</tcell>
           <tcell type='fraction_table'>
             <trow>
               <tcell type='drop_zone_row' answer='5'></tcell>
