@@ -6,10 +6,11 @@
     </p>
     <!-- Q -->
     <p type='question_step' align='vertical' correctType='single_correct'>
-      <line type='text' locationType='top'>Select the operation in "5 added to y"</line>
-      <line type='table'>
+      <line type='text' locationType='top'>Select the operation in following</line>
+      <line type='text'>5 added to y</line>
+      <line type='table' col='1'>
         <trow>
-          <tcell type='selectable_button' answer='0'>Addition(+)</tcell>
+          <tcell type='selectable_button' answer='1'>Addition(+)</tcell>
           <tcell type='selectable_button' answer='0'>Subtraction(-)</tcell>
           <tcell type='selectable_button' answer='0'>Multiplication(\\times)</tcell>
           <tcell type='selectable_button' answer='0'>Division(\\div)</tcell>
@@ -20,13 +21,6 @@
     <p type='question_step' align='vertical' correctType='single_correct'>
       <line type='text' locationType='top'>Fill the blanks</line>
       <line type='table'>
-        <trow>
-          <tcell type='text'></tcell>
-          <tcell type='text'>Tens</tcell>
-          <tcell type='text'>Ones</tcell>
-          <tcell type='text'>Tenths</tcell>
-          <tcell type='text'>Hundredths</tcell>
-        </trow>
         <trow>
           <tcell type='text'>5 added to y :</tcell>
           <tcell type='drop_zone' id='1'  size='3'></tcell>
@@ -100,7 +94,7 @@
           <tcell type='drop_zone' answer='3'   size='3'></tcell>
         </trow>
         <trow>
-          <tcell type='text'>HCF =</tcell>
+          <tcell type='text'>HCF = </tcell>
           <tcell type='drop_zone' answer='2'  size='3'></tcell>
         </trow>
       </line>
@@ -113,15 +107,22 @@
       <line type='text' locationType='top'>Divide both parts of ratio by HCF of both parts</line>
       <line type='table'>
         <trow>
-          <tcell type='text'>4:6 = 4 \\div</tcell>
+          <tcell type='text'>4:6</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>4 \\div</tcell>
           <tcell type='drop_zone' answer='2'  size='3'></tcell>
-          <tcell type='text'> : 6 \\div</tcell>
+          <tcell type='text'>:</tcell>
+          <tcell type='text'>6 \\div</tcell>
           <tcell type='drop_zone' answer='2'   size='3'></tcell>
         </trow>
         <trow>
+          <tcell type='text'>4:6</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'></tcell>
           <tcell type='drop_zone' answer='2'  size='3'></tcell>
-          <tcell type='text'> :</tcell>
+          <tcell type='text'>:</tcell>
           <tcell type='drop_zone' answer='3'   size='3'></tcell>
+          <tcell type='text'></tcell>
         </trow>
       </line>
       <line type='table' locationType='bottom'>
@@ -137,50 +138,72 @@
     <!-- Q -->
     <p type='question_step' align='vertical' correctType='single_correct'>
       <line type='text' locationType='top'>Find simplest form of 6 : 8</line>
-      <line type='text' locationType='top'>6=2\\times3</line>
-      <line type='text' locationType='top'>8=2\\times2\\times2</line>
+      <line type='text'>6=2\\times3</line>
+      <line type='text'>8=2\\times2\\times2</line>
       <line type='table'>
         <trow>
-          <tcell type='text'>HCF = </tcell>
+          <tcell type='text'> HCF </tcell>
+          <tcell type='text'> = </tcell>
           <tcell type='drop_zone' answer='2'  size='3'></tcell>
         </trow>
+      </line>
+      <line type='table' col='5'>
         <trow>
-          <tcell type='text'>6 : 8 = 6\\div2 : 8\div2 =</tcell>
+          <tcell type='text'>6 : 8</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>6 \\div 2</tcell>
+          <tcell type='text'>:</tcell>
+          <tcell type='text'>8 \\div 2</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'></tcell>
+          <tcell type='text'>=</tcell>
           <tcell type='drop_zone' answer='3'  size='3'></tcell>
-          <tcell type='text'>\\times</tcell>
+          <tcell type='text'>:</tcell>
           <tcell type='drop_zone' answer='4'   size='3'></tcell>
         </trow>
       </line>
       <line type='table' locationType='bottom'>
-        <trow type='drag_source_line' sourceType='prime' start='0' end='15'></trow>
+        <trow type='drag_source_line' sourceType='integer' start='0' end='9'></trow>
       </line>
     </p>
     <!-- Q -->
     <p type='question_step' align='vertical' correctType='single_correct'>
       <line type='text' locationType='top'>Find simplest form of 18 : 24</line>
-      <line type='text' locationType='top'>18=2\\times3\\times3</line>
-      <line type='text' locationType='top'>8=2\\times2\\times2\\times3\\</line>
-      <line type='table'>
+      <line type='text'>18=2\\times3\\times3</line>
+      <line type='text'>8=2\\times2\\times2\\times3\\</line>
+      <line type='table' col='5'>
         <trow>
-          <tcell type='text'>HCF = </tcell>
+          <tcell type='text'> HCF </tcell>
+          <tcell type='text'> = </tcell>
           <tcell type='drop_zone' answer='6'  size='3'></tcell>
         </trow>
+      </line>
+      <line type='table' col='5'>
         <trow>
-          <tcell type='text'>18 : 24 = 18\\div6 : 24\\div6 =</tcell>
+          <tcell type='text'>18 : 24</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>18 \\div 6</tcell>
+          <tcell type='text'>:</tcell>
+          <tcell type='text'>24 \\div 6</tcell>
+        </trow>
+        <trow>
+          <tcell type='text'></tcell>
+          <tcell type='text'>=</tcell>
           <tcell type='drop_zone' answer='3'  size='3'></tcell>
-          <tcell type='text'>\\times</tcell>
+          <tcell type='text'>:</tcell>
           <tcell type='drop_zone' answer='4'   size='3'></tcell>
         </trow>
       </line>
       <line type='table' locationType='bottom'>
-        <trow type='drag_source_line' sourceType='prime' start='0' end='15'></trow>
+        <trow type='drag_source_line' sourceType='integer' start='0' end='9'></trow>
       </line>
     </p>
     <!-- Q -->
     <p type='question_step' align='vertical' correctType='single_correct'>
       <line type='text' locationType='top'>Are both the ratios same</line>
-      <line type='text' locationType='top'>6:8 = 3:4</line>
-      <line type='text' locationType='top'>18:24 = 3:4</line>
+      <line type='text'>6:8 = 3:4</line>
+      <line type='text'>18:24 = 3:4</line>
       <line type='table'>
         <trow>
           <tcell type='selectable_button' answer='1'>Yes</tcell>
@@ -199,11 +222,11 @@
       <line type='text' locationType='top'>Find for single unit</line>
       <line type='table'>
         <trow>
-          <tcell type='text'>Cost of 6 cans of juice</tcell>
+          <tcell type='text'>Cost of 6 juice cans=</tcell>
           <tcell type='drop_zone_row' answer='210' size='12'></tcell>
         </trow>
         <trow>
-          <tcell type='text'>Cost of 1 can of juice =</tcell>
+          <tcell type='text'>Cost of 1 juice can=</tcell>
           <tcell type='fraction_table'>
             <trow>
               <tcell type='text'>210</tcell>
@@ -212,6 +235,7 @@
               <tcell type='drop_zone_row' answer='6' size='12'></tcell>
             </trow>
           </tcell>
+          <tcell type='text'></tcell>
           <tcell type='drop_zone_row' answer='35' size='12'></tcell>
         </trow>
       </line>
