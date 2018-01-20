@@ -608,16 +608,29 @@
     <!-- Q -->
     <p type='question_step' align='vertical' correctType='single_correct'>
       <line type='text' locationType='top'>Find sum of whole parts</line>
-      <line type='incorrect_submit_text'>Whole part of 2\\frac{1}{3} is 2. Whole part of 3\\frac{1}{2} is 3. Their sum is 2+3=5.</line>
+      <!-- <line type='incorrect_submit_text'>Whole part of 2\\frac{1}{3} is 2. Whole part of 3\\frac{1}{2} is 3. Their sum is 2+3=5.</line> -->
       <line type='post_submit_text'>In order to add mixed fractions, add whole parts and fractions separately.</line>
-      <line type='text' locationType='top'>2\\frac{1}{3} + 3\\frac{1}{2}</line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>2\\frac{1}{3} + 3\\frac{1}{2}</tcell>
+        </trow>
+      </line>
       <line type='table'>
         <trow>
           <tcell type='text'>Sum of whole parts =</tcell>
+        </trow>
+      </line>
+      <line type='table'>
+        <trow>
           <tcell type='drop_zone_row' answer='2' size='6'></tcell>
           <tcell type='text'> +</tcell>
           <tcell type='drop_zone_row' answer='3' size='6'></tcell>
-          <tcell type='text'> =</tcell>
+        </trow>
+      </line>
+
+      <line type='table'>
+        <trow>
+          <tcell type='text'> = </tcell>
           <tcell type='drop_zone_row' answer='5' size='6'></tcell>
         </trow>
       </line>
@@ -630,9 +643,9 @@
     <!-- Q -->
     <p type='question_step' align='vertical' correctType='single_correct'>
       <line type='text' locationType='top'>What kind of fractions are \\frac{1}{3} and \\frac{1}{2}</line>
-      <line type='incorrect_submit_text'>As both denominators are different, both the fractions are unlike fractions</line>
+      <!-- <line type='incorrect_submit_text'>As both denominators are different, both the fractions are unlike fractions</line> -->
       <line type='post_submit_text'>For adding unlike fractions, we have to find LCM of both denominators first</line>
-      <line type='table'>
+      <line type='table' col='1'>
         <trow>
           <tcell type='selectable_button' answer='0'>Like Fractions</tcell>
           <tcell type='selectable_button' answer='1'>Unlike Fractions</tcell>
@@ -642,13 +655,22 @@
     <!-- Q -->
     <p type='question_step' align='vertical' correctType='single_correct'>
       <line type='text' locationType='top'>Find LCM of 2 and 3</line>
-      <line type='incorrect_submit_text'>In Prime Factorization of 2 and 3, Prime Factor 2 comes up at most of 1 time and prime Factor 3 comes of minimum of 1 time</line>
+      <!-- <line type='incorrect_submit_text'>In Prime Factorization of 2 and 3, Prime Factor 2 comes up at most of 1 time and prime Factor 3 comes of minimum of 1 time</line> -->
       <line type='post_submit_text'>In order to compare unlike fractions, convert both fractions to their equivalent fractions with same denominator.</line>
-      <line type='text' locationType='top'>2=2</line>
-      <line type='text' locationType='top'>3=3</line>
-      <line type='table'>
+      <line type='table' col='7'>
         <trow>
-          <tcell type='text'>LCM =</tcell>
+          <tcell type='text'>3 </tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>3 </tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>2 </tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>2 </tcell>
+        </trow>
+        <trow>
+          <tcell type='text'>LCM </tcell>
+          <tcell type='text'>=</tcell>
           <tcell type='drop_zone_row' answer='2' size='6'></tcell>
           <tcell type='text'> \\times</tcell>
           <tcell type='drop_zone_row' answer='3' size='6'></tcell>
@@ -684,6 +706,7 @@
               <tcell type='drop_zone_row' answer='2'></tcell>
             </trow>
           </tcell>
+          <tcell type='text'> = </tcell>
           <tcell type='fraction_table'>
             <trow>
               <tcell type='drop_zone_row' answer='2'></tcell>
@@ -714,6 +737,7 @@
               <tcell type='drop_zone_row' answer='3'></tcell>
             </trow>
           </tcell>
+          <tcell type='text'> = </tcell>
           <tcell type='fraction_table'>
             <trow>
               <tcell type='drop_zone_row' answer='3'></tcell>
@@ -738,13 +762,18 @@
           <tcell type='fraction_table'>
             <trow>
               <tcell type='drop_zone_row' answer='2'></tcell>
-              <tcell type='text'> +</tcell>
+              <tcell type='text'> + </tcell>
               <tcell type='drop_zone_row' answer='3'></tcell>
             </trow>
             <trow>
               <tcell type='drop_zone_row' answer='6'></tcell>
             </trow>
           </tcell>
+        </trow>
+      </line>
+      <line type='table'>
+        <trow>
+          <tcell type='text'>\\frac{2}{6} + \\frac{3}{6} =</tcell>
           <tcell type='fraction_table'>
             <trow>
               <tcell type='drop_zone_row' answer='5'></tcell>
@@ -763,9 +792,9 @@
     <!-- Q -->
     <p type='question_step' align='vertical' correctType='single_correct'>
       <line type='text' locationType='top'>What kind of fraction is \\frac{5}{6}</line>
-      <line type='incorrect_submit_text'>As 5 &lt; 6, Numerator &lt; Denominator. Hence it is a proper fraction</line>
+      <!-- <line type='incorrect_submit_text'>As 5 &lt; 6, Numerator &lt; Denominator. Hence it is a proper fraction</line> -->
       <line type='post_submit_text'>As the sum of fractions is proper fraction, both the sums of whole parts and frctions can be added. </line>
-      <line type='table'>
+      <line type='table' col='1'>
         <trow>
           <tcell type='selectable_button' answer='0'>Improper Fractions</tcell>
           <tcell type='selectable_button' answer='1'>Proper Fractions</tcell>
@@ -777,7 +806,7 @@
     <!-- O writing-tenths,hundredths-as-decimals-->
     <p type='comprehension' align='vertical'>
       <line type='text' locationType='top'>Convert from place value table to decimals.</line> 
-      <line type='table'>
+      <!-- <line type='table'>
         <trow>
           <tcell type='text'>Tens</tcell>
           <tcell type='text'>Ones</tcell>
@@ -796,12 +825,12 @@
           <tcell type='text'>5</tcell>
           <tcell type='text'>3</tcell>
         </trow>
-      </line>
+      </line> -->
     </p>
     <p type='question_step' align='vertical' correctType='single_correct'>
       <line type='text' locationType='top'>fill all numbers at the correct position</line>
       
-      <line type='table'>
+      <line type='tex_table'>
         <trow>
           <tcell type='text'>Tens</tcell>
           <tcell type='text'>Ones</tcell>
@@ -858,7 +887,7 @@
     <!-- Q -->
     <p type='question_step' align='vertical' correctType='multiple_correct'>
       <line type='text' locationType='top'>Write the final decimal</line>
-      <line type='table'>
+      <line type='table' col='1'>
         <trow>
           <tcell type='text'>10 + 2 + \\frac{5}{10} + \\frac{3}{100} =</tcell>
           <tcell type='drop_zone_row' answer='12.53' size='12'></tcell>
@@ -866,9 +895,9 @@
       </line>
       
       <line type='table' locationType='bottom'>
-        <trow type='drag_source_line'>
-          <tcell type='text' id='1'> .</tcell></trow>
-        <trow type='drag_source_line' sourceType='integer' start='0' end='9'></trow>
+        <!-- <trow type='drag_source_line'>
+          <tcell type='text' id='1'> .</tcell></trow> -->
+        <trow type='drag_source_line' sourceType='decimal' start='0' end='9'></trow>
       </line>
     </p>
 
@@ -881,7 +910,7 @@
     <!-- Q -->
     <p type='question_step' align='vertical' correctType='single_correct'>
       <line type='text' locationType='top'>Select smallest multiple of 5 from the options </line>
-      <line type='incorrect_submit_text'>10,100,1000 are all multiples of 5. But 10 is the smallest multiple of 5.</line>
+      <!-- <line type='incorrect_submit_text'>10,100,1000 are all multiples of 5. But 10 is the smallest multiple of 5.</line> -->
       <line type='post_submit_text'>We have to find a fraction equivalent to \\frac{11}{5} whose denominator is 10.</line>
       <line type='table'>
         <trow>
