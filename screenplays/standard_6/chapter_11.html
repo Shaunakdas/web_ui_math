@@ -109,10 +109,10 @@
         <trow>
           <tcell type='text'>4:6</tcell>
           <tcell type='text'>=</tcell>
-          <tcell type='text'>4 \\div</tcell>
+          <tcell type='text'>4\\div </tcell>
           <tcell type='drop_zone' answer='2'  size='3'></tcell>
           <tcell type='text'>:</tcell>
-          <tcell type='text'>6 \\div</tcell>
+          <tcell type='text'>6\\div </tcell>
           <tcell type='drop_zone' answer='2'   size='3'></tcell>
         </trow>
         <trow>
@@ -218,15 +218,17 @@
       <line type='text' locationType='top'> If the cost of 6 cans of juice is INR 210, then what will be the cost of 4 cans of juice?</line>
     </p>
     <!-- Q -->
-    <p type='question_step' align='vertical' correctType='single_correct'>
+    <!-- <p type='question_step' align='vertical' correctType='single_correct'>
       <line type='text' locationType='top'>Find for single unit</line>
       <line type='table'>
         <trow>
-          <tcell type='text'>Cost of 6 juice cans=</tcell>
+          <tcell type='text'>Cost of 6\\n juice cans</tcell>
+          <tcell type='text'>=</tcell>
           <tcell type='drop_zone_row' answer='210' size='12'></tcell>
         </trow>
         <trow>
-          <tcell type='text'>Cost of 1 juice can=</tcell>
+          <tcell type='text'>Cost of 1\\n juice can</tcell>
+          <tcell type='text'>=</tcell>
           <tcell type='fraction_table'>
             <trow>
               <tcell type='text'>210</tcell>
@@ -236,26 +238,38 @@
             </trow>
           </tcell>
           <tcell type='text'></tcell>
+          <tcell type='text'>=</tcell>
           <tcell type='drop_zone_row' answer='35' size='12'></tcell>
         </trow>
       </line>
       <line type='table' locationType='bottom'>
         <trow type='drag_source_line' sourceType='integer' start='0' end='9'></trow>
       </line>
-    </p>
+    </p> -->
     <p type='question_step' align='vertical' correctType='single_correct'>
       <line type='text' locationType='top'>Find for required number of units</line>
-      <line type='table'>
+      <line type='table' col='4'>
         <trow>
-          <tcell type='text'>Cost of 6 cans of juice = 210</tcell>
+          <tcell type='text'>Cost of 6\\n cans of juice</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>210</tcell>
         </trow>
         <trow>
-          <tcell type='text'>Cost of 1 can of juice = 35</tcell>
+          <tcell type='text'>Cost of 1\\n can of juice</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>35</tcell>
         </trow>
         <trow>
-          <tcell type='text'>Cost of 4 can of juice = 35\\times</tcell>
+          <tcell type='text'>Cost of 4\\n can of juice</tcell>
+          <tcell type='text'>=</tcell>
+          <tcell type='text'>35\\times  </tcell>
           <tcell type='drop_zone_row' answer='4' size='12'></tcell>
-          <tcell type='text'> =</tcell>
+        </trow>
+      </line>
+      <line type='table' col='4'>
+        <trow>
+          <tcell type='text'>Cost of 4\\n cans of juice</tcell>
+          <tcell type='text'>=</tcell>
           <tcell type='drop_zone_row' answer='140' size='12'></tcell>
         </trow>
       </line>
